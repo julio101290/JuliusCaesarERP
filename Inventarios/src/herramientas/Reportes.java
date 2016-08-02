@@ -78,6 +78,7 @@ public class Reportes {
                 catch (Exception j)
                 {
                     System.out.println("Mensaje de Error:"+j.getMessage());
+                    //JOptionPane.showInternalMessageDialog(null,"Mensaje de Error:"+j.getMessage().toString());
                 }
                
             }

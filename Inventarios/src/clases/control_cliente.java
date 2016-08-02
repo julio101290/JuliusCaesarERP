@@ -144,6 +144,22 @@ ResultSet res;
              
               datos[10]=res.getString("CodigoPostal");
               datos[11]=res.getString("LugarNacimiento");
+              
+              this.strCliente=res.getString("IdCliente");
+              this.strNombre=res.getString("Nombres");
+              this.strApellido=res.getString("Apellidos");
+              this.strDomicilio=res.getString("Direccion");
+              this.strCiudad=res.getString("Ciudad");
+              
+              this.strTelefono=res.getString("Telefono");
+              this.strRFC=res.getString("RFC");
+              //datos[7]=res.getString("FechaNacimiento");
+               Fecha =        res.getDate("FechaNacimiento");
+              this.strEstado=res.getString("Estado");
+              this.strMunicipio=res.getString("Municipio");
+             
+              this.strCodigoPostal=res.getString("CodigoPostal");
+              this.strLugarNacimiento=res.getString("LugarNacimiento");
                       
               res.close();
               return datos;

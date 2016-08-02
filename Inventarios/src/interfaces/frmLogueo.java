@@ -28,10 +28,13 @@ public class frmLogueo extends javax.swing.JFrame {
     /**
      * Creates new form frmLogueo
      */
+
     public static frmPrincipal principal= new frmPrincipal();
     public frmLogueo() {
+        
         initComponents();
         leerConfiguracion();
+        
     }
 
     /**
@@ -53,94 +56,56 @@ public class frmLogueo extends javax.swing.JFrame {
         pswContraseña = new javax.swing.JPasswordField();
         lblBase = new javax.swing.JLabel();
         txtBase = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
+        setAutoRequestFocus(false);
         setLocationByPlatform(true);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/padlock.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 170, 160));
 
         lblServidor.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblServidor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblServidor.setText("SERVIDOR");
         lblServidor.setToolTipText("");
+        getContentPane().add(lblServidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 209, 160, -1));
+        getContentPane().add(txtServer, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 232, 160, -1));
 
         lblUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsuario.setText("USUARIO");
+        getContentPane().add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 326, 160, -1));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 355, 160, -1));
 
         lblContraseña.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblContraseña.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblContraseña.setText("CONTRASEÑA");
+        getContentPane().add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 386, 160, -1));
 
-        cmdAccesar.setText("ACCESO");
+        cmdAccesar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmdAccesar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/LLAVE.png"))); // NOI18N
+        cmdAccesar.setText("ACCESAR");
         cmdAccesar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdAccesarActionPerformed(evt);
             }
         });
+        getContentPane().add(cmdAccesar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 160, 56));
+        getContentPane().add(pswContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 414, 160, -1));
 
         lblBase.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblBase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBase.setText("BASE DE DATOS");
         lblBase.setToolTipText("");
+        getContentPane().add(lblBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 263, 160, -1));
+        getContentPane().add(txtBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 286, 160, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblServidor, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(lblUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(pswContraseña)
-                            .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(lblContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblBase, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(txtBase)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(123, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(140, 140, 140)
-                    .addComponent(cmdAccesar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(156, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(30, 30, 30)
-                .addComponent(lblServidor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblBase)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(lblUsuario)
-                .addGap(12, 12, 12)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblContraseña)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pswContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap(459, Short.MAX_VALUE)
-                    .addComponent(cmdAccesar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondon.png"))); // NOI18N
+        jLabel1.setLabelFor(this);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -100, 400, 630));
 
         pack();
         setLocationRelativeTo(null);
@@ -241,6 +206,7 @@ public class frmLogueo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAccesar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblBase;
     private javax.swing.JLabel lblContraseña;
@@ -321,5 +287,8 @@ public void crearXML2() throws ParserConfigurationException, TransformerConfigur
     e.printStackTrace();
     }
   }
+
+    
+
 
 }

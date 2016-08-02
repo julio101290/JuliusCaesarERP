@@ -31,7 +31,7 @@ private conexion con;
         con = new conexion();
     }
     
-      public void leerBodega(String strBodega){
+    public void leerBodega(String strBodega){
         String strConsulta;
         String datos[]=new String [12];
         

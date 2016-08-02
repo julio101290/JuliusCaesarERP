@@ -6,6 +6,7 @@
 package interfaces;
 
 import clases.control_existencias;
+import herramientas.Reportes;
 import herramientas.conexion;
 import static herramientas.conexion.strServidor;
 import herramientas.globales;
@@ -25,6 +26,9 @@ control_existencias ctrl = new control_existencias();
      */
     public frmPrincipal() {
         initComponents();
+           
+             
+      
     }
 
     /**
@@ -54,6 +58,7 @@ control_existencias ctrl = new control_existencias();
         menuBodegas = new javax.swing.JMenuItem();
         MenuFlujo = new javax.swing.JMenuItem();
         menuEntrada = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -61,10 +66,13 @@ control_existencias ctrl = new control_existencias();
         jDesktopPane1.setBackground(java.awt.Color.lightGray);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Los Mochis.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Wallpaperpackz (22).jpg"))); // NOI18N
         jLabel1.setLabelFor(jDesktopPane1);
         jDesktopPane1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1480, 570);
+        jLabel1.setBounds(0, 0, 1480, 590);
+
+        jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
+        jMenuBar1.setForeground(new java.awt.Color(153, 153, 153));
 
         jMenu6.setBorder(new javax.swing.border.MatteBorder(null));
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/server-database.png"))); // NOI18N
@@ -216,6 +224,17 @@ control_existencias ctrl = new control_existencias();
         });
         menuInventario.add(menuEntrada);
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/web-space-px-png.png"))); // NOI18N
+        jMenuItem6.setText("Reportes");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        menuInventario.add(jMenuItem6);
+
         jMenuBar1.add(menuInventario);
 
         setJMenuBar(jMenuBar1);
@@ -232,7 +251,7 @@ control_existencias ctrl = new control_existencias();
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
                 .addGap(24, 24, 24))
         );
 
@@ -304,6 +323,12 @@ control_existencias ctrl = new control_existencias();
         jDesktopPane1.add(movimiento);
         movimiento.setVisible(true);
     }//GEN-LAST:event_menuEntradaActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        frmConsultaReportes reportes = new frmConsultaReportes();
+        jDesktopPane1.add(reportes);
+        reportes.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 public void ejecutarDerecho(){
     jMenuItem3.setVisible(globales.blnAccesoArticulos);
     jMenuItem4.setVisible(globales.blnAccesoClientes);
@@ -323,6 +348,7 @@ public void ejecutarDerecho(){
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem menuBodegas;
     private javax.swing.JMenuItem menuEntrada;
     private javax.swing.JMenuItem menuEstados;

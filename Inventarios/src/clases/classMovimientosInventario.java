@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,9 +23,24 @@ public class classMovimientosInventario {
     ResultSet res;
     private Sentencias_sql sql; 
     
-    String strTipoMovimiento;
-    long lngTipoFlujo;
+    public String strTipoMovimiento;
+    public long lngTipoFlujo;
+    public String strFactura;
+    public long lngBodega;
+    public String strFecha;
+    public long lngCliente;
+    public long lngFolio;
+    public String strObservacion;
+    public String strExiste;
     
+    public long   lngProducto;
+    public String strDescripcionProducto;
+    public double dblPrecio;
+    public double dblCantidad;
+    public double dblImporteTotal;
+    public long   lngRegistro;  
+    
+    public java.util.Date Fecha = new java.util.Date();
     
     public classMovimientosInventario(){
         sql = new Sentencias_sql();
@@ -36,7 +52,7 @@ public class classMovimientosInventario {
         String datos[]=new String [5];
         DecimalFormat formato = new DecimalFormat("0000");
         
-        strConsulta="call PAL_UltimoFolioInventario ("+strTipoMovimiento
+        strConsulta="call PAL_UltimoFolioInventario ('"+strTipoMovimiento+ "'"
                  + ",'" + strTipoFlujo + "'"
                  + ",'" + strFolio + "'"
           
@@ -48,7 +64,7 @@ public class classMovimientosInventario {
          res = ps.executeQuery();
          
          while(res.next()){
-              return  Long.valueOf(res.getString("idEstado"));              
+              return  Long.valueOf(res.getString("siguiente"));              
          }
          res.close();
           }catch(SQLException e){
@@ -57,5 +73,232 @@ public class classMovimientosInventario {
      
           }
         return 1;
-    }   
+    } 
+    
+   
+    
+    public boolean ingresarMovimientoInventario() throws SQLException
+    {               
+         String strConsulta="";
+         String strRespuesta="";
+         
+         strConsulta=strConsulta +"call PAR_INSERTAMOVIMIENTOINVENTARIO ('"+this.strTipoMovimiento+"'"
+                 + ",'" + this.strFactura + "'"
+                 + ",'" + this.strFecha + "'"
+                 + "," + this.lngBodega + ""
+                 + "," + this.lngCliente + ""
+                 + "," + this.lngFolio + ""
+                 + "," + this.lngTipoFlujo + ""
+                 + ",'" + this.strObservacion + "'"
+                 
+                 + ");";
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery(); 
+         System.out.println(strConsulta);
+         return true;
+    }
+     public boolean ingresarMovimientoInventarioProducto() throws SQLException
+    {               
+         String strConsulta="";
+         
+         strConsulta=strConsulta +"call  PAR_InsertaMovimientoInventarioProducto  ('"+this.strTipoMovimiento+"'"
+                 + "," + this.lngFolio + ""
+                 + "," + this.lngTipoFlujo + ""
+                 + "," + this.lngBodega + ""
+                 
+                 + "," + this.lngProducto + ""
+                 + ",'" + this.strDescripcionProducto + "'"
+                 + "," + this.dblPrecio + ""
+                 + "," + this.dblCantidad + ""
+                 + "," + this.dblImporteTotal + ""
+                 + "," + this.lngRegistro + ""
+                
+                 + ");";
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery(); 
+         System.out.println(strConsulta);
+         return true;
+    }
+    
+    
+    public boolean actualizarMovimientoInventario() throws SQLException
+    {               
+         String strConsulta="";
+         String strRespuesta="";
+         
+         strConsulta=strConsulta +"call PAC_ActualizaInventarioMaestro  ('"+this.strTipoMovimiento+"'"
+                 + ",'" + this.strFactura + "'"
+                 + ",'" + this.strFecha + "'"
+                 + "," + this.lngBodega + ""
+                 + "," + this.lngCliente + ""
+                 + "," + this.lngFolio + ""
+                 + "," + this.lngTipoFlujo + ""
+                 + ",'" + this.strObservacion + "'"
+                 
+                 + ");";
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery(); 
+         System.out.println(strConsulta);
+         return true;
+    }
+ 
+    
+    
+    public void leerMovimiento(){
+        String strConsulta;
+        strExiste="NO";
+        strConsulta="";
+        strConsulta=strConsulta +"call PAL_LeerMovimientoInventario  ('"+this.strTipoMovimiento+"'"
+            + "," + this.lngBodega + ""
+            + "," + this.lngTipoFlujo + ""
+            + "," + this.lngFolio + ""
+            + ");";
+      
+        try{
+         
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery();
+         
+         while(res.next()){
+              //System.out.println(res.getString("Nombres"));
+              this.strFactura=res.getString("Factura");
+              this.strFecha=res.getString("Fecha");
+              this.Fecha=res.getDate("Fecha");
+              this.lngCliente=Long.valueOf(res.getString("idCliente"));
+              this.strObservacion=res.getString("Observacion");
+              this.strExiste=res.getString("EXISTE");
+         }
+         res.close();
+          }catch(SQLException e){
+              JOptionPane.showInternalMessageDialog(null,"ERROR AL LEER EL INVENTARIO" + e.toString());
+          }
+    }
+ 
+ public void eliminarMovimiento(){
+        String strConsulta;
+      
+        strConsulta="";
+        strConsulta=strConsulta +"call PAR_EliminamovimientoInventario   ('"+this.strTipoMovimiento+"'"
+            + "," + this.lngBodega + ""
+            + "," + this.lngTipoFlujo + ""
+            + "," + this.lngFolio + ""
+            + ");";
+      
+        try{
+         
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery();
+         
+         
+          }catch(SQLException e){
+              JOptionPane.showInternalMessageDialog(null,"ERROR AL ELIMINAR MOVIMIENTO" + e.toString());
+          }
+    }
+    public  long lngleerUltimoRegistro(){
+        String strConsulta;
+        strConsulta="";
+        strConsulta=strConsulta +"call PAL_UltimoRegistroInventariosProductos  ('"+this.strTipoMovimiento+"'"
+            + "," + this.lngBodega + ""
+            + "," + this.lngTipoFlujo + ""
+            + "," + this.lngFolio + ""
+            + ");";
+      
+        try{
+         
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery();
+         
+         while(res.next()){
+              //System.out.println(res.getString("Nombres"));
+              
+              return res.getLong("siguiente");
+             
+         }
+         res.close();
+          }catch(SQLException e){
+              JOptionPane.showInternalMessageDialog(null,"ERROR AL LEER EL INVENTARIO" + e.toString());
+          }
+        return 1;
+    }
+    
+    public void leerInventariosProductos(DefaultTableModel tablaArticulos ){
+        String strConsulta;
+        String datos[]=new String [7];
+        strConsulta="";
+         strConsulta=strConsulta +"call PAL_LeeInventariosProductos  ('"+this.strTipoMovimiento+"'"
+            + "," + this.lngBodega + ""
+            + "," + this.lngTipoFlujo + ""
+            + "," + this.lngFolio + ""
+            + ");";
+        
+        
+        
+      
+        try{
+         
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery();
+         
+         while(res.next()){
+              //System.out.println(res.getString("Nombres"));
+              
+              datos[0]=res.getString("Registro");
+              datos[1]=res.getString("Producto");
+              datos[2]=res.getString("Descripcion");
+              datos[3]=res.getString("Precio");
+              datos[4]=res.getString("Cantidad");
+              datos[5]=res.getString("importeTotal");
+             
+              tablaArticulos.addRow(datos);
+         }
+            res.close();
+            }catch(SQLException e){
+        
+          JOptionPane.showInternalMessageDialog(null,"ERROR" + e.toString());
+        }
+    }
+    
+    public void eliminarMovimientoProducto(){
+        String strConsulta;
+      
+        strConsulta="";
+        strConsulta=strConsulta +"call PAR_EliminamovimientoInventarioProducto   ('"+this.strTipoMovimiento+"'"
+            + "," + this.lngBodega + ""
+            + "," + this.lngTipoFlujo + ""
+            + "," + this.lngFolio + ""
+            + "," + this.lngRegistro + ""
+            + ");";
+      
+        try{
+         
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery();
+         
+         
+          }catch(SQLException e){
+              JOptionPane.showInternalMessageDialog(null,"ERROR AL ELIMINAR MOVIMIENTO" + e.toString());
+          }
+    }
+    
+    public void eliminarTodoMovimientoProducto(){
+        String strConsulta;
+      
+        strConsulta="";
+        strConsulta=strConsulta +"call PAR_EliminamovimientoInventarioProducto   ('"+this.strTipoMovimiento+"'"
+            + "," + this.lngBodega + ""
+            + "," + this.lngTipoFlujo + ""
+            + "," + this.lngFolio + ""
+            + ");";
+      
+        try{
+         
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery();
+         
+         
+          }catch(SQLException e){
+              JOptionPane.showInternalMessageDialog(null,"ERROR AL ELIMINAR MOVIMIENTO" + e.toString());
+          }
+    }
 }
+

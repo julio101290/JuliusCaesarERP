@@ -7,6 +7,8 @@ https://www.youtube.com/watch?v=4s5DIH86-nc
  */
 package interfaces;
 
+import clases.classSplash;
+import clases.classSplash.ScreenSplash;
 import javax.swing.JOptionPane;
 
 /**
@@ -111,14 +113,10 @@ public class frmLogin extends javax.swing.JPanel {
     }//GEN-LAST:event_cmdAccesarActionPerformed
  
 public static void main(String[] args) {
-        
+ 
       frmLogueo login = new frmLogueo();
       login.setVisible(true);
-      
-      
-     
-      
-      
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

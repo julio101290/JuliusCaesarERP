@@ -19,7 +19,7 @@ public class conexion {
   
     public Connection conectado(){
        try{  
-
+         String strConexion;
          Class.forName("com.mysql.jdbc.Driver");
         
          conexion = DriverManager.getConnection("jdbc:mysql://"+ this.strServidor +"/" +this.strBaseDeDatos + "?user="+this.strUsuarioSQL + "&password="+ this.strPSWSQL);

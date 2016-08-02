@@ -453,6 +453,7 @@ public final class frmUsuarios extends javax.swing.JInternalFrame {
             Usuario.strContraseña=this.txtContraseña.getText();
             Usuario.strNombre=this.txtNombre.getText();
             Usuario.strGrupoUsuario=( this.cboTipoUsuario.getSelectedItem().toString().substring(0, 4));
+            Usuario.lngIDUsuario=Long.valueOf(this.txtIdUsuario.getText());
             
             strRespuesta= herramientas.globales.strPreguntaSiNo("Desea actualizar el usuario");
             

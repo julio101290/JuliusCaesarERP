@@ -8,6 +8,8 @@ package herramientas;
 import clases.classGruposUsuarios;
 import java.io.File;
 import java.io.FileInputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,11 +43,23 @@ import javax.swing.JOptionPane;
     public static String gstrRFC;
     public static String gstrTelefono;
     
+    public static String[ ] LicenciaEmpresas = {"Prueba"
+            , "Julio"
+            , "Julio"
+            , "Julio"
+            , "Julio"
+            , "Julio"
+            , "Julio"
+            , "Julio"
+            };
+    
     private static conexion con;
     private static PreparedStatement ps;
     private static ResultSet res;
     
-            
+   //TEMPORALES
+   public static String gstrCliente;
+   public static long glngArticulo;
 
     
     public static void obtenerDerechosGrupo(){
@@ -87,7 +101,7 @@ import javax.swing.JOptionPane;
     return null;
     } 
     
-    public static void llenarComboGlobal(JComboBox Combo,String strConsulta){
+    public static void llenarComboGlobal(JComboBox Combo,String strConsulta,boolean blnLimpiar){
      
             
         con = new conexion();
@@ -97,8 +111,10 @@ import javax.swing.JOptionPane;
         int intDesde=0;
         int intCuantos=1000;
         String strBusqueda="";
-
-        Combo.removeAllItems();
+                
+        if (blnLimpiar==true){
+            Combo.removeAllItems();
+        }
       
       
         try{
@@ -121,5 +137,37 @@ import javax.swing.JOptionPane;
         }
         
     }
+    
+      static String sha1(String input) throws NoSuchAlgorithmException {
+        MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+        byte[] result = mDigest.digest(input.getBytes());
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < result.length; i++) {
+            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+        }
+         
+        return sb.toString();
+    }
+      
+    
+ 
+  
+      public static boolean verificaLicencia() throws NoSuchAlgorithmException{
+          String Licencia;
+          boolean blnEncontro=false;
+          
+          Licencia=sha1(gstrCiudad+gstrDireccion+gstrEstado+gstrNombre+gstrPais+gstrRazonSocial+gstrRFC+gstrTelefono);
+          
+          for(int i = 0; i <= 7;  i++){
+              if(LicenciaEmpresas[i].equals(Licencia)){
+                  blnEncontro=true;
+              } 
+	
+            }
+
+          
+          return blnEncontro;
+        }
+      
 
 }

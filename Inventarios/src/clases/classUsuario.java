@@ -55,7 +55,10 @@ ResultSet res;
     {               
          String strSQL="";
          strSQL=strSQL +"CALL PA_ActualizarUsuario('"+this.strUsuario+"','" +this.strContraseña+"'"
-                 + ","+this.strGrupoUsuario+",'"+this.strNombre+"');";
+                 + ","+this.strGrupoUsuario+",'"
+                 +this.strNombre+"',"
+                 +this.lngIDUsuario
+                 + ");";
          System.out.println(strSQL);
          sql.ejecutarQuery(strSQL);
          System.out.println(strSQL);
