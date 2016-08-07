@@ -2,20 +2,23 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1945b8ab-202b-42d8-8320-13b62b2a74dc">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="25"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="strNombre" class="java.lang.String"/>
 	<parameter name="strDireccion" class="java.lang.String"/>
 	<parameter name="strRFC" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[call PAL_InformeExistencias]]>
 	</queryString>
+	<field name="EXISTENCIA" class="java.math.BigDecimal"/>
 	<field name="Producto" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="Descripcion" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="EXISTENCIA" class="java.math.BigDecimal"/>
+	<field name="logo" class="java.lang.Object">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -56,6 +59,11 @@
 				</textElement>
 				<text><![CDATA[INFORME DE EXISTENCIAS]]></text>
 			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="12" width="127" height="94" uuid="6778fdf8-c0a5-4ca9-9ade-e86b7e31312c"/>
+				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte [])$F{logo})
+]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

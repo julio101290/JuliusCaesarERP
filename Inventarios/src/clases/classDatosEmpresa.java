@@ -8,6 +8,7 @@ package clases;
 import herramientas.conexion;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +30,7 @@ public class classDatosEmpresa {
     public String Direccion;
     public String Estado;
     public File Logo;
+    public String strFile;
     public FileInputStream fLogo;
     public String Nombre;
     public String Pais;
@@ -42,7 +44,39 @@ public class classDatosEmpresa {
     con = new conexion();
     
 }
-        public boolean ingresarDatosEmpresa() throws SQLException
+    
+    public boolean guardarDatosImagen() throws SQLException, FileNotFoundException{
+        String strConsulta;
+        FileInputStream fLogo=null;
+        File archivo=new File(this.strFile);
+        fLogo= new FileInputStream(archivo);
+        strConsulta="insert into datosempresa (Nombre,RazonSocial,RFC,Telefono,"
+                + "Direccion"
+                + ",Ciudad"
+                + ",Pais"
+                + ",Estado"
+                + ",Logo)"
+                + "values"
+                + "("
+                + "?,?,?,?,?,?,?,?,?)";
+        ps= con.conectado().prepareStatement(strConsulta);
+        ps.setString(1, this.Nombre);
+        ps.setString(2, this.RazonSocial);
+        ps.setString(3, this.RFC);
+        ps.setString(4, this.Telefono);
+        ps.setString(5, this.Direccion);
+        ps.setString(6, this.strCiudad);
+        ps.setString(7, this.Pais);
+        ps.setString(8, this.Estado);
+        ps.setBinaryStream(9,fLogo);
+        ps.executeUpdate();
+ 
+        return true;
+        
+    }
+    
+    
+    public boolean ingresarDatosEmpresa() throws SQLException
     {               
          
            

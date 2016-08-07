@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import herramientas.globales;
 import static herramientas.globales.llenarComboGlobal;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,7 +105,8 @@ public class frmInformacionEmpresa extends javax.swing.JInternalFrame{
         lblPais.setText("País:");
 
         lblLogo.setText("Logo:");
-        lblLogo.setEnabled(false);
+
+        lblImagen.setBorder(new javax.swing.border.MatteBorder(null));
 
         cboEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
 
@@ -115,10 +117,7 @@ public class frmInformacionEmpresa extends javax.swing.JInternalFrame{
             }
         });
 
-        txtImagen.setEnabled(false);
-
         btnSeleccionar.setText("Seleccionar");
-        btnSeleccionar.setEnabled(false);
         btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarActionPerformed(evt);
@@ -144,20 +143,20 @@ public class frmInformacionEmpresa extends javax.swing.JInternalFrame{
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPais)
+                    .addComponent(lblRazonSocial)
+                    .addComponent(lblNombreEmpresa)
+                    .addComponent(lblRFC)
+                    .addComponent(lblTelefono)
+                    .addComponent(lblDireccion)
+                    .addComponent(lblCiudad)
+                    .addComponent(lblEstado)
+                    .addComponent(lblLogo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPais)
-                            .addComponent(lblRazonSocial)
-                            .addComponent(lblNombreEmpresa)
-                            .addComponent(lblRFC)
-                            .addComponent(lblTelefono)
-                            .addComponent(lblDireccion)
-                            .addComponent(lblCiudad)
-                            .addComponent(lblEstado)
-                            .addComponent(lblLogo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNombre)
                             .addComponent(txtRazonSocial, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -173,18 +172,17 @@ public class frmInformacionEmpresa extends javax.swing.JInternalFrame{
                                         .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(cboEstado, javax.swing.GroupLayout.Alignment.LEADING, 0, 221, Short.MAX_VALUE)
-                                        .addComponent(cboPais, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addComponent(cboPais, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(61, 61, 61)))))
-                .addContainerGap())
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,13 +225,13 @@ public class frmInformacionEmpresa extends javax.swing.JInternalFrame{
                     .addComponent(lblLogo)
                     .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSeleccionar))
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,8 +247,7 @@ public class frmInformacionEmpresa extends javax.swing.JInternalFrame{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, Short.MAX_VALUE))
         );
 
         pack();
@@ -315,6 +312,7 @@ public class frmInformacionEmpresa extends javax.swing.JInternalFrame{
         empresa.RFC=this.txtRFC.getText();
         empresa.Telefono=this.txtTelefono.getText();
         empresa.RazonSocial=this.txtRazonSocial.getText();
+        empresa.strFile=this.txtImagen.getText();
            //DATOS EMPRESA
         herramientas.globales.gstrCiudad=empresa.strCiudad;
         herramientas.globales.gstrDireccion=empresa.Direccion;
@@ -327,11 +325,16 @@ public class frmInformacionEmpresa extends javax.swing.JInternalFrame{
         
       
         try {
-            if (empresa.ingresarDatosEmpresa()==true){
-                JOptionPane.showMessageDialog(null, "INFORMACION GUARDADA ");
-                
-                
-                this.dispose();
+            try {
+                //   if (empresa.ingresarDatosEmpresa()==true){
+                if (empresa.guardarDatosImagen()==true){
+                    JOptionPane.showMessageDialog(null, "INFORMACION GUARDADA ");
+                    
+                    
+                    this.dispose();
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(frmInformacionEmpresa.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (SQLException ex) {
             Logger.getLogger(frmInformacionEmpresa.class.getName()).log(Level.SEVERE, null, ex);

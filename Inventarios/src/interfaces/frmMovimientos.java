@@ -123,6 +123,12 @@ public class frmMovimientos extends javax.swing.JInternalFrame {
             }
         });
 
+        tab.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                obtenerFoco(evt);
+            }
+        });
+
         panGenerales.setBackground(new java.awt.Color(255, 255, 255));
 
         lblEntradaSalida.setText("Entrada/Salida");
@@ -860,6 +866,8 @@ public void defineTablaArticulos(){
             clsInventario.lngRegistro=lngUltimoRegistro;
             clsInventario.ingresarMovimientoInventarioProducto();
             defineTablaArticulos();
+            limpiarProducto();
+            frmMovimientos.txtProducto.requestFocus();
             
         } catch (SQLException ex) {
             Logger.getLogger(frmMovimientos.class.getName()).log(Level.SEVERE, null, ex);
@@ -920,6 +928,10 @@ public void defineTablaArticulos(){
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProductoActionPerformed
 
+    private void obtenerFoco(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_obtenerFoco
+        defineTablaArticulos();
+    }//GEN-LAST:event_obtenerFoco
+
   
    public void desHabilitarControlesMastro(){
        this.dteFecha.setEnabled(false);
@@ -947,7 +959,7 @@ public void defineTablaArticulos(){
    
    }
       
-        public void limpiar(){
+     public void limpiar(){
             this.txtFactura.setText("");
             this.txtNumCliente.setText("");
             this.txtObservaciones.setText("");
@@ -955,6 +967,13 @@ public void defineTablaArticulos(){
             this.lblNomCliente.setText("");
             this.dteFecha.setToolTipText("");
         }
+     
+     public void limpiarProducto(){
+         frmMovimientos.txtCantidad.setText("");
+         frmMovimientos.txtDescripcionProducto.setText("");
+         frmMovimientos.txtPrecio.setText("");
+         frmMovimientos.txtProducto.setText("");
+     }
         
    public void desHabilitarLLave(){
        this.cboBodega.setEnabled(false);
