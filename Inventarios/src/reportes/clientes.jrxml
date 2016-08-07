@@ -44,11 +44,14 @@
 	<field name="CodigoPostal" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="logo" class="java.lang.Object">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="32" splitType="Stretch"/>
+		<band height="2" splitType="Stretch"/>
 	</title>
 	<pageHeader>
 		<band height="112" splitType="Stretch">
@@ -60,7 +63,7 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="7" width="555" height="20" uuid="bc3097ba-7b2f-457a-a6b7-2f599fe0b483"/>
+				<reportElement x="0" y="0" width="555" height="27" uuid="bc3097ba-7b2f-457a-a6b7-2f599fe0b483"/>
 				<textElement textAlignment="Center">
 					<font size="16" isBold="true"/>
 				</textElement>
@@ -87,6 +90,10 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{strRFC}]]></textFieldExpression>
 			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="127" height="94" uuid="a23b9f03-68fe-474e-995b-39f4ad7c1df1"/>
+				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte [])$F{logo})]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>
