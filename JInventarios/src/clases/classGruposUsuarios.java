@@ -33,7 +33,9 @@ public class classGruposUsuarios {
     public boolean  blnAccesoClientes;
     public boolean  blnAccesoArticulos;
     public boolean  blnAccesoInventarios;
-
+    public boolean  blnABCBodegas;
+    public boolean  blnABCTiposFlujo;
+    public boolean  blnReportesInventarios;
     
     
     
@@ -139,6 +141,11 @@ public class classGruposUsuarios {
                  + "," + this.blnAccesoClientes
                  + "," + this.blnAccesoArticulos
                  + "," + this.blnAccesoInventarios
+                 
+                 + "," + this.blnABCBodegas
+                 + "," + this.blnABCTiposFlujo
+                 + "," + this.blnReportesInventarios
+                 
                  + ");";
          ps= con.conectado().prepareStatement(strConsulta);
          
@@ -180,6 +187,9 @@ public boolean actualizarGrupo() throws SQLException
                  + "," + this.blnAccesoClientes
                  + "," + this.blnAccesoArticulos
                  + "," + this.blnAccesoInventarios
+                 + "," + this.blnABCBodegas
+                 + "," + this.blnABCTiposFlujo
+                 + "," + this.blnReportesInventarios
                  + ");";
       
         
@@ -217,6 +227,10 @@ public boolean actualizarGrupo() throws SQLException
               this.blnAccesoClientes=res.getBoolean("accesoClientes");
               this.blnAccesoArticulos=res.getBoolean("accesoArticulos");
               this.blnAccesoInventarios=res.getBoolean("accesoInventario");
+              
+              this.blnABCBodegas=res.getBoolean("abcBodegas");
+              this.blnABCTiposFlujo=res.getBoolean("abcTipoFlujo");
+              this.blnReportesInventarios=res.getBoolean("ReportesInventarios");
                       
               res.close();
               return datos;

@@ -58,7 +58,7 @@ control_existencias ctrl = new control_existencias();
         menuBodegas = new javax.swing.JMenuItem();
         MenuFlujo = new javax.swing.JMenuItem();
         menuEntrada = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        ReportesInventarios = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -224,16 +224,16 @@ control_existencias ctrl = new control_existencias();
         });
         menuInventario.add(menuEntrada);
 
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/web-space-px-png.png"))); // NOI18N
-        jMenuItem6.setText("Reportes");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        ReportesInventarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        ReportesInventarios.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        ReportesInventarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/web-space-px-png.png"))); // NOI18N
+        ReportesInventarios.setText("Reportes");
+        ReportesInventarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                ReportesInventariosActionPerformed(evt);
             }
         });
-        menuInventario.add(jMenuItem6);
+        menuInventario.add(ReportesInventarios);
 
         jMenuBar1.add(menuInventario);
 
@@ -324,20 +324,24 @@ control_existencias ctrl = new control_existencias();
         movimiento.setVisible(true);
     }//GEN-LAST:event_menuEntradaActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void ReportesInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportesInventariosActionPerformed
         frmConsultaReportes reportes = new frmConsultaReportes();
         jDesktopPane1.add(reportes);
         reportes.setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_ReportesInventariosActionPerformed
 public void ejecutarDerecho(){
     jMenuItem3.setVisible(globales.blnAccesoArticulos);
     jMenuItem4.setVisible(globales.blnAccesoClientes);
     jMenuItem2.setVisible(globales.blnAccesoGrupos);
     jMenuItem1.setVisible(globales.blnAccesoUsuarios);
+    menuBodegas.setVisible(globales.blnABCBodegas);
+    this.MenuFlujo.setVisible(globales.blnABCTiposFlujo);
+    this.ReportesInventarios.setVisible(globales.blnReportesInventarios);
 }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuFlujo;
+    private javax.swing.JMenuItem ReportesInventarios;
     public static javax.swing.JDesktopPane jDesktopPane1;
     public static javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -348,7 +352,6 @@ public void ejecutarDerecho(){
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem menuBodegas;
     private javax.swing.JMenuItem menuEntrada;
     private javax.swing.JMenuItem menuEstados;

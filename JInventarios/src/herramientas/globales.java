@@ -30,6 +30,9 @@ import javax.swing.JOptionPane;
     public static boolean  blnAccesoClientes;
     public static boolean  blnAccesoArticulos;
     public static boolean  blnAccesoInventarios;
+    public static boolean  blnABCBodegas;
+    public static boolean  blnABCTiposFlujo;
+    public static boolean  blnReportesInventarios;
     
     //DATOS EMPRESA
     public static String gstrCiudad;
@@ -42,6 +45,7 @@ import javax.swing.JOptionPane;
     public static String gstrRazonSocial;
     public static String gstrRFC;
     public static String gstrTelefono;
+    
     
     public static String[ ] LicenciaEmpresas = {"Prueba"
             , "Julio"
@@ -72,7 +76,9 @@ import javax.swing.JOptionPane;
         blnAccesoArticulos=grupos.blnAccesoArticulos;
         blnAccesoInventarios=grupos.blnAccesoInventarios;
         
-        
+        blnABCBodegas=grupos.blnABCBodegas;
+        blnABCTiposFlujo=grupos.blnABCTiposFlujo;
+        blnReportesInventarios=grupos.blnReportesInventarios;
     }
     
  
