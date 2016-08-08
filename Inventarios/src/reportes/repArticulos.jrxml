@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d9e7c383-492f-4d6f-8796-73c873ebcea6">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="53"/>
+	<property name="ireport.x" value="27"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="strNombre" class="java.lang.String"/>
 	<parameter name="strDireccion" class="java.lang.String"/>
@@ -30,46 +30,53 @@
 	<field name="PrecioVenta" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="logo" class="java.lang.Object">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="140" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="13" width="802" height="20" uuid="4b81abca-f715-454c-a5ea-30a2ecf1399e"/>
+				<reportElement x="0" y="6" width="802" height="27" uuid="4b81abca-f715-454c-a5ea-30a2ecf1399e"/>
 				<textElement textAlignment="Center">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE GENERAL DE ARTICULOS]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="53" width="747" height="20" uuid="688f272a-de54-43e6-ae8d-9a1f2efb02bc"/>
+				<reportElement x="0" y="53" width="802" height="20" uuid="688f272a-de54-43e6-ae8d-9a1f2efb02bc"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{strDireccion}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="0" y="93" width="747" height="20" uuid="e73f0bf8-3925-4b18-b961-4cebd76e116b"/>
+				<reportElement x="0" y="93" width="802" height="20" uuid="e73f0bf8-3925-4b18-b961-4cebd76e116b"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="33" width="747" height="20" uuid="976c5a94-4060-4f20-ad58-87086f2a3c8d"/>
+				<reportElement x="0" y="33" width="802" height="20" uuid="976c5a94-4060-4f20-ad58-87086f2a3c8d"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{strNombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="73" width="747" height="20" uuid="8c14b5b7-ce57-404d-9126-d346aac77b49"/>
+				<reportElement x="0" y="73" width="802" height="20" uuid="8c14b5b7-ce57-404d-9126-d346aac77b49"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{strRFC}]]></textFieldExpression>
 			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="6" width="127" height="94" uuid="425aaab7-cd14-4a60-adfc-6afeb0572f93"/>
+				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte [])$F{logo})]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

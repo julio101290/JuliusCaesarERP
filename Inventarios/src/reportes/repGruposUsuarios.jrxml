@@ -15,6 +15,9 @@
 	<field name="Descripcion" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="logo" class="java.lang.Object">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -55,6 +58,10 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{strNombre}]]></textFieldExpression>
 			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="1" y="0" width="127" height="94" uuid="15f93cc1-149f-4a48-851d-5c4fd6793a37"/>
+				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte [])$F{logo})]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

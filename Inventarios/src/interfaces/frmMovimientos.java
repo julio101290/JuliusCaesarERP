@@ -791,7 +791,7 @@ public void defineTablaArticulos(){
             lngTipoFlujo=Long.valueOf(this.cboTipoFlujo.getSelectedItem().toString().substring(0, 4).toString());
             lngBodega=Long.valueOf(this.cboBodega.getSelectedItem().toString().substring(0, 4).toString());
             lngFolio=Long.valueOf(this.txtFolio.getText());
-            strConsulta="SELECT * FROM inventarios where EntradaSalida ='" +strMovimiento +"' "
+            strConsulta="SELECT * , (SELECT Logo FROM datosempresa) as logo FROM inventarios where EntradaSalida ='" +strMovimiento +"' "
                     +"and idBodega="+lngBodega+" "
                     +"and idTipoFlujo="+lngTipoFlujo+" "
                     +"and idFolio="+ lngFolio
