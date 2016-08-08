@@ -59,6 +59,18 @@ control_existencias ctrl = new control_existencias();
         MenuFlujo = new javax.swing.JMenuItem();
         menuEntrada = new javax.swing.JMenuItem();
         ReportesInventarios = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        Ventas = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -236,6 +248,76 @@ control_existencias ctrl = new control_existencias();
         menuInventario.add(ReportesInventarios);
 
         jMenuBar1.add(menuInventario);
+        jMenuBar1.add(jMenu3);
+
+        Ventas.setBorder(new javax.swing.border.MatteBorder(null));
+        Ventas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Calculator.png"))); // NOI18N
+        Ventas.setText("Ventas");
+        Ventas.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem5.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jMenuItem5.setIcon(new javax.swing.ImageIcon("C:\\Users\\julio\\Desktop\\Company.png")); // NOI18N
+        jMenuItem5.setText("Puntos de Venta");
+        Ventas.add(jMenuItem5);
+
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/e-commerce-px-png (1).png"))); // NOI18N
+        jMenuItem6.setText("Ventas");
+        Ventas.add(jMenuItem6);
+
+        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/web-space-px-png.png"))); // NOI18N
+        jMenuItem7.setText("Reportes de Ventas");
+        Ventas.add(jMenuItem7);
+
+        jMenuBar1.add(Ventas);
+
+        jMenu4.setBorder(new javax.swing.border.MatteBorder(null));
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Business.png"))); // NOI18N
+        jMenu4.setText("Cartera");
+        jMenu4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem8.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Money.png"))); // NOI18N
+        jMenuItem8.setText("Cargos / Abonos");
+        jMenu4.add(jMenuItem8);
+
+        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem9.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/web-space-px-png.png"))); // NOI18N
+        jMenuItem9.setText("Reportes de Cartera");
+        jMenu4.add(jMenuItem9);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Help.png"))); // NOI18N
+        jMenu5.setText("Ayuda");
+        jMenu5.setActionCommand("Ayuda");
+        jMenu5.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+
+        jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        jMenuItem10.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/books.png"))); // NOI18N
+        jMenuItem10.setText("Manual de Usuario PDF");
+        jMenu5.add(jMenuItem10);
+
+        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem11.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/world.png"))); // NOI18N
+        jMenuItem11.setText("WEB, Tutoriales ETC");
+        jMenu5.add(jMenuItem11);
+
+        jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem12.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Information.png"))); // NOI18N
+        jMenuItem12.setText("Acerca de");
+        jMenu5.add(jMenuItem12);
+
+        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -342,16 +424,28 @@ public void ejecutarDerecho(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuFlujo;
     private javax.swing.JMenuItem ReportesInventarios;
+    private javax.swing.JMenu Ventas;
     public static javax.swing.JDesktopPane jDesktopPane1;
     public static javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem menuBodegas;
     private javax.swing.JMenuItem menuEntrada;
     private javax.swing.JMenuItem menuEstados;

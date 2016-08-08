@@ -64,8 +64,8 @@ public class frmLogueo extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/PadLock.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 110, 170));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/secure-server-px-png.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 130, 170));
 
         lblServidor.setBackground(new java.awt.Color(204, 204, 204));
         lblServidor.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
