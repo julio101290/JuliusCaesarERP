@@ -245,7 +245,7 @@
                               <Component id="txtDescripcion" pref="152" max="32767" attributes="0"/>
                               <Component id="txtIDGrupo" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="264" max="32767" attributes="0"/>
+                          <EmptySpace pref="304" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -305,7 +305,7 @@
                                       <Component id="chkPermiteABCUsuarios" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="chkPermiteABCArticulos" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="114" max="32767" attributes="0"/>
+                                  <EmptySpace pref="154" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="chkPermiteABCEntradasSalidas" min="-2" max="-2" attributes="0"/>
                                       <Component id="chkPermiteVerReportesInventarios" min="-2" max="-2" attributes="0"/>
@@ -409,6 +409,77 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Permite Ver Reportes de Inventarios"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel3">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="Derechos Venta">
+                    <Property name="tabTitle" type="java.lang.String" value="Derechos Venta"/>
+                  </JTabbedPaneConstraints>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="chkCartera" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="chkReportesVentas" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="chkPermiteCartera" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="chkABCPuntosVenta" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="chkAccesoVentas" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="321" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="chkABCPuntosVenta" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="chkAccesoVentas" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="chkReportesVentas" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="chkCartera" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="9" max="32767" attributes="0"/>
+                          <Component id="chkPermiteCartera" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JCheckBox" name="chkABCPuntosVenta">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Permite ABC de Puntos de Venta"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="chkAccesoVentas">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Permite Acceso a Ventas"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="chkReportesVentas">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Permite Acceso a Reportes de Ventas"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="chkCartera">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Permite Mover La Cartera"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="chkPermiteCartera">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Permite Acceso a Reportes de cartera"/>
                   </Properties>
                 </Component>
               </SubComponents>

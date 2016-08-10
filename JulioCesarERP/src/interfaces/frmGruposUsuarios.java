@@ -68,6 +68,12 @@ public class frmGruposUsuarios extends javax.swing.JInternalFrame {
         chkPermiteABCBodegas = new javax.swing.JCheckBox();
         chkPermiteABCTiposFlujo = new javax.swing.JCheckBox();
         chkPermiteVerReportesInventarios = new javax.swing.JCheckBox();
+        jPanel3 = new javax.swing.JPanel();
+        chkABCPuntosVenta = new javax.swing.JCheckBox();
+        chkAccesoVentas = new javax.swing.JCheckBox();
+        chkReportesVentas = new javax.swing.JCheckBox();
+        chkCartera = new javax.swing.JCheckBox();
+        chkPermiteCartera = new javax.swing.JCheckBox();
         PanBotones = new javax.swing.JPanel();
         btnEliminar = new javax.swing.JButton();
         btnImprimirReporte = new javax.swing.JButton();
@@ -215,7 +221,7 @@ public class frmGruposUsuarios extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                     .addComponent(txtIDGrupo))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,7 +273,7 @@ public class frmGruposUsuarios extends javax.swing.JInternalFrame {
                             .addComponent(chkPermiteABCClientes)
                             .addComponent(chkPermiteABCUsuarios)
                             .addComponent(chkPermiteABCArticulos))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chkPermiteABCEntradasSalidas)
                             .addComponent(chkPermiteVerReportesInventarios)))
@@ -309,6 +315,48 @@ public class frmGruposUsuarios extends javax.swing.JInternalFrame {
         );
 
         jTabInventario.addTab("Derechos", jPanel2);
+
+        chkABCPuntosVenta.setText("Permite ABC de Puntos de Venta");
+
+        chkAccesoVentas.setText("Permite Acceso a Ventas");
+
+        chkReportesVentas.setText("Permite Acceso a Reportes de Ventas");
+
+        chkCartera.setText("Permite Mover La Cartera");
+
+        chkPermiteCartera.setText("Permite Acceso a Reportes de cartera");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chkCartera)
+                    .addComponent(chkReportesVentas)
+                    .addComponent(chkPermiteCartera)
+                    .addComponent(chkABCPuntosVenta)
+                    .addComponent(chkAccesoVentas))
+                .addContainerGap(321, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chkABCPuntosVenta)
+                .addGap(18, 18, 18)
+                .addComponent(chkAccesoVentas)
+                .addGap(18, 18, 18)
+                .addComponent(chkReportesVentas)
+                .addGap(23, 23, 23)
+                .addComponent(chkCartera)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(chkPermiteCartera)
+                .addContainerGap())
+        );
+
+        jTabInventario.addTab("Derechos Venta", jPanel3);
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -475,6 +523,12 @@ public class frmGruposUsuarios extends javax.swing.JInternalFrame {
             this.chkPermiteABCTiposFlujo.setSelected(grupos.blnABCTiposFlujo);
             this.chkPermiteVerReportesInventarios.setSelected(grupos.blnReportesInventarios);
             
+            this.chkABCPuntosVenta.setSelected(grupos.blnABCPuntosVenta);
+            this.chkAccesoVentas.setSelected(grupos.blnAccesoVenta);
+            this.chkReportesVentas.setSelected(grupos.blnReportesVentas);
+            this.chkCartera.setSelected(grupos.blnAccesoCartera);
+            this.chkPermiteCartera.setSelected(grupos.blnReportesCartera);
+            
             this.btnEliminar.setVisible(true);
             this.btnNuevo.setVisible(true);
             
@@ -551,6 +605,13 @@ long lngValor=0;
                 grupos.blnABCTiposFlujo=this.chkPermiteABCTiposFlujo.isSelected();
                 grupos.blnReportesInventarios=this.chkPermiteVerReportesInventarios.isSelected();
                 
+                grupos.blnABCPuntosVenta=this.chkABCPuntosVenta.isSelected();
+                grupos.blnAccesoVenta=this.chkAccesoVentas.isSelected();
+                grupos.blnReportesVentas=this.chkReportesVentas.isSelected();
+                grupos.blnAccesoCartera=this.chkCartera.isSelected();
+                grupos.blnReportesCartera=this.chkPermiteCartera.isSelected();
+                
+                
                 
              
                     try {
@@ -579,6 +640,11 @@ long lngValor=0;
             grupos.blnABCBodegas=this.chkPermiteABCBodegas.isSelected();
             grupos.blnABCTiposFlujo=this.chkPermiteABCTiposFlujo.isSelected();
             grupos.blnReportesInventarios=this.chkPermiteVerReportesInventarios.isSelected();
+            grupos.blnABCPuntosVenta=this.chkABCPuntosVenta.isSelected();
+            grupos.blnAccesoVenta=this.chkAccesoVentas.isSelected();
+            grupos.blnReportesVentas=this.chkReportesVentas.isSelected();
+            grupos.blnAccesoCartera=this.chkCartera.isSelected();
+            grupos.blnReportesCartera=this.chkPermiteCartera.isSelected();
                 
             
             try {
@@ -625,6 +691,11 @@ long lngValor=0;
         this.chkPermiteABCClientes.setSelected(false);
         this.chkPermiteABCArticulos.setSelected(false);
         this.chkPermiteABCEntradasSalidas.setSelected(false);
+        this.chkAccesoVentas.setSelected(false);
+        this.chkABCPuntosVenta.setSelected(false);
+        this.chkReportesVentas.setSelected(false);
+        this.chkCartera.setSelected(false);
+        this.chkPermiteCartera.setSelected(false);
         
     }
    
@@ -690,6 +761,9 @@ long lngValor=0;
     private javax.swing.JButton btnImprimirReporte;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnRegCliente;
+    private javax.swing.JCheckBox chkABCPuntosVenta;
+    private javax.swing.JCheckBox chkAccesoVentas;
+    private javax.swing.JCheckBox chkCartera;
     private javax.swing.JCheckBox chkPermiteABCArticulos;
     private javax.swing.JCheckBox chkPermiteABCBodegas;
     private javax.swing.JCheckBox chkPermiteABCClientes;
@@ -698,7 +772,9 @@ long lngValor=0;
     private javax.swing.JCheckBox chkPermiteABCGrupos;
     private javax.swing.JCheckBox chkPermiteABCTiposFlujo;
     private javax.swing.JCheckBox chkPermiteABCUsuarios;
+    private javax.swing.JCheckBox chkPermiteCartera;
     private javax.swing.JCheckBox chkPermiteVerReportesInventarios;
+    private javax.swing.JCheckBox chkReportesVentas;
     private javax.swing.JButton cmdAtras;
     private javax.swing.JButton cmdBuscar;
     private javax.swing.JButton cmdSiguiente1;
@@ -706,6 +782,7 @@ long lngValor=0;
     private javax.swing.JPanel jPanDatos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabInventario;

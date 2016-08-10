@@ -37,6 +37,12 @@ public class classGruposUsuarios {
     public boolean  blnABCTiposFlujo;
     public boolean  blnReportesInventarios;
     
+    public  boolean  blnABCPuntosVenta;
+    public  boolean  blnAccesoVenta;
+    public  boolean  blnReportesVentas;
+    public  boolean  blnAccesoCartera;
+    public  boolean  blnReportesCartera;
+    
     
     
     public classGruposUsuarios(){
@@ -146,6 +152,12 @@ public class classGruposUsuarios {
                  + "," + this.blnABCTiposFlujo
                  + "," + this.blnReportesInventarios
                  
+                 + "," + this.blnABCPuntosVenta
+                 + "," + this.blnAccesoVenta
+                 + "," + this.blnReportesVentas
+                 + "," + this.blnAccesoCartera
+                 + "," + this.blnReportesCartera
+                 
                  + ");";
          ps= con.conectado().prepareStatement(strConsulta);
          
@@ -190,6 +202,11 @@ public boolean actualizarGrupo() throws SQLException
                  + "," + this.blnABCBodegas
                  + "," + this.blnABCTiposFlujo
                  + "," + this.blnReportesInventarios
+                 + "," + this.blnABCPuntosVenta
+                 + "," + this.blnAccesoVenta
+                 + "," + this.blnReportesVentas
+                 + "," + this.blnAccesoCartera
+                 + "," + this.blnReportesCartera
                  + ");";
       
         
@@ -231,6 +248,12 @@ public boolean actualizarGrupo() throws SQLException
               this.blnABCBodegas=res.getBoolean("abcBodegas");
               this.blnABCTiposFlujo=res.getBoolean("abcTipoFlujo");
               this.blnReportesInventarios=res.getBoolean("ReportesInventarios");
+              
+              this.blnABCPuntosVenta=res.getBoolean("abcPuntosVenta");
+              this.blnAccesoVenta=res.getBoolean("accesoVentas");
+              this.blnReportesVentas=res.getBoolean("ReportesVentas");
+              this.blnAccesoCartera=res.getBoolean("accesoCartera");
+              this.blnReportesCartera=res.getBoolean("ReportesCartera");
                       
               res.close();
               return datos;

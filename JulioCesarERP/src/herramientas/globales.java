@@ -34,6 +34,12 @@ import javax.swing.JOptionPane;
     public static boolean  blnABCTiposFlujo;
     public static boolean  blnReportesInventarios;
     
+    public static boolean  blnABCPuntosVenta;
+    public static boolean  blnAccesoVenta;
+    public static boolean  blnReportesVentas;
+    public static boolean  blnAccesoCartera;
+    public static boolean  blnReportesCartera;
+    
     //DATOS EMPRESA
     public static String gstrCiudad;
     public static String gstrDireccion;

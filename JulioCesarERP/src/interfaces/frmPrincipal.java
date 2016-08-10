@@ -61,12 +61,12 @@ control_existencias ctrl = new control_existencias();
         ReportesInventarios = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         Ventas = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        Puntos_venta = new javax.swing.JMenuItem();
+        jVentas = new javax.swing.JMenuItem();
+        ReportesVentas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        Cartera = new javax.swing.JMenuItem();
+        ReporteCartera = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -256,23 +256,28 @@ control_existencias ctrl = new control_existencias();
         Ventas.setText("Ventas");
         Ventas.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
 
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem5.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Company.png"))); // NOI18N
-        jMenuItem5.setText("Puntos de Venta");
-        Ventas.add(jMenuItem5);
+        Puntos_venta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        Puntos_venta.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Puntos_venta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Company.png"))); // NOI18N
+        Puntos_venta.setText("Puntos de Venta");
+        Puntos_venta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Puntos_ventaActionPerformed(evt);
+            }
+        });
+        Ventas.add(Puntos_venta);
 
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/e-commerce-px-png (1).png"))); // NOI18N
-        jMenuItem6.setText("Ventas");
-        Ventas.add(jMenuItem6);
+        jVentas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jVentas.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/e-commerce-px-png (1).png"))); // NOI18N
+        jVentas.setText("Ventas");
+        Ventas.add(jVentas);
 
-        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/web-space-px-png.png"))); // NOI18N
-        jMenuItem7.setText("Reportes de Ventas");
-        Ventas.add(jMenuItem7);
+        ReportesVentas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        ReportesVentas.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        ReportesVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/web-space-px-png.png"))); // NOI18N
+        ReportesVentas.setText("Reportes de Ventas");
+        Ventas.add(ReportesVentas);
 
         jMenuBar1.add(Ventas);
 
@@ -281,17 +286,17 @@ control_existencias ctrl = new control_existencias();
         jMenu4.setText("Cartera");
         jMenu4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
 
-        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem8.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Money.png"))); // NOI18N
-        jMenuItem8.setText("Cargos / Abonos");
-        jMenu4.add(jMenuItem8);
+        Cartera.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        Cartera.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Cartera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Money.png"))); // NOI18N
+        Cartera.setText("Cargos / Abonos");
+        jMenu4.add(Cartera);
 
-        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem9.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/web-space-px-png.png"))); // NOI18N
-        jMenuItem9.setText("Reportes de Cartera");
-        jMenu4.add(jMenuItem9);
+        ReporteCartera.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        ReporteCartera.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        ReporteCartera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/web-space-px-png.png"))); // NOI18N
+        ReporteCartera.setText("Reportes de Cartera");
+        jMenu4.add(ReporteCartera);
 
         jMenuBar1.add(jMenu4);
 
@@ -412,6 +417,10 @@ control_existencias ctrl = new control_existencias();
         jDesktopPane1.add(reportes);
         reportes.setVisible(true);
     }//GEN-LAST:event_ReportesInventariosActionPerformed
+
+    private void Puntos_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Puntos_ventaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Puntos_ventaActionPerformed
 public void ejecutarDerecho(){
     jMenuItem3.setVisible(globales.blnAccesoArticulos);
     jMenuItem4.setVisible(globales.blnAccesoClientes);
@@ -420,11 +429,22 @@ public void ejecutarDerecho(){
     menuBodegas.setVisible(globales.blnABCBodegas);
     this.MenuFlujo.setVisible(globales.blnABCTiposFlujo);
     this.ReportesInventarios.setVisible(globales.blnReportesInventarios);
+    
+    this.Puntos_venta.setVisible(globales.blnABCPuntosVenta);
+    this.jVentas.setVisible(globales.blnAccesoVenta);
+    this.ReportesVentas.setVisible(globales.blnReportesVentas);
+    this.Cartera.setVisible(globales.blnAccesoCartera);
+    this.ReporteCartera.setVisible(globales.blnReportesCartera);
+    
 }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Cartera;
     private javax.swing.JMenuItem MenuFlujo;
+    private javax.swing.JMenuItem Puntos_venta;
+    private javax.swing.JMenuItem ReporteCartera;
     private javax.swing.JMenuItem ReportesInventarios;
+    private javax.swing.JMenuItem ReportesVentas;
     private javax.swing.JMenu Ventas;
     public static javax.swing.JDesktopPane jDesktopPane1;
     public static javax.swing.JLabel jLabel1;
@@ -443,11 +463,7 @@ public void ejecutarDerecho(){
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jVentas;
     private javax.swing.JMenuItem menuBodegas;
     private javax.swing.JMenuItem menuEntrada;
     private javax.swing.JMenuItem menuEstados;
