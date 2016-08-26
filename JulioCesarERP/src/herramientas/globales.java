@@ -85,6 +85,13 @@ import javax.swing.JOptionPane;
         blnABCBodegas=grupos.blnABCBodegas;
         blnABCTiposFlujo=grupos.blnABCTiposFlujo;
         blnReportesInventarios=grupos.blnReportesInventarios;
+        
+        blnABCPuntosVenta=grupos.blnABCPuntosVenta;
+        blnAccesoVenta=grupos.blnAccesoVenta;
+        blnReportesVentas=grupos.blnReportesVentas;
+        blnAccesoCartera=grupos.blnAccesoCartera;
+        blnReportesCartera=grupos.blnReportesCartera;
+    
     }
     
  

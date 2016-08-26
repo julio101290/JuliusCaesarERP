@@ -653,6 +653,7 @@ long lngValor=0;
                 JOptionPane.showInternalMessageDialog(rootPane,"Actualizado Correctamente");
             } catch (SQLException ex) {
                 Logger.getLogger(frmGruposUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showInternalMessageDialog(rootPane,"ERROR AL ACTUALIZAR"+ ex.toString());
             }
 
         }

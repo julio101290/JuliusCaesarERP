@@ -192,7 +192,9 @@ public boolean actualizarGrupo() throws SQLException
          String strConsulta="";
          String strRespuesta="";
          
-         strConsulta=strConsulta +"call PA_ActualizarGrupo  ("+this.lngIDGrupo+",'"+ strDescripcion 
+         strConsulta=strConsulta +"call PA_ActualizarGrupo  ("
+                 +this.lngIDGrupo+",'"
+                 + strDescripcion 
                    + "'," + this.blnAccesoConfiguracion
                  + "," + this.blnAccesoGrupos
                  + "," + this.blnAccesoUsuarios
@@ -202,6 +204,7 @@ public boolean actualizarGrupo() throws SQLException
                  + "," + this.blnABCBodegas
                  + "," + this.blnABCTiposFlujo
                  + "," + this.blnReportesInventarios
+                
                  + "," + this.blnABCPuntosVenta
                  + "," + this.blnAccesoVenta
                  + "," + this.blnReportesVentas
@@ -249,10 +252,10 @@ public boolean actualizarGrupo() throws SQLException
               this.blnABCTiposFlujo=res.getBoolean("abcTipoFlujo");
               this.blnReportesInventarios=res.getBoolean("ReportesInventarios");
               
-              this.blnABCPuntosVenta=res.getBoolean("abcPuntosVenta");
-              this.blnAccesoVenta=res.getBoolean("accesoVentas");
-              this.blnReportesVentas=res.getBoolean("ReportesVentas");
-              this.blnAccesoCartera=res.getBoolean("accesoCartera");
+              this.blnABCPuntosVenta=res.getBoolean("Puntos_venta");
+              this.blnAccesoVenta=res.getBoolean("Venta");
+              this.blnReportesVentas=res.getBoolean("ReportesVenta");
+              this.blnAccesoCartera=res.getBoolean("Cartera");
               this.blnReportesCartera=res.getBoolean("ReportesCartera");
                       
               res.close();

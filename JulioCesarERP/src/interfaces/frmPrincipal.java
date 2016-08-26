@@ -64,9 +64,11 @@ control_existencias ctrl = new control_existencias();
         Puntos_venta = new javax.swing.JMenuItem();
         jVentas = new javax.swing.JMenuItem();
         ReportesVentas = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         Cartera = new javax.swing.JMenuItem();
         ReporteCartera = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -280,6 +282,7 @@ control_existencias ctrl = new control_existencias();
         Ventas.add(ReportesVentas);
 
         jMenuBar1.add(Ventas);
+        jMenuBar1.add(jMenu8);
 
         jMenu4.setBorder(new javax.swing.border.MatteBorder(null));
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Business.png"))); // NOI18N
@@ -299,6 +302,7 @@ control_existencias ctrl = new control_existencias();
         jMenu4.add(ReporteCartera);
 
         jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jMenu9);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Help.png"))); // NOI18N
         jMenu5.setText("Ayuda");
@@ -455,6 +459,8 @@ public void ejecutarDerecho(){
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-08-2016 a las 05:04:26
+-- Tiempo de generación: 26-08-2016 a las 12:05:37
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.23
 
@@ -41,11 +41,7 @@ select
     ifnull((select sum(x.Cantidad)
         from inventarios x
         where x.EntradaSalida='Entrada' 
-        	 -- and x.EntradaSalida=a.EntradaSalida
-             -- and x.idTipoFlujo=a.idTipoFlujo
-             -- and x.idFolio= a.idFolio
-             -- and x.idBodega=a.idBodega
-              and x.Producto=a.Producto
+        	                                                      and x.Producto=a.Producto
              group by x.Producto
             
            ),0) -
@@ -53,11 +49,7 @@ select
           ifnull( (select sum(x.Cantidad)
         from inventarios x
         where x.EntradaSalida='Salida' 
-        	 -- and x.EntradaSalida=a.EntradaSalida
-              -- and x.idTipoFlujo=a.idTipoFlujo
-              -- and x.idFolio= a.idFolio
-              -- and x.idBodega=a.idBodega
-               and x.Producto=a.Producto
+        	                                                          and x.Producto=a.Producto
              group by x.Producto 
                    
                   ),0)
@@ -269,7 +261,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ActualizaPais` (IN `ParIdPais` B
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ActualizarGrupo` (IN `parIDGrupo` BIGINT, IN `parDescripcion` VARCHAR(200), IN `parAccesoConfiguracion` BOOLEAN, IN `parAccesoGrupos` BOOLEAN, IN `parAccesoUsuarios` BOOLEAN, IN `parAccesoClientes` BOOLEAN, IN `parAccesoArticulos` BOOLEAN, IN `parAccesoInventario` BOOLEAN, IN `parABCBodegas` INT, IN `parABCTiposFlujo` INT, IN `parReportesInventarios` INT, IN `parPuntosVenta` TINYINT, IN `parVentas` TINYINT, IN `parReportesVentas` TINYINT, IN `parCartera` TINYINT, IN `parReportesCartera` TINYINT)  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ActualizarGrupo` (IN `parIDGrupo` BIGINT, IN `parDescripcion` VARCHAR(200), IN `parAccesoConfiguracion` BOOLEAN, IN `parAccesoGrupos` BOOLEAN, IN `parAccesoUsuarios` BOOLEAN, IN `parAccesoClientes` BOOLEAN, IN `parAccesoArticulos` BOOLEAN, IN `parAccesoInventario` BOOLEAN, IN `parABCBodegas` BOOLEAN, IN `parABCTiposFlujo` BOOLEAN, IN `parReportesInventarios` BOOLEAN, IN `parPuntosVenta` BOOLEAN, IN `parVentas` BOOLEAN, IN `parReportesVentas` BOOLEAN, IN `parCartera` BOOLEAN, IN `parReportesCartera` BOOLEAN)  NO SQL
 update GruposUsuarios 
 
 set Descripcion=parDescripcion
@@ -284,7 +276,7 @@ set Descripcion=parDescripcion
     ,abcTipoFlujo=parABCTiposFlujo
     ,ReportesInventarios=parReportesInventarios
     
-    ,Puntos_venta=parVentas
+    ,Puntos_venta=parPuntosVenta
     ,Venta=parVentas
     
     ,ReportesVenta=parReportesVentas
@@ -703,6 +695,13 @@ SELECT idGrupoUsuario
 ,abcBodegas
 ,abcTipoFlujo
 ,ReportesInventarios
+
+,Puntos_venta
+,Venta
+,ReportesVenta
+,Cartera
+,ReportesCartera
+
 from GruposUsuarios where idGrupoUsuario=parIDGrupoUsuario$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_LeerPais` (IN `parIdPais` BIGINT)  NO SQL
@@ -940,14 +939,14 @@ CREATE TABLE `gruposusuarios` (
   `accesoArticulos` tinyint(1) DEFAULT '0',
   `accesoConfiguracion` tinyint(1) DEFAULT '0',
   `accesoInventario` tinyint(1) DEFAULT '0',
-  `abcBodegas` tinyint(4) NOT NULL,
-  `abcTipoFlujo` tinyint(4) NOT NULL,
-  `ReportesInventarios` tinyint(4) NOT NULL,
-  `Puntos_venta` tinyint(4) NOT NULL,
-  `Venta` tinyint(4) NOT NULL,
-  `ReportesVenta` tinyint(4) NOT NULL,
-  `Cartera` tinyint(4) NOT NULL,
-  `ReportesCartera` tinyint(4) NOT NULL
+  `abcBodegas` tinyint(1) DEFAULT NULL,
+  `abcTipoFlujo` tinyint(1) NOT NULL,
+  `ReportesInventarios` tinyint(1) NOT NULL,
+  `Puntos_venta` tinyint(1) DEFAULT NULL,
+  `Venta` tinyint(1) NOT NULL,
+  `ReportesVenta` tinyint(1) NOT NULL,
+  `Cartera` tinyint(1) NOT NULL,
+  `ReportesCartera` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -955,7 +954,7 @@ CREATE TABLE `gruposusuarios` (
 --
 
 INSERT INTO `gruposusuarios` (`IdGrupoUsuario`, `Descripcion`, `accesoUsuarios`, `accesoGrupos`, `accesoClientes`, `accesoArticulos`, `accesoConfiguracion`, `accesoInventario`, `abcBodegas`, `abcTipoFlujo`, `ReportesInventarios`, `Puntos_venta`, `Venta`, `ReportesVenta`, `Cartera`, `ReportesCartera`) VALUES
-(2, 'PRUEBAS', 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0),
+(2, 'PRUEBAS', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (9, 'Administrador', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (10, 'Supervisor', 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0),
 (11, 'Desarrollador', 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0),
