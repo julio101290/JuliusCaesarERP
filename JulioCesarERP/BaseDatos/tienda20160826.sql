@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-08-2016 a las 12:05:37
+-- Tiempo de generación: 26-08-2016 a las 13:05:45
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.23
 
@@ -261,6 +261,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ActualizaPais` (IN `ParIdPais` B
 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ActualizaPuntoVenta` (IN `parIdPuntoVenta` INT, IN `parDescripcion` VARCHAR(500))  NO SQL
+update PuntosVenta
+
+set Descripcion=parDescripcion
+
+where idPuntoVenta=parIdPuntoVenta$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ActualizarGrupo` (IN `parIDGrupo` BIGINT, IN `parDescripcion` VARCHAR(200), IN `parAccesoConfiguracion` BOOLEAN, IN `parAccesoGrupos` BOOLEAN, IN `parAccesoUsuarios` BOOLEAN, IN `parAccesoClientes` BOOLEAN, IN `parAccesoArticulos` BOOLEAN, IN `parAccesoInventario` BOOLEAN, IN `parABCBodegas` BOOLEAN, IN `parABCTiposFlujo` BOOLEAN, IN `parReportesInventarios` BOOLEAN, IN `parPuntosVenta` BOOLEAN, IN `parVentas` BOOLEAN, IN `parReportesVentas` BOOLEAN, IN `parCartera` BOOLEAN, IN `parReportesCartera` BOOLEAN)  NO SQL
 update GruposUsuarios 
 
@@ -374,6 +381,9 @@ WHERE idCliente=idCliente1$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_EliminarGrupo` (IN `parIDGrupo` INT)  NO SQL
 delete from GruposUsuarios where idGrupoUsuario = parIDGrupo$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_EliminarPuntoVenta` (IN `parPuntoVenta` BIGINT)  NO SQL
+delete from PuntosVenta where idPuntoVenta=parPuntoVenta$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_EliminarTipoFlujo` (IN `ParIdTipoFlujo` BIGINT)  NO SQL
 delete from TiposFlujos where idTipoFlujo=ParIdTipoFlujo$$
 
@@ -476,6 +486,10 @@ values(ParDescripcion
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_InsertaPais` (IN `parDescripcion` VARCHAR(200))  NO SQL
 insert into Paises (Descripcion)
 values (parDescripcion)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_InsertaPuntoVenta` (IN `paPuntoVenta` VARCHAR(500))  NO SQL
+insert into PuntosVenta(Descripcion)
+values(paPuntoVenta)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_InsertaTipoFlujo` (IN `parDescripcion` VARCHAR(200), IN `ParEntradaSalida` VARCHAR(20))  NO SQL
 insert into TiposFlujos(Descripcion,EntradaSalida) VALUES(
@@ -590,7 +604,7 @@ SELECT COUNT(*) as cuantos
 FROM Articulos
 where Descripcion LIKE CONCAT('%',parBusqueda,'%')$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_LeeCuantosBodegas` (IN `parBusqueda` INT)  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_LeeCuantosBodegas` (IN `parBusqueda` VARCHAR(800))  NO SQL
 SELECT COUNT(*) as cuantos
 FROM Bodegas
 where Descripcion LIKE CONCAT('%',parBusqueda,'%')$$
@@ -606,6 +620,11 @@ SELECT COUNT(*) as cuantos
 FROM Paises
 where Descripcion LIKE CONCAT('%',parBusqueda,'%')
 or idPais LIKE CONCAT('%',parBusqueda,'%')$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_LeeCuantosPuntoVentas` (IN `parBusqueda` VARCHAR(800))  NO SQL
+SELECT COUNT(*) as cuantos
+FROM PuntosVenta
+where Descripcion LIKE CONCAT('%',parBusqueda,'%')$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_LeeCuantosTiposFlujos` (IN `parBusqueda` VARCHAR(200))  NO SQL
 SELECT COUNT(TiposFlujos.idTipoFlujo) AS CUANTOS
@@ -665,6 +684,27 @@ where a.Descripcion LIKE CONCAT('%',parBusqueda,'%')
 
 
 limit parDesde,parCuantos$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_LeePuntosVentas` (IN `parDesde` INT, IN `parCuantos` INT, IN `parBusqueda` VARCHAR(500))  NO SQL
+SELECT 
+		idPuntoVenta
+        ,Descripcion
+
+        FROM
+        PuntosVenta
+        
+        where Descripcion LIKE CONCAT('%',parBusqueda,'%')
+
+ 
+limit parDesde,parCuantos$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_LeePuntoVenta` (IN `parPuntoVenta` BIGINT)  NO SQL
+SELECT idPuntoVenta
+		,Descripcion
+FROM	
+	PuntosVenta
+    WHERE
+    idPuntoVenta =parPuntoVenta$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_LeerArticulos` (IN `parDesde` BIGINT, IN `parCuantos` BIGINT, IN `parBusqueda` VARCHAR(800))  NO SQL
 SELECT 	idArticulo
@@ -954,7 +994,7 @@ CREATE TABLE `gruposusuarios` (
 --
 
 INSERT INTO `gruposusuarios` (`IdGrupoUsuario`, `Descripcion`, `accesoUsuarios`, `accesoGrupos`, `accesoClientes`, `accesoArticulos`, `accesoConfiguracion`, `accesoInventario`, `abcBodegas`, `abcTipoFlujo`, `ReportesInventarios`, `Puntos_venta`, `Venta`, `ReportesVenta`, `Cartera`, `ReportesCartera`) VALUES
-(2, 'PRUEBAS', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 'PRUEBAS', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0),
 (9, 'Administrador', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (10, 'Supervisor', 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0),
 (11, 'Desarrollador', 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0),
@@ -1069,6 +1109,28 @@ INSERT INTO `paises` (`idPais`, `Descripcion`) VALUES
 (1, 'MEXICO'),
 (2, 'Estados Unidos Americanos'),
 (3, 'Afganistan');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `puntosventa`
+--
+
+CREATE TABLE `puntosventa` (
+  `idPuntoVenta` int(11) NOT NULL,
+  `Descripcion` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `puntosventa`
+--
+
+INSERT INTO `puntosventa` (`idPuntoVenta`, `Descripcion`) VALUES
+(1, 'Juan Jose '),
+(2, 'Mochis'),
+(3, 'Guasave'),
+(5, 'Choix'),
+(6, 'Mocorito');
 
 -- --------------------------------------------------------
 
@@ -1195,6 +1257,14 @@ ALTER TABLE `paises`
   ADD PRIMARY KEY (`idPais`);
 
 --
+-- Indices de la tabla `puntosventa`
+--
+ALTER TABLE `puntosventa`
+  ADD UNIQUE KEY `idPuntoVenta` (`idPuntoVenta`),
+  ADD KEY `idPuntoVenta_2` (`idPuntoVenta`),
+  ADD KEY `idPuntoVenta_3` (`idPuntoVenta`);
+
+--
 -- Indices de la tabla `tiposflujos`
 --
 ALTER TABLE `tiposflujos`
@@ -1241,6 +1311,11 @@ ALTER TABLE `gruposusuarios`
 --
 ALTER TABLE `paises`
   MODIFY `idPais` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `puntosventa`
+--
+ALTER TABLE `puntosventa`
+  MODIFY `idPuntoVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tiposflujos`
 --

@@ -423,7 +423,9 @@ control_existencias ctrl = new control_existencias();
     }//GEN-LAST:event_ReportesInventariosActionPerformed
 
     private void Puntos_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Puntos_ventaActionPerformed
-        // TODO add your handling code here:
+        frmPuntosVenta PuntosVenta = new frmPuntosVenta();
+        jDesktopPane1.add(PuntosVenta);
+        PuntosVenta.setVisible(true);
     }//GEN-LAST:event_Puntos_ventaActionPerformed
 public void ejecutarDerecho(){
     jMenuItem3.setVisible(globales.blnAccesoArticulos);
