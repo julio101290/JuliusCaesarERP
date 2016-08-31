@@ -13,13 +13,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author julio
  */
-public class frmBuscarPersona extends javax.swing.JInternalFrame {
+public class frmBuscarPersonaVenta extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmBuscarPersona
      */
     long lngNumPaginas;
-    public frmBuscarPersona() {
+    public frmBuscarPersonaVenta() {
         initComponents();
         defineTablaClientes("",0);
     }
@@ -273,9 +273,8 @@ public class frmBuscarPersona extends javax.swing.JInternalFrame {
         long lngCliente;
 
         if (fila > -1){
-            frmMovimientos.txtNumCliente.setText(String.valueOf(JTabClientes.getValueAt(fila, 0)));
-            frmMovimientos.lblNomCliente.setText(String.valueOf(JTabClientes.getValueAt(fila, 1))+" "+String.valueOf(JTabClientes.getValueAt(fila, 2)));
-            frmMovimientos.txtFactura.requestFocus();
+            frmVentas.txtNumCliente.setText(String.valueOf(JTabClientes.getValueAt(fila, 0)));
+            frmVentas.lblNomCliente.setText(String.valueOf(JTabClientes.getValueAt(fila, 1))+" "+String.valueOf(JTabClientes.getValueAt(fila, 2)));
             this.dispose();
            
 
