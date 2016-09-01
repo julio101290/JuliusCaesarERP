@@ -703,11 +703,18 @@ public void defineTablaArticulos(){
             
             lngPuntoVenta=Long.valueOf(this.cboPuntoVenta.getSelectedItem().toString().substring(0, 4).toString());
             lngFolio=Long.valueOf(this.txtFolio.getText());
-            strConsulta="SELECT * , (SELECT Logo FROM datosempresa) as logo FROM Ventas where "
-                    +"and idPuntoVenta="+lngPuntoVenta+" "
-                    +"and idFolio="+ lngFolio
-                    ;
-                    
+            strConsulta="          SELECT * "
+                    + ",    (SELECT Logo FROM datosempresa) as logo"
+                    + ",(Select z.Descripcion from PuntosVenta z where a.puntoventa=z.idPuntoVenta)DescPuntoVenta"
+                    + " FROM Ventas a "
+                    + ",VentasProductos b"
+                    + " where  "
+                    + "a.idVenta=b.idVenta "
+                    + "and a.PuntoVenta=b.idPuntoVenta "
+                    + "and a.idVenta=2 "
+                    + "and a.puntoventa=1";
+            
+            
             System.out.println(strConsulta);
             Reportes.lanzarReporte(strConsulta, "repTargetaVenta");
 

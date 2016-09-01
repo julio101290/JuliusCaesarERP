@@ -243,7 +243,7 @@ public class classVenta {
         String strConsulta;
       
         strConsulta="";
-        strConsulta=strConsulta +"call PAR_EliminamovimientoInventarioProducto   ("+this.lngPuntoVenta+""
+        strConsulta=strConsulta +"call PAR_EliminarVentaProducto   ("+this.lngPuntoVenta+""
             + "," + this.lngFolio + ""
             + "," + this.lngRegistro + ""
             + ");";

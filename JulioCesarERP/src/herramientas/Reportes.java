@@ -68,6 +68,7 @@ public class Reportes {
                 jasperDesign.setQuery(newQuery);
                
                  JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+                 System.out.println(strConsulta);
                  JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, mpParametros, con.conectado());
                  JasperViewer jviewer = new JasperViewer(jasperPrint,false);
                  jviewer.setTitle(strReporte);
