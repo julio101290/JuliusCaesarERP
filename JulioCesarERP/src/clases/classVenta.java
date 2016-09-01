@@ -182,7 +182,7 @@ public class classVenta {
     public  long lngleerUltimoVentaRegistro(){
         String strConsulta;
         strConsulta="";
-        strConsulta=strConsulta +"call PAL_UltimoRegistroVentasProductos  ('"+this.lngPuntoVenta+"'"
+        strConsulta=strConsulta +"call PAL_UltimoRegistroVentasProductos  ("+this.lngPuntoVenta+""
             + "," + this.lngFolio + ""
             + ");";
       
@@ -208,7 +208,7 @@ public class classVenta {
         String strConsulta;
         String datos[]=new String [7];
         strConsulta="";
-         strConsulta=strConsulta +"call PAL_LeeVentasProductos  ('"+this.lngPuntoVenta+"'"
+         strConsulta=strConsulta +"call PAL_LeeVentasProductos  ("+this.lngPuntoVenta+""
             + "," + this.lngFolio + ""
             + ");";
         
@@ -228,7 +228,7 @@ public class classVenta {
               datos[2]=res.getString("Descripcion");
               datos[3]=res.getString("Precio");
               datos[4]=res.getString("Cantidad");
-              datos[5]=res.getString("importeTotal");
+              datos[5]=res.getString("importe_neto");
              
               tablaArticulos.addRow(datos);
          }
