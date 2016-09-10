@@ -39,6 +39,7 @@ import javax.swing.JOptionPane;
     public static boolean  blnReportesVentas;
     public static boolean  blnAccesoCartera;
     public static boolean  blnReportesCartera;
+    public static boolean  blnScaner;
     
     //DATOS EMPRESA
     public static String gstrCiudad;
@@ -91,6 +92,7 @@ import javax.swing.JOptionPane;
         blnReportesVentas=grupos.blnReportesVentas;
         blnAccesoCartera=grupos.blnAccesoCartera;
         blnReportesCartera=grupos.blnReportesCartera;
+        blnScaner=grupos.blnScaner;
     
     }
     

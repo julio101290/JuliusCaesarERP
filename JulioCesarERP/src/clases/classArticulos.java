@@ -30,6 +30,7 @@ public class classArticulos {
     public double dblIEPS;
     public double dblPrecioCosto;
     public double dblPrecioVenta;
+    public String strCodigoBarras;
     
     
     public classArticulos(){
@@ -58,7 +59,7 @@ public class classArticulos {
               this.dblIEPS=res.getDouble("IEPS");
               this.dblPrecioCosto=res.getDouble("PrecioCosto");
               this.dblPrecioVenta=res.getDouble("PrecioVenta");
-                      
+              this.strCodigoBarras=res.getString("codigoBarras");
               res.close();
               
               
@@ -70,10 +71,41 @@ public class classArticulos {
      
           }
         }
+     
+     
+     public boolean existeCodigoBarras(String strCodigo){
+        String strConsulta;
+        boolean blnDato;
+        blnDato=false;
+        String datos[]=new String [12];
+        
+        strConsulta="call  PAL_ExisteCodigoBarras  ("+strCodigo
+                + ");";
+     
+      
+        try{
+         
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery();
+         
+         while(res.next()){
+             blnDato=true;
+              res.close();
+              
+              
+         }
+         res.close();
+          }catch(SQLException e){
+         System.out.println(e);
+ 
+     
+          }
+        return blnDato;
+        }
     
      public void leerArticulos(long intDesde ,long intCuantos,DefaultTableModel tablaArticulos,String strBusqueda ){
         String strConsulta;
-        String datos[]=new String [7];
+        String datos[]=new String [8];
       
         strConsulta="CALL PA_LeeArticulos ("+intDesde+","+intCuantos+",'"+strBusqueda+"');";
       
@@ -92,6 +124,7 @@ public class classArticulos {
               datos[4]=res.getString("IVA");
               datos[5]=res.getString("PrecioCosto");
               datos[6]=res.getString("PrecioVenta");
+              //datos[7]=res.getString("codigoBarras");
              
               tablaArticulos.addRow(datos);
          }
@@ -115,6 +148,7 @@ public class classArticulos {
                  + ",'" + this.dblIVA + "'"
                  + ",'" + this.dblPrecioCosto + "'"
                  + ",'" + this.dblPrecioVenta + "'"
+                 + ",'" + this.strCodigoBarras + "'"
                  + ");";
          ps= con.conectado().prepareStatement(strConsulta);
          
@@ -139,6 +173,7 @@ public class classArticulos {
                  + ",'" + this.dblIVA + "'"
                  + ",'" + this.dblPrecioCosto + "'"
                  + ",'" + this.dblPrecioVenta + "'"
+                 + ",'" + this.strCodigoBarras + "'"
                  + ");";
 
        ps= con.conectado().prepareStatement(strConsulta);

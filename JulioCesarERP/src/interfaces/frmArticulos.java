@@ -49,6 +49,8 @@ public class frmArticulos extends javax.swing.JInternalFrame {
         txtIdArticulo = new javax.swing.JTextField();
         lblTipo = new javax.swing.JLabel();
         cboTipo = new javax.swing.JComboBox();
+        lblDescripcion1 = new javax.swing.JLabel();
+        txtCodigoBarras = new javax.swing.JTextField();
         costos = new javax.swing.JPanel();
         txtPrecioCosto = new javax.swing.JTextField();
         txtPrecioVenta = new javax.swing.JTextField();
@@ -80,7 +82,7 @@ public class frmArticulos extends javax.swing.JInternalFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("CATALOGO DE BODEGAS");
+        setTitle("CATALOGO DE ARTICULOS");
 
         JTabArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,12 +109,12 @@ public class frmArticulos extends javax.swing.JInternalFrame {
         });
         JTabArticulos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         JTabArticulos.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 JTabArticulosAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         JTabArticulos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -130,21 +132,30 @@ public class frmArticulos extends javax.swing.JInternalFrame {
 
         cboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Producto", "Servicio" }));
 
+        lblDescripcion1.setText("Codigo de Barras:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTipo)
-                    .addComponent(idProducto)
-                    .addComponent(lblDescripcion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDescripcion)
-                    .addComponent(cboTipo, 0, 174, Short.MAX_VALUE)
-                    .addComponent(txtIdArticulo))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(lblTipo)
+                        .addGap(18, 18, 18)
+                        .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(idProducto)
+                            .addComponent(lblDescripcion)
+                            .addComponent(lblDescripcion1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtCodigoBarras)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                            .addComponent(txtIdArticulo, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -158,11 +169,15 @@ public class frmArticulos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescripcion)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescripcion1)
+                    .addComponent(txtCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipo)
                     .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         panCapturaArticulos.addTab("Datos Basicos", jPanel1);
@@ -388,14 +403,11 @@ public class frmArticulos extends javax.swing.JInternalFrame {
             .addGroup(PanBotones2Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(PanBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanBotones2Layout.createSequentialGroup()
-                        .addComponent(btnImprimirReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PanBotones2Layout.createSequentialGroup()
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)))
+                    .addComponent(btnImprimirReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(btnRegArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
                 .addGroup(PanBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(salirclijButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -411,7 +423,7 @@ public class frmArticulos extends javax.swing.JInternalFrame {
                 .addGroup(PanBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnImprimirReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(salirclijButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -429,7 +441,7 @@ public class frmArticulos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(panCapturaArticulos, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
+                        .addComponent(panCapturaArticulos))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(PanBotones2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -517,6 +529,7 @@ public void defineTablaArticulos(String strBusqueda,long DesdeHoja){
             this.txtIVA.setText(String.valueOf(articulos.dblIVA));
             this.txtPrecioCosto.setText(String.valueOf(articulos.dblPrecioCosto));
             this.txtPrecioVenta.setText(String.valueOf(articulos.dblPrecioVenta));
+            this.txtCodigoBarras.setText(articulos.strCodigoBarras);
 
             this.btnEliminar.setVisible(true);
             this.btnNuevo.setVisible(true);
@@ -571,7 +584,11 @@ public void defineTablaArticulos(String strBusqueda,long DesdeHoja){
             Articulos.dblIVA=Double.valueOf(this.txtIVA.getText());
             Articulos.dblPrecioCosto=Double.valueOf(this.txtPrecioCosto.getText());
             Articulos.dblPrecioVenta=Double.valueOf(this.txtPrecioVenta.getText());
-          
+            Articulos.strCodigoBarras=this.txtCodigoBarras.getText();
+            if (Articulos.existeCodigoBarras(Articulos.strCodigoBarras)==true){
+                 JOptionPane.showInternalMessageDialog(rootPane,"EL CODIGO DE BARRAS YA EXISTE");
+                return ; 
+            }
 
             try {
                 Articulos.ingresarArticulo();
@@ -595,7 +612,11 @@ public void defineTablaArticulos(String strBusqueda,long DesdeHoja){
             Articulos.dblIVA=Double.valueOf(this.txtIVA.getText());
             Articulos.dblPrecioCosto=Double.valueOf(this.txtPrecioCosto.getText());
             Articulos.dblPrecioVenta=Double.valueOf(this.txtPrecioVenta.getText());
-          
+            Articulos.strCodigoBarras=this.txtCodigoBarras.getText();
+            if (Articulos.existeCodigoBarras(Articulos.strCodigoBarras)==true){
+                 JOptionPane.showInternalMessageDialog(rootPane,"EL CODIGO DE BARRAS YA EXISTE");
+                return ; 
+            }
 
             try {
                 if (Articulos.actualizarArticulo()==true){
@@ -662,6 +683,7 @@ public void defineTablaArticulos(String strBusqueda,long DesdeHoja){
         this.txtPrecioCosto.setText("0");
         this.txtPrecioVenta.setText("0");
         this.btnEliminar.setVisible(false);
+        this.txtCodigoBarras.setText("");
         
         
     }
@@ -689,6 +711,7 @@ public void defineTablaArticulos(String strBusqueda,long DesdeHoja){
     private javax.swing.JLabel jlblTotalPaginas;
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblDescripcion1;
     private javax.swing.JLabel lblIEPS;
     private javax.swing.JLabel lblIVA;
     private javax.swing.JLabel lblPrecioCosto;
@@ -698,6 +721,7 @@ public void defineTablaArticulos(String strBusqueda,long DesdeHoja){
     private javax.swing.JButton salirclijButton;
     private javax.swing.JScrollPane tabPaises;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtCodigoBarras;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtIEPS;
     private javax.swing.JTextField txtIVA;

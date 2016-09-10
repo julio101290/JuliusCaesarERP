@@ -74,6 +74,7 @@ public class frmGruposUsuarios extends javax.swing.JInternalFrame {
         chkReportesVentas = new javax.swing.JCheckBox();
         chkCartera = new javax.swing.JCheckBox();
         chkPermiteCartera = new javax.swing.JCheckBox();
+        chkScaner = new javax.swing.JCheckBox();
         PanBotones = new javax.swing.JPanel();
         btnEliminar = new javax.swing.JButton();
         btnImprimirReporte = new javax.swing.JButton();
@@ -326,6 +327,13 @@ public class frmGruposUsuarios extends javax.swing.JInternalFrame {
 
         chkPermiteCartera.setText("Permite Acceso a Reportes de cartera");
 
+        chkScaner.setText("Usa escaner");
+        chkScaner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkScanerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -336,15 +344,20 @@ public class frmGruposUsuarios extends javax.swing.JInternalFrame {
                     .addComponent(chkCartera)
                     .addComponent(chkReportesVentas)
                     .addComponent(chkPermiteCartera)
-                    .addComponent(chkABCPuntosVenta)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(chkABCPuntosVenta)
+                        .addGap(52, 52, 52)
+                        .addComponent(chkScaner))
                     .addComponent(chkAccesoVentas))
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chkABCPuntosVenta)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkABCPuntosVenta)
+                    .addComponent(chkScaner))
                 .addGap(18, 18, 18)
                 .addComponent(chkAccesoVentas)
                 .addGap(18, 18, 18)
@@ -528,6 +541,7 @@ public class frmGruposUsuarios extends javax.swing.JInternalFrame {
             this.chkReportesVentas.setSelected(grupos.blnReportesVentas);
             this.chkCartera.setSelected(grupos.blnAccesoCartera);
             this.chkPermiteCartera.setSelected(grupos.blnReportesCartera);
+            this.chkScaner.setSelected(grupos.blnScaner);
             
             this.btnEliminar.setVisible(true);
             this.btnNuevo.setVisible(true);
@@ -610,8 +624,7 @@ long lngValor=0;
                 grupos.blnReportesVentas=this.chkReportesVentas.isSelected();
                 grupos.blnAccesoCartera=this.chkCartera.isSelected();
                 grupos.blnReportesCartera=this.chkPermiteCartera.isSelected();
-                
-                
+                grupos.blnScaner=this.chkScaner.isSelected();
                 
              
                     try {
@@ -645,6 +658,7 @@ long lngValor=0;
             grupos.blnReportesVentas=this.chkReportesVentas.isSelected();
             grupos.blnAccesoCartera=this.chkCartera.isSelected();
             grupos.blnReportesCartera=this.chkPermiteCartera.isSelected();
+            grupos.blnScaner=this.chkScaner.isSelected();
                 
             
             try {
@@ -678,6 +692,10 @@ long lngValor=0;
             Logger.getLogger(frmGruposUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void chkScanerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkScanerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkScanerActionPerformed
 
     public void limpiar(){
         this.btnEliminar.setVisible(false);
@@ -776,6 +794,7 @@ long lngValor=0;
     private javax.swing.JCheckBox chkPermiteCartera;
     private javax.swing.JCheckBox chkPermiteVerReportesInventarios;
     private javax.swing.JCheckBox chkReportesVentas;
+    private javax.swing.JCheckBox chkScaner;
     private javax.swing.JButton cmdAtras;
     private javax.swing.JButton cmdBuscar;
     private javax.swing.JButton cmdSiguiente1;

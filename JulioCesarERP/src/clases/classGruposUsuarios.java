@@ -42,6 +42,7 @@ public class classGruposUsuarios {
     public  boolean  blnReportesVentas;
     public  boolean  blnAccesoCartera;
     public  boolean  blnReportesCartera;
+    public  boolean  blnScaner;
     
     
     
@@ -157,6 +158,7 @@ public class classGruposUsuarios {
                  + "," + this.blnReportesVentas
                  + "," + this.blnAccesoCartera
                  + "," + this.blnReportesCartera
+                 + "," + this.blnScaner
                  
                  + ");";
          ps= con.conectado().prepareStatement(strConsulta);
@@ -210,6 +212,7 @@ public boolean actualizarGrupo() throws SQLException
                  + "," + this.blnReportesVentas
                  + "," + this.blnAccesoCartera
                  + "," + this.blnReportesCartera
+                 + "," + this.blnScaner
                  + ");";
       
         
@@ -257,6 +260,7 @@ public boolean actualizarGrupo() throws SQLException
               this.blnReportesVentas=res.getBoolean("ReportesVenta");
               this.blnAccesoCartera=res.getBoolean("Cartera");
               this.blnReportesCartera=res.getBoolean("ReportesCartera");
+              this.blnScaner=res.getBoolean("Scaner");
                       
               res.close();
               return datos;
