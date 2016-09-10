@@ -102,6 +102,41 @@ public class classArticulos {
           }
         return blnDato;
         }
+     
+     public void obtieneCodigo(String strCodigo){
+        String strConsulta;
+        boolean blnDato;
+        
+        String datos[]=new String [12];
+        
+        strConsulta="call   PAL_ObtieneCodigo   ("+strCodigo
+                + ");";
+     
+      
+        try{
+         
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery();
+         
+         while(res.next()){
+             
+            this.lngIdArticulo=Long.valueOf(res.getString("idArticulo"));
+            this.strDescripcion=res.getString("Descripcion");
+            this.strTipo=res.getString("Tipo");
+            this.dblIVA=res.getDouble("IVA");
+            this.dblIEPS=res.getDouble("IEPS");
+            this.dblPrecioCosto=res.getDouble("PrecioCosto");
+            this.dblPrecioVenta=res.getDouble("PrecioVenta");
+            this.strCodigoBarras=res.getString("codigoBarras");
+         }
+         res.close();
+          }catch(SQLException e){
+         System.out.println(e);
+ 
+     
+          }
+     
+        }
     
      public void leerArticulos(long intDesde ,long intCuantos,DefaultTableModel tablaArticulos,String strBusqueda ){
         String strConsulta;

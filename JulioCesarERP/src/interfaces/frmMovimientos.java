@@ -9,9 +9,11 @@ import clases.classArticulos;
 import clases.classMovimientosInventario;
 import clases.control_cliente;
 import herramientas.Reportes;
+import herramientas.globales;
 import static herramientas.globales.llenarComboGlobal;
 import static herramientas.globales.verificaLicencia;
 import static interfaces.frmPrincipal.jDesktopPane1;
+import java.awt.Color;
 import java.awt.RenderingHints.Key;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
@@ -409,12 +411,12 @@ public class frmMovimientos extends javax.swing.JInternalFrame {
             }
         });
         JTabArticulos.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 JTabArticulosAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         tabPaises.setViewportView(JTabArticulos);
@@ -485,14 +487,14 @@ public class frmMovimientos extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                                     .addComponent(txtPrecio))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(txtDescripcionProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(29, Short.MAX_VALUE))))
+                                .addComponent(txtDescripcionProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtProducto))
+                        .addGap(29, 29, 29))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -548,7 +550,7 @@ public class frmMovimientos extends javax.swing.JInternalFrame {
                 .addGroup(panProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tabPaises, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         tab.addTab("PRODUCTOS", panProductos);
@@ -892,11 +894,29 @@ public void defineTablaArticulos(){
 
     private void EnterProducto(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EnterProducto
          if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            classArticulos articulos = new classArticulos();
-            articulos.leerArticulo(this.txtProducto.getText()); 
             
-            frmMovimientos.txtDescripcionProducto.setText(articulos.strDescripcion);
-            frmMovimientos.txtPrecio.setText(String.valueOf(articulos.dblPrecioCosto));
+            if (globales.blnScaner==true){
+                classArticulos articulos = new classArticulos();
+                articulos.obtieneCodigo(this.txtProducto.getText());
+                txtProducto.setText(String.valueOf(articulos.lngIdArticulo));
+                //articulos.leerArticulo(this.txtProducto.getText()); 
+
+                frmMovimientos.txtDescripcionProducto.setText(articulos.strDescripcion);
+                frmMovimientos.txtCantidad.setText("1");
+                
+                frmMovimientos.txtPrecio.setText(String.valueOf(articulos.dblPrecioCosto));
+                frmMovimientos.txtImporteTotal.setText(String.valueOf(articulos.dblPrecioCosto*(1+(articulos.dblIVA/100))));
+                btnGuardarProducto.doClick();
+//                this.limpiarProducto();
+//                this.txtProducto.requestFocus();
+            }
+            else{
+                classArticulos articulos = new classArticulos();
+                articulos.leerArticulo(this.txtProducto.getText()); 
+
+                frmMovimientos.txtDescripcionProducto.setText(articulos.strDescripcion);
+                frmMovimientos.txtPrecio.setText(String.valueOf(articulos.dblPrecioCosto));
+            }
         }
          
          if(evt.getKeyCode() == KeyEvent.VK_F3) {
@@ -919,9 +939,11 @@ public void defineTablaArticulos(){
         double dblPrecio;
         double dblCantidad;
         double dblImporteTotal;
+        double dblIVA;
         dblPrecio=Double.valueOf(this.txtPrecio.getText());
         dblCantidad=Double.valueOf(this.txtCantidad.getText());
-        dblImporteTotal=dblPrecio*dblCantidad;
+       
+        dblImporteTotal=(dblPrecio*dblCantidad);
         this.txtImporteTotal.setText(String.valueOf(dblImporteTotal));
     }//GEN-LAST:event_cambiaPrecio
 
@@ -974,6 +996,7 @@ public void defineTablaArticulos(){
          frmMovimientos.txtDescripcionProducto.setText("");
          frmMovimientos.txtPrecio.setText("");
          frmMovimientos.txtProducto.setText("");
+         frmMovimientos.txtImporteTotal.setText("");
      }
         
    public void desHabilitarLLave(){
@@ -1048,7 +1071,7 @@ public void defineTablaArticulos(){
     public static javax.swing.JTextField txtDescripcionProducto;
     public static javax.swing.JTextField txtFactura;
     private javax.swing.JTextField txtFolio;
-    private javax.swing.JTextField txtImporteTotal;
+    private static javax.swing.JTextField txtImporteTotal;
     public static javax.swing.JTextField txtNumCliente;
     private javax.swing.JTextArea txtObservaciones;
     public static javax.swing.JTextField txtPrecio;

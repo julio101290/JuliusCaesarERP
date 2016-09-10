@@ -430,7 +430,7 @@
                           <Component id="tabPaises" pref="0" max="32767" attributes="0"/>
                           <Component id="jPanel1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="82" max="32767" attributes="0"/>
+                      <EmptySpace pref="94" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -492,7 +492,6 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txtProducto" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
                                               <Component id="txtCantidad" alignment="0" pref="174" max="32767" attributes="0"/>
                                               <Component id="txtPrecio" alignment="0" max="32767" attributes="0"/>
                                           </Group>
@@ -502,8 +501,9 @@
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           <Component id="txtDescripcionProducto" min="-2" pref="174" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="txtProducto" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="29" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -608,6 +608,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtImporteTotal">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnGuardarProducto">
                   <Properties>

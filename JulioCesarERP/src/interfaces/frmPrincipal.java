@@ -284,6 +284,11 @@ control_existencias ctrl = new control_existencias();
         ReportesVentas.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         ReportesVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/web-space-px-png.png"))); // NOI18N
         ReportesVentas.setText("Reportes de Ventas");
+        ReportesVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReportesVentasActionPerformed(evt);
+            }
+        });
         Ventas.add(ReportesVentas);
 
         jMenuBar1.add(Ventas);
@@ -438,6 +443,12 @@ control_existencias ctrl = new control_existencias();
         jDesktopPane1.add(ventas);
         ventas.setVisible(true);
     }//GEN-LAST:event_jVentasActionPerformed
+
+    private void ReportesVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportesVentasActionPerformed
+        frmConsultaReportes reportes = new frmConsultaReportes();
+        jDesktopPane1.add(reportes);
+        reportes.setVisible(true);
+    }//GEN-LAST:event_ReportesVentasActionPerformed
 public void ejecutarDerecho(){
     jMenuItem3.setVisible(globales.blnAccesoArticulos);
     jMenuItem4.setVisible(globales.blnAccesoClientes);

@@ -239,6 +239,41 @@ public class classVenta {
         }
     }
     
+    public double leerTotalVenta( ){
+        String strConsulta;
+        double dblTotal;
+        String datos[]=new String [7];
+        strConsulta="";
+        dblTotal=0;
+         strConsulta=strConsulta +"call PAL_LeeTotalVentasProductos  ("+this.lngPuntoVenta+""
+            + "," + this.lngFolio + ""
+            + ");";
+        
+        
+        
+      
+        try{
+         
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery();
+         
+         while(res.next()){
+              //System.out.println(res.getString("Nombres"));
+              
+             
+              dblTotal= Double.valueOf(res.getString("total"));
+             
+           
+         }
+            res.close();
+            return dblTotal;
+            }catch(SQLException e){
+        
+          JOptionPane.showInternalMessageDialog(null,"ERROR" + e.toString());
+        }
+    return dblTotal;
+    }
+    
     public void eliminarVentaProducto(){
         String strConsulta;
       
