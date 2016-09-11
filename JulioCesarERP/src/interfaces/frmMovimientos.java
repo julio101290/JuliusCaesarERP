@@ -610,10 +610,10 @@ public class frmMovimientos extends javax.swing.JInternalFrame {
             clsInventario.strFecha=((JTextField)dteFecha.getDateEditor().getUiComponent()).getText();
             clsInventario.strObservacion=this.txtObservaciones.getText();
             
-            if (clsInventario.lngFolio>5 ){
-                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 5 MOVIMIENTOS");
-                return;
-            }
+//            if (clsInventario.lngFolio>5 ){
+//                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 5 MOVIMIENTOS");
+//                return;
+//            }
             
             try {
                 clsInventario.ingresarMovimientoInventario();
@@ -861,10 +861,10 @@ public void defineTablaArticulos(){
             clsInventario.dblPrecio=Double.valueOf(this.txtPrecio.getText());
             clsInventario.dblImporteTotal=Double.valueOf(this.txtImporteTotal.getText());
             lngUltimoRegistro=clsInventario.lngleerUltimoRegistro();
-            if (lngUltimoRegistro>3){
-                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 3 REGISTROS");
-                return;
-            }
+//            if (lngUltimoRegistro>3){
+//                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 3 REGISTROS");
+//                return;
+//            }
             clsInventario.lngRegistro=lngUltimoRegistro;
             clsInventario.ingresarMovimientoInventarioProducto();
             defineTablaArticulos();

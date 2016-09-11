@@ -79,8 +79,8 @@ public class classArticulos {
         blnDato=false;
         String datos[]=new String [12];
         
-        strConsulta="call  PAL_ExisteCodigoBarras  ("+strCodigo
-                + ");";
+        strConsulta="call  PAL_ExisteCodigoBarras  ('"+strCodigo
+                + "');";
      
       
         try{
@@ -109,8 +109,8 @@ public class classArticulos {
         
         String datos[]=new String [12];
         
-        strConsulta="call   PAL_ObtieneCodigo   ("+strCodigo
-                + ");";
+        strConsulta="call   PAL_ObtieneCodigo   ('"+strCodigo
+                + "');";
      
       
         try{

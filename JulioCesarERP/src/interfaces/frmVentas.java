@@ -791,10 +791,10 @@ public void defineTablaArticulos(){
             clsVentas.dblPrecio=Double.valueOf(this.txtPrecio.getText());
             clsVentas.dblImporteTotal=Double.valueOf(this.txtImporteTotal.getText());
             lngUltimoRegistro=clsVentas.lngleerUltimoVentaRegistro();
-            if (lngUltimoRegistro>5){
-                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 5 REGISTROS");
-                return;
-            }
+//            if (lngUltimoRegistro>5){
+//                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 5 REGISTROS");
+//                return;
+//            }
             clsVentas.lngRegistro=lngUltimoRegistro;
             clsVentas.ingresarMovimientoVentaProducto();
             defineTablaArticulos();
