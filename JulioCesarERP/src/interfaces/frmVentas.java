@@ -329,6 +329,8 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
         tab.addTab("DATOS GENERALES", panGenerales);
 
+        JTabArticulos.setBackground(new java.awt.Color(255, 255, 0));
+        JTabArticulos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         JTabArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -352,7 +354,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        JTabArticulos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        JTabArticulos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         JTabArticulos.setEnabled(false);
         JTabArticulos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -482,7 +484,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
         );
 
         lblTotalGeneral.setBackground(new java.awt.Color(0, 0, 0));
-        lblTotalGeneral.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTotalGeneral.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lblTotalGeneral.setForeground(new java.awt.Color(245, 8, 8));
         lblTotalGeneral.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
@@ -492,25 +494,25 @@ public class frmVentas extends javax.swing.JInternalFrame {
             panProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panProductosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabPaises, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tabPaises, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panProductosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTotalGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(205, 205, 205))
+                .addComponent(lblTotalGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(142, 142, 142))
         );
         panProductosLayout.setVerticalGroup(
             panProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panProductosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tabPaises, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTotalGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addComponent(lblTotalGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         tab.addTab("PRODUCTOS", panProductos);
@@ -720,15 +722,15 @@ public void defineTablaArticulos(){
             lngPuntoVenta=Long.valueOf(this.cboPuntoVenta.getSelectedItem().toString().substring(0, 4).toString());
             lngFolio=Long.valueOf(this.txtFolio.getText());
             strConsulta="          SELECT * "
-                    + ",    (SELECT Logo FROM datosempresa) as logo"
-                    + ",(Select z.Descripcion from PuntosVenta z where a.puntoventa=z.idPuntoVenta)DescPuntoVenta"
+                    + " ,    (SELECT Logo FROM datosempresa) as logo"
+                    + " ,(Select z.Descripcion from PuntosVenta z where a.puntoventa=z.idPuntoVenta)DescPuntoVenta"
                     + " FROM Ventas a "
-                    + ",VentasProductos b"
+                    + " ,VentasProductos b"
                     + " where  "
-                    + "a.idVenta=b.idVenta "
-                    + "and a.PuntoVenta=b.idPuntoVenta "
-                    + "and a.idVenta=2 "
-                    + "and a.puntoventa=1";
+                    + " a.idVenta=b.idVenta "
+                    + " and a.PuntoVenta=b.idPuntoVenta "
+                    + " and a.idVenta= " + lngFolio
+                    + " and a.puntoventa="+ lngPuntoVenta;
             
             
             System.out.println(strConsulta);
@@ -833,7 +835,7 @@ public void defineTablaArticulos(){
                 frmVentas.txtDescripcionProducto.setText(articulos.strDescripcion);
                 frmVentas.txtCantidad.setText("1");
                 
-                frmVentas.txtPrecio.setText(String.valueOf(articulos.dblPrecioCosto));
+                frmVentas.txtPrecio.setText(String.valueOf(articulos.dblPrecioVenta));
                 frmVentas.txtImporteTotal.setText(String.valueOf(articulos.dblPrecioVenta*(1+(articulos.dblIVA/100))));
                 btnGuardarProducto.doClick();
 //                this.limpiarProducto();
