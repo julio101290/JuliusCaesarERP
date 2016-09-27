@@ -24,6 +24,7 @@ private conexion con;
     
     public long lngIdPuntoVenta;
     public String strDescripcion;
+    public String strIdBodega;
 
     
     public classPuntoVenta(){
@@ -49,6 +50,7 @@ private conexion con;
               this.strDescripcion=res.getString("Descripcion");
               datos[0]=res.getString("idPuntoVenta");
               datos[1]=res.getString("Descripcion");
+              datos[2]=res.getString("idBodega");
                       
               res.close();
               
@@ -66,8 +68,8 @@ private conexion con;
          String strConsulta="";
          String strRespuesta="";
          
-         strConsulta=strConsulta +"call PA_InsertaPuntoVenta('"+this.strDescripcion+"'"
-                 + ");";
+         strConsulta=strConsulta +"call PA_InsertaPuntoVenta('"+this.strDescripcion+"',"
+                 +this.strIdBodega+ ");";
          ps= con.conectado().prepareStatement(strConsulta);
          
          strRespuesta= herramientas.globales.strPreguntaSiNo("Desea agregar la PuntoVenta " + this.strDescripcion);
@@ -85,7 +87,8 @@ private conexion con;
          String strRespuesta="";
          
          strConsulta=strConsulta +"call PA_ActualizaPuntoVenta  ("+this.lngIdPuntoVenta+",'"
-                 + this.strDescripcion + "'" 
+                 + this.strDescripcion + "'," 
+                  + this.strIdBodega + "" 
                  + ");";
 
        ps= con.conectado().prepareStatement(strConsulta);
@@ -134,6 +137,8 @@ private conexion con;
               
               datos[0]=res.getString("idPuntoVenta");
               datos[1]=res.getString("Descripcion");
+              //datos[2]=res.getString("idBodega");
+              
           
              
               tablaPuntoVentas.addRow(datos);

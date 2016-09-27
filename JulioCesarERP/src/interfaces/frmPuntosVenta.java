@@ -8,6 +8,7 @@ package interfaces;
 import clases.classPuntoVenta;
 import clases.classPuntoVenta;
 import herramientas.Reportes;
+import static herramientas.globales.llenarComboGlobal;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,7 @@ public class frmPuntosVenta extends javax.swing.JInternalFrame {
     public frmPuntosVenta() {
         initComponents();
          limpiar();
+         llenarComboGlobal(this.cboBodegas,"select idBodega,Descripcion from Bodegas;",false);
          this.defineTablaPuntosVenta("", 1);
 
     }
@@ -47,6 +49,8 @@ public class frmPuntosVenta extends javax.swing.JInternalFrame {
         txtDescripcion = new javax.swing.JTextField();
         idPuntoVenta = new javax.swing.JLabel();
         txtIdPuntoVenta = new javax.swing.JTextField();
+        lblDescripcion1 = new javax.swing.JLabel();
+        cboBodegas = new javax.swing.JComboBox();
         jPanel4 = new javax.swing.JPanel();
         jlblNumReg = new javax.swing.JLabel();
         txtNumReg = new javax.swing.JTextField();
@@ -88,6 +92,20 @@ public class frmPuntosVenta extends javax.swing.JInternalFrame {
 
         idPuntoVenta.setText("ID Punto Venta:");
 
+        lblDescripcion1.setText("Bodegas:");
+
+        cboBodegas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        cboBodegas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboBodegasItemStateChanged(evt);
+            }
+        });
+        cboBodegas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboBodegasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,13 +113,15 @@ public class frmPuntosVenta extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDescripcion1)
                     .addComponent(idPuntoVenta)
                     .addComponent(lblDescripcion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(txtIdPuntoVenta))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                    .addComponent(txtIdPuntoVenta)
+                    .addComponent(cboBodegas, 0, 222, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +134,11 @@ public class frmPuntosVenta extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescripcion)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescripcion1)
+                    .addComponent(cboBodegas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         panCapturaBodegas.addTab("Datos Basicos", jPanel1);
@@ -289,7 +313,7 @@ public class frmPuntosVenta extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panCapturaBodegas, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+                    .addComponent(panCapturaBodegas))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -302,7 +326,7 @@ public class frmPuntosVenta extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PanBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         pack();
@@ -326,6 +350,7 @@ public class frmPuntosVenta extends javax.swing.JInternalFrame {
 
             this.txtIdPuntoVenta.setText(String.valueOf(bodega.lngIdPuntoVenta));
             this.txtDescripcion.setText(bodega.strDescripcion);
+            this.cboBodegas.setSelectedItem(bodega.strIdBodega);
        
           
 
@@ -371,7 +396,7 @@ public class frmPuntosVenta extends javax.swing.JInternalFrame {
             String strRespuesta="";
 
             PuntosVenta.strDescripcion=this.txtDescripcion.getText();
-           
+            PuntosVenta.strIdBodega=(this.cboBodegas.getSelectedItem().toString().substring(0, 4).toString());
             
 
             try {
@@ -391,6 +416,7 @@ public class frmPuntosVenta extends javax.swing.JInternalFrame {
 
             PuntosVenta.lngIdPuntoVenta=Long.valueOf(this.txtIdPuntoVenta.getText());
             PuntosVenta.strDescripcion=this.txtDescripcion.getText();
+            PuntosVenta.strIdBodega=(this.cboBodegas.getSelectedItem().toString().substring(0, 4).toString());
             
             try {
                 if (PuntosVenta.actualizarPuntoVenta()==true){
@@ -482,6 +508,16 @@ public void limpiar()
         defineTablaPuntosVenta(this.txtBuscar.getText(),Long.valueOf(this.txtPagina.getText()));
     }//GEN-LAST:event_cmdBuscarActionPerformed
 
+    private void cboBodegasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboBodegasItemStateChanged
+        if (evt.getSource()==cboBodegas) {
+            
+        }
+    }//GEN-LAST:event_cboBodegasItemStateChanged
+
+    private void cboBodegasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboBodegasActionPerformed
+
+    }//GEN-LAST:event_cboBodegasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -494,6 +530,7 @@ public void limpiar()
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnRegPuntoVenta;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox cboBodegas;
     private javax.swing.JButton cmdAtras;
     private javax.swing.JButton cmdBuscar;
     private javax.swing.JButton cmdSiguiente;
@@ -506,6 +543,7 @@ public void limpiar()
     private javax.swing.JLabel jlblTotalPaginas;
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblDescripcion1;
     private javax.swing.JTabbedPane panCapturaBodegas;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDescripcion;

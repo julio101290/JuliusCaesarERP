@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-09-2016 a las 21:15:17
+-- Tiempo de generación: 27-09-2016 a las 12:06:37
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.5.38
 
@@ -421,10 +421,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ActualizaPais` (IN `ParIdPais` B
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ActualizaPuntoVenta` (IN `parIdPuntoVenta` INT, IN `parDescripcion` VARCHAR(500))  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ActualizaPuntoVenta` (IN `parIdPuntoVenta` INT, IN `parDescripcion` VARCHAR(500), IN `parBodega` VARCHAR(100))  NO SQL
 update PuntosVenta
 
 set Descripcion=parDescripcion
+	,idBodega=parBodega
 
 where idPuntoVenta=parIdPuntoVenta$$
 
@@ -651,9 +652,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_InsertaPais` (IN `parDescripcion
 insert into Paises (Descripcion)
 values (parDescripcion)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_InsertaPuntoVenta` (IN `paPuntoVenta` VARCHAR(500))  NO SQL
-insert into PuntosVenta(Descripcion)
-values(paPuntoVenta)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_InsertaPuntoVenta` (IN `paPuntoVenta` VARCHAR(500), IN `parBodega` VARCHAR(100))  NO SQL
+insert into PuntosVenta(Descripcion,idBodega)
+values(paPuntoVenta,idBodega)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_InsertaTipoFlujo` (IN `parDescripcion` VARCHAR(200), IN `ParEntradaSalida` VARCHAR(20))  NO SQL
 insert into TiposFlujos(Descripcion,EntradaSalida) VALUES(
@@ -865,12 +866,14 @@ SELECT
 limit parDesde,parCuantos$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_LeePuntoVenta` (IN `parPuntoVenta` BIGINT)  NO SQL
-SELECT idPuntoVenta
-		,Descripcion
+SELECT a.idPuntoVenta
+		,a.Descripcion
+        ,(SELECT b.Descripcion from bodegas  b where
+          b.idBodega=a.idBodega) as idBodega 
 FROM	
-	PuntosVenta
+	PuntosVenta a
     WHERE
-    idPuntoVenta =parPuntoVenta$$
+    a.idPuntoVenta =parPuntoVenta$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_LeerArticulos` (IN `parDesde` BIGINT, IN `parCuantos` BIGINT, IN `parBusqueda` VARCHAR(800))  NO SQL
 SELECT 	idArticulo
@@ -1205,13 +1208,15 @@ CREATE TABLE `inventarioproductos` (
 
 INSERT INTO `inventarioproductos` (`EntradaSalida`, `idTipoFlujo`, `idBodega`, `idFolio`, `Producto`, `Descripcion`, `Cantidad`, `Precio`, `ImporteTotal`, `Registro`) VALUES
 ('Entrada', 4, 2, 2, 3, 'peras', '1.0000', '1.00', '1.00', 1),
+('Entrada', 4, 2, 3, 1, 'Limones', '1.0000', '5.00', '5.30', 1),
 ('Entrada', 4, 4, 1, 4, 'Platanos', '200.0000', '3.00', '2000.00', 1),
 ('Entrada', 4, 4, 1, 1, 'Limones', '5.0000', '5.00', '25.00', 3),
 ('Entrada', 4, 4, 2, 5, 'Guayabas', '12.0000', '1.00', '12.00', 1),
 ('Entrada', 4, 4, 3, 4, 'Platanos', '123.0000', '3.00', '369.00', 1),
 ('Entrada', 4, 4, 3, 4, 'Platanos', '31.0000', '3.00', '93.00', 2),
 ('Entrada', 4, 4, 3, 5, 'Guayabas', '54.0000', '1.00', '54.00', 3),
-('Entrada', 4, 5, 1, 0, '', '1.0000', '0.00', '0.00', 1);
+('Entrada', 4, 5, 1, 0, '', '1.0000', '0.00', '0.00', 1),
+('Salida', 3, 2, 3, 4, 'Platanos', '1.0000', '3.00', '3.00', 1);
 
 -- --------------------------------------------------------
 
@@ -1268,11 +1273,13 @@ CREATE TABLE `movimientoinventario` (
 
 INSERT INTO `movimientoinventario` (`EntradaSalida`, `idTipoFlujo`, `idBodega`, `idFolio`, `Fecha`, `idCliente`, `Factura`, `Observacion`) VALUES
 ('Entrada', 4, 2, 2, '2016-07-10', 34, 'fACTURA', 'Observacion'),
+('Entrada', 4, 2, 3, '2016-09-10', 3, 's', '3'),
 ('Entrada', 4, 3, 1, '2016-09-02', 35, 'F-1', 'Prueba'),
 ('Entrada', 4, 4, 1, '2016-08-04', 34, 'fa', ''),
 ('Entrada', 4, 4, 2, '2016-08-11', 1, '1', '1\n'),
 ('Entrada', 4, 4, 3, '2016-08-26', 35, 'f-1231', 'Observacion'),
-('Entrada', 4, 5, 1, '2016-09-10', 17, 'fACTURA', 'Prueba');
+('Entrada', 4, 5, 1, '2016-09-10', 17, 'fACTURA', 'Prueba'),
+('Salida', 3, 2, 3, '2016-09-03', 17, 'e', 'ew');
 
 -- --------------------------------------------------------
 
@@ -1302,19 +1309,20 @@ INSERT INTO `paises` (`idPais`, `Descripcion`) VALUES
 
 CREATE TABLE `puntosventa` (
   `idPuntoVenta` int(11) NOT NULL,
-  `Descripcion` varchar(500) NOT NULL
+  `Descripcion` varchar(500) NOT NULL,
+  `idBodega` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `puntosventa`
 --
 
-INSERT INTO `puntosventa` (`idPuntoVenta`, `Descripcion`) VALUES
-(1, 'CAMAJOA'),
-(2, 'Mochis'),
-(3, 'Guasave'),
-(5, 'Choix'),
-(6, 'Mocorito');
+INSERT INTO `puntosventa` (`idPuntoVenta`, `Descripcion`, `idBodega`) VALUES
+(1, 'CAMAJOA', '5'),
+(2, 'Mochis', ''),
+(3, 'Guasave', ''),
+(5, 'Choix', ''),
+(6, 'Mocorito', '');
 
 -- --------------------------------------------------------
 
@@ -1400,7 +1408,8 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`idVenta`, `PuntoVenta`, `Cliente`, `Fecha`, `MetodoDePago`, `NumCtaPago`, `Observaciones`) VALUES
-(2, 1, 34, '2016-08-06 00:00:00', '', '', 'observaciones');
+(2, 1, 34, '2016-08-06 00:00:00', '', '', 'observaciones'),
+(1, 1, 17, '2016-09-01 00:00:00', '', '', 'fds');
 
 -- --------------------------------------------------------
 
@@ -1419,6 +1428,20 @@ CREATE TABLE `ventasproductos` (
   `IVA` decimal(18,2) NOT NULL,
   `Importe_Neto` decimal(18,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ventasproductos`
+--
+
+INSERT INTO `ventasproductos` (`idPuntoVenta`, `idVenta`, `Registro`, `Producto`, `Descripcion`, `Cantidad`, `Precio`, `IVA`, `Importe_Neto`) VALUES
+(1, 1, 2, 5, 'Guayabas', '4.0000', '2.00', '0.00', '8.00'),
+(1, 1, 3, 4, 'Platanos', '2.0000', '4.00', '0.00', '8.00'),
+(1, 1, 9, 1, 'Limones', '1.0000', '10.00', '0.00', '10.60'),
+(1, 2, 4, 1, 'Limones', '1.0000', '5.00', '0.00', '10.60'),
+(1, 2, 5, 0, '', '1.0000', '0.00', '0.00', '0.00'),
+(1, 2, 6, 0, '', '1.0000', '0.00', '0.00', '0.00'),
+(1, 2, 7, 4, 'Platanos', '1.0000', '3.00', '0.00', '4.08'),
+(1, 2, 8, 5, 'Guayabas', '1.0000', '1.00', '0.00', '2.06');
 
 -- --------------------------------------------------------
 
