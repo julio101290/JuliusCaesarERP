@@ -639,8 +639,9 @@ public class frmMovimientos extends javax.swing.JInternalFrame {
             clsInventario.strFactura=this.txtFactura.getText();
             clsInventario.strFecha=((JTextField)dteFecha.getDateEditor().getUiComponent()).getText();
             clsInventario.strObservacion=this.txtObservaciones.getText();
+           
             try {
-                clsInventario.actualizarMovimientoInventario();
+                clsInventario.actualizarMovimientoInventarioVenta();
                 JOptionPane.showInternalMessageDialog(rootPane,"MOVIMIENTO ACTUALIZADO");
                 this.tab.setEnabledAt(1, true);
             } catch (SQLException ex) {
@@ -860,6 +861,9 @@ public void defineTablaArticulos(){
             clsInventario.dblCantidad=Double.valueOf(this.txtCantidad.getText());
             clsInventario.dblPrecio=Double.valueOf(this.txtPrecio.getText());
             clsInventario.dblImporteTotal=Double.valueOf(this.txtImporteTotal.getText());
+            clsInventario.lngRegistroVenta=0;
+            clsInventario.lngPuntoVenta=0;
+            clsInventario.lngVenta=0;
             lngUltimoRegistro=clsInventario.lngleerUltimoRegistro();
 //            if (lngUltimoRegistro>3){
 //                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 3 REGISTROS");

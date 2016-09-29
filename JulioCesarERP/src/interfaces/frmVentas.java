@@ -6,6 +6,9 @@
 package interfaces;
 
 import clases.classArticulos;
+import clases.classBodega;
+import clases.classMovimientosInventario;
+import clases.classPuntoVenta;
 import clases.classVenta;
 import clases.control_cliente;
 import herramientas.Reportes;
@@ -572,10 +575,10 @@ public class frmVentas extends javax.swing.JInternalFrame {
             clsVentas.strFecha=((JTextField)dteFecha.getDateEditor().getUiComponent()).getText();
             clsVentas.strObservacion=this.txtObservaciones.getText();
             
-            if (clsVentas.lngFolio>10 ){
-                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 5 MOVIMIENTOS");
-                return;
-            }
+//            if (clsVentas.lngFolio>10 ){
+//                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 5 MOVIMIENTOS");
+//                return;
+//            }
             
             try {
                 clsVentas.ingresarMovimientoVenta();
@@ -743,11 +746,18 @@ public void defineTablaArticulos(){
         strRespuesta=herramientas.globales.strPreguntaSiNo("¿DESEA ELIMINAR LA VENTA?");
         if (strRespuesta=="SI"){
             classVenta clsVentas = new classVenta();
+            classMovimientosInventario clsInventario = new classMovimientosInventario();
+            
+            
             clsVentas.lngFolio=Long.valueOf(this.txtFolio.getText());
             clsVentas.lngPuntoVenta=Long.valueOf(this.cboPuntoVenta.getSelectedItem().toString().substring(0, 4).toString());
            
+            clsInventario.lngVenta=clsVentas.lngFolio;
+            clsInventario.lngPuntoVenta=clsVentas.lngPuntoVenta;
+            
             clsVentas.eliminarMovimiento();
             clsVentas.eliminarTodoVentaProducto();
+            clsInventario.eliminarMovimientoProductoTodoVenta();
             JOptionPane.showInternalMessageDialog(rootPane,"Eliminado Correctamente");
             //EJECUTA EL EVENTO DE OTRO BOTON
             btnCancelarActionPerformed(evt);
@@ -784,6 +794,9 @@ public void defineTablaArticulos(){
         try {
             long lngUltimoRegistro;
             classVenta clsVentas =new classVenta();
+            classMovimientosInventario clsInventario= new classMovimientosInventario();
+            classPuntoVenta clsPuntoVenta= new classPuntoVenta();
+            
             clsVentas.lngFolio=Long.valueOf(this.txtFolio.getText());
             clsVentas.lngPuntoVenta=Long.valueOf(this.cboPuntoVenta.getSelectedItem().toString().substring(0, 4).toString());
           
@@ -792,13 +805,40 @@ public void defineTablaArticulos(){
             clsVentas.dblCantidad=Double.valueOf(this.txtCantidad.getText());
             clsVentas.dblPrecio=Double.valueOf(this.txtPrecio.getText());
             clsVentas.dblImporteTotal=Double.valueOf(this.txtImporteTotal.getText());
+            
+            clsPuntoVenta.lngIdPuntoVenta=clsVentas.lngPuntoVenta;
+            clsPuntoVenta.leerPuntoVenta(String.valueOf(clsVentas.lngPuntoVenta));
+            
+            clsInventario.lngBodega=Long.valueOf(clsPuntoVenta.strIdBodega);
+            clsInventario.lngCliente=clsVentas.lngCliente;
+            clsInventario.dblCantidad=1;
+            clsInventario.dblImporteTotal=clsVentas.dblImporteTotal;
+            clsInventario.dblPrecio=clsVentas.dblPrecio;                    
+            clsInventario.lngProducto=clsVentas.lngProducto;
+            clsInventario.lngVenta=clsVentas.lngFolio;
+            clsInventario.lngRegistroVenta=clsVentas.lngRegistro;
+            clsInventario.lngPuntoVenta=clsVentas.lngPuntoVenta;
+            clsInventario.strTipoMovimiento="Salida";
+            clsInventario.strObservacion="SALIDA POR VENTA";
+            if (clsInventario.dblExistencia()<clsVentas.dblCantidad){
+                JOptionPane.showInternalMessageDialog(rootPane, "NO HAY EXISTENCIA");
+                this.limpiarProducto();
+                frmVentas.txtProducto.requestFocus();
+                return;
+            }
+            
             lngUltimoRegistro=clsVentas.lngleerUltimoVentaRegistro();
+                
+
 //            if (lngUltimoRegistro>5){
 //                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 5 REGISTROS");
 //                return;
 //            }
             clsVentas.lngRegistro=lngUltimoRegistro;
+            clsInventario.lngRegistroVenta=lngUltimoRegistro;
+            clsInventario.lngRegistro=lngUltimoRegistro;
             clsVentas.ingresarMovimientoVentaProducto();
+            clsInventario.ingresarMovimientoInventarioProductoVenta();
             defineTablaArticulos();
             limpiarProducto();
             frmVentas.txtProducto.requestFocus();
@@ -814,12 +854,19 @@ public void defineTablaArticulos(){
 
     private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
             classVenta clsVentas =new classVenta();
+            classMovimientosInventario clsInventarios =new classMovimientosInventario();
+            
             clsVentas.lngFolio=Long.valueOf(this.txtFolio.getText());
             clsVentas.lngPuntoVenta=Long.valueOf(this.cboPuntoVenta.getSelectedItem().toString().substring(0, 4).toString());
-          
+            clsInventarios.lngPuntoVenta=clsVentas.lngPuntoVenta;
+            clsInventarios.lngVenta=clsVentas.lngFolio;
+            clsInventarios.lngRegistro=this.lngRegistro;
+            
+            
             clsVentas.lngRegistro=this.lngRegistro;
             
             clsVentas.eliminarVentaProducto();
+            clsInventarios.eliminarMovimientoProductoVenta();
             limpiarProducto();
             defineTablaArticulos();
     }//GEN-LAST:event_btnEliminarProductoActionPerformed

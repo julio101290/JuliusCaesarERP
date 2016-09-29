@@ -38,7 +38,10 @@ public class classMovimientosInventario {
     public double dblPrecio;
     public double dblCantidad;
     public double dblImporteTotal;
-    public long   lngRegistro;  
+    public long   lngRegistro; 
+    public long   lngPuntoVenta; 
+    public long   lngVenta; 
+    public long   lngRegistroVenta; 
     
     public java.util.Date Fecha = new java.util.Date();
     
@@ -112,6 +115,37 @@ public class classMovimientosInventario {
                  + "," + this.dblCantidad + ""
                  + "," + this.dblImporteTotal + ""
                  + "," + this.lngRegistro + ""
+                 
+//                 + "," + this.lngPuntoVenta + ""
+//                 + "," + this.lngVenta + ""
+//                 + "," + this.lngRegistroVenta + ""
+//                
+                 + ");";
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery(); 
+         System.out.println(strConsulta);
+         return true;
+    }
+     
+         public boolean ingresarMovimientoInventarioProductoVenta() throws SQLException
+    {               
+         String strConsulta="";
+         
+         strConsulta=strConsulta +"call  PAR_InsertaMovimientoInventarioProducto  ('"+this.strTipoMovimiento+"'"
+                 + "," + this.lngFolio + ""
+                 + "," + this.lngTipoFlujo + ""
+                 + "," + this.lngBodega + ""
+                 
+                 + "," + this.lngProducto + ""
+                 + ",'" + this.strDescripcionProducto + "'"
+                 + "," + this.dblPrecio + ""
+                 + "," + this.dblCantidad + ""
+                 + "," + this.dblImporteTotal + ""
+                 + "," + this.lngRegistro + ""
+                
+                 + "," + this.lngPuntoVenta + ""
+                 + "," + this.lngVenta + ""
+                 + "," + this.lngRegistroVenta + ""
                 
                  + ");";
          ps= con.conectado().prepareStatement(strConsulta);
@@ -119,9 +153,11 @@ public class classMovimientosInventario {
          System.out.println(strConsulta);
          return true;
     }
+
+     
     
     
-    public boolean actualizarMovimientoInventario() throws SQLException
+    public boolean actualizarMovimientoInventarioVenta() throws SQLException
     {               
          String strConsulta="";
          String strRespuesta="";
@@ -142,7 +178,24 @@ public class classMovimientosInventario {
          return true;
     }
  
-    
+    public Double dblExistencia() throws SQLException
+    {               
+         String strConsulta="";
+         String strRespuesta="";
+         Double dblResultado = null;
+        
+         
+         strConsulta=strConsulta +"call PAC_TraerExistencia  ('"+this.lngProducto+"'"
+                 + "," + this.lngBodega + "" 
+                 + ");";
+         ps= con.conectado().prepareStatement(strConsulta);
+         res = ps.executeQuery(); 
+         while(res.next()){
+              dblResultado=res.getDouble("existencia");
+         }
+         res.close();
+         return dblResultado;     
+    }
     
     public void leerMovimiento(){
         String strConsulta;
@@ -280,7 +333,50 @@ public class classMovimientosInventario {
           }
     }
     
-    public void eliminarTodoMovimientoProducto(){
+     public void eliminarMovimientoProductoVenta(){
+        String strConsulta;
+      
+        strConsulta="";
+        strConsulta=strConsulta +"delete from inventarioproductos where idPuntoVenta= " + this.lngPuntoVenta
+            + " and idVenta=" + this.lngVenta + ""
+            + " and Registro=" + this.lngRegistro + ";";
+           
+      
+        try{
+         
+         ps= con.conectado().prepareStatement(strConsulta);
+         ps.executeUpdate();
+         
+         
+          }catch(SQLException e){
+             // JOptionPane.showInternalMessageDialog(null,"ERROR AL ELIMINAR MOVIMIENTO" + e.toString());
+              System.out.println(e.toString());
+          }
+    }
+    
+     public void eliminarMovimientoProductoTodoVenta(){
+        String strConsulta;
+      
+        strConsulta="";
+        strConsulta=strConsulta +"delete from inventarioproductos where idPuntoVenta= " + this.lngPuntoVenta
+            + " and idVenta=" + this.lngVenta + ";";
+           // + " and Registro=" + this.lngRegistro + ";";
+           
+      
+        try{
+         
+         ps= con.conectado().prepareStatement(strConsulta);
+         ps.executeUpdate();
+         
+         
+          }catch(SQLException e){
+             // JOptionPane.showInternalMessageDialog(null,"ERROR AL ELIMINAR MOVIMIENTO" + e.toString());
+              System.out.println(e.toString());
+          }
+    }
+     
+     
+     public void eliminarTodoMovimientoProducto(){
         String strConsulta;
       
         strConsulta="";

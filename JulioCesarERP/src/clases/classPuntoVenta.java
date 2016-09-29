@@ -48,6 +48,7 @@ private conexion con;
          while(res.next()){
               this.lngIdPuntoVenta=Long.valueOf(res.getString("idPuntoVenta"));
               this.strDescripcion=res.getString("Descripcion");
+              this.strIdBodega=res.getString(3);
               datos[0]=res.getString("idPuntoVenta");
               datos[1]=res.getString("Descripcion");
               datos[2]=res.getString("idBodega");
