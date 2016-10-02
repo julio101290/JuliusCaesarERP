@@ -116,9 +116,9 @@ public class classMovimientosInventario {
                  + "," + this.dblImporteTotal + ""
                  + "," + this.lngRegistro + ""
                  
-//                 + "," + this.lngPuntoVenta + ""
-//                 + "," + this.lngVenta + ""
-//                 + "," + this.lngRegistroVenta + ""
+                 + "," + this.lngPuntoVenta + ""
+                 + "," + this.lngVenta + ""
+                 + "," + this.lngRegistroVenta + ""
 //                
                  + ");";
          ps= con.conectado().prepareStatement(strConsulta);

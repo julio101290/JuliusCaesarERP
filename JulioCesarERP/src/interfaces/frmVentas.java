@@ -24,6 +24,8 @@ import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.VK_ENTER;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -63,6 +65,9 @@ public class frmVentas extends javax.swing.JInternalFrame {
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        Calendar c2 = new GregorianCalendar();
+        dteFecha.setCalendar(c2);
     }
 
     /**
@@ -187,6 +192,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
         lblClienteProveedor.setText("Cliente:");
 
+        txtNumCliente.setText("0");
         txtNumCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumClienteActionPerformed(evt);
@@ -582,7 +588,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
             
             try {
                 clsVentas.ingresarMovimientoVenta();
-                JOptionPane.showInternalMessageDialog(rootPane,"MOVIMIENTO REGISTRADO");
+                //JOptionPane.showInternalMessageDialog(rootPane,"MOVIMIENTO REGISTRADO");
                 this.tab.setEnabledAt(1, true);
                 this.btnGuardar.setLabel("Actualizar");
             } catch (SQLException ex) {
@@ -604,8 +610,9 @@ public class frmVentas extends javax.swing.JInternalFrame {
             clsVentas.strObservacion=this.txtObservaciones.getText();
             try {
                 clsVentas.actualizarMovimientoVenta();
-                JOptionPane.showInternalMessageDialog(rootPane,"VENTA ACTUALIZADO");
+                //JOptionPane.showInternalMessageDialog(rootPane,"VENTA ACTUALIZADO");
                 this.tab.setEnabledAt(1, true);
+                this.tab.setSelectedIndex(1);
             } catch (SQLException ex) {
                 Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showInternalMessageDialog(rootPane,"ERROR AL ACTUALIZAR LA VENTA" + ex.toString());
@@ -700,6 +707,8 @@ public void defineTablaArticulos(){
         this.btnEliminar1.setEnabled(false);
         this.btnImprimir.setEnabled(false);
         limpiar();
+        blnTraeUltimoFolio();
+        txtFolio.requestFocus();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtFolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFolioActionPerformed
@@ -960,11 +969,12 @@ public void defineTablaArticulos(){
       
      public void limpiar(){
            
-            this.txtNumCliente.setText("");
+            this.txtNumCliente.setText("0");
             this.txtObservaciones.setText("");
             this.tab.setEnabledAt(1, false);
             this.lblNomCliente.setText("");
-            this.dteFecha.setToolTipText("");
+            //this.dteFecha.setToolTipText("");
+            this.btnGuardar.setLabel("");
         }
      
      public void limpiarProducto(){
