@@ -55,7 +55,7 @@ import javax.swing.JOptionPane;
     
     
     public static String[ ] LicenciaEmpresas = {"Prueba"
-            , "Julio"
+            , "4f1097066186c05f7b2b16e197e15f3671d0c6fe"//TIENDA CAMAJOA
             , "Julio"
             , "Julio"
             , "Julio"

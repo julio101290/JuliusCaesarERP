@@ -610,11 +610,17 @@ public class frmMovimientos extends javax.swing.JInternalFrame {
             clsInventario.strFecha=((JTextField)dteFecha.getDateEditor().getUiComponent()).getText();
             clsInventario.strObservacion=this.txtObservaciones.getText();
             
-//            if (clsInventario.lngFolio>5 ){
-//                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 5 MOVIMIENTOS");
-//                return;
-//            }
             
+            try {
+                if (verificaLicencia()==false){
+                    if (clsInventario.lngFolio>5 ){
+                        JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 5 MOVIMIENTOS");
+                        return;
+                    }
+                }
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(frmMovimientos.class.getName()).log(Level.SEVERE, null, ex);
+            }
             try {
                 clsInventario.ingresarMovimientoInventario();
                 JOptionPane.showInternalMessageDialog(rootPane,"MOVIMIENTO REGISTRADO");

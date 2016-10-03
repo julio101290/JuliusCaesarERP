@@ -581,11 +581,16 @@ public class frmVentas extends javax.swing.JInternalFrame {
             clsVentas.strFecha=((JTextField)dteFecha.getDateEditor().getUiComponent()).getText();
             clsVentas.strObservacion=this.txtObservaciones.getText();
             
-//            if (clsVentas.lngFolio>10 ){
-//                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 5 MOVIMIENTOS");
-//                return;
-//            }
-            
+            try {
+                if (verificaLicencia()==false){
+                    if (clsVentas.lngFolio>10 ){
+                        JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 10 MOVIMIENTOS");
+                        return;
+                    }
+                }
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
             try {
                 clsVentas.ingresarMovimientoVenta();
                 //JOptionPane.showInternalMessageDialog(rootPane,"MOVIMIENTO REGISTRADO");
@@ -829,6 +834,19 @@ public void defineTablaArticulos(){
             clsInventario.lngPuntoVenta=clsVentas.lngPuntoVenta;
             clsInventario.strTipoMovimiento="Salida";
             clsInventario.strObservacion="SALIDA POR VENTA";
+            
+            //VERIFICA LICENCIA
+            try {
+                if (verificaLicencia()==false){
+                    if (clsVentas.lngRegistro>10 ){
+                        JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 10 MOVIMIENTOS");
+                        return;
+                    }
+                }
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             if (clsInventario.dblExistencia()<clsVentas.dblCantidad){
                 JOptionPane.showInternalMessageDialog(rootPane, "NO HAY EXISTENCIA");
                 this.limpiarProducto();
