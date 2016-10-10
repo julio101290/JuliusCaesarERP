@@ -91,7 +91,7 @@
 				<textFieldExpression><![CDATA[$P{strRFC}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame">
-				<reportElement x="0" y="0" width="127" height="94" uuid="a23b9f03-68fe-474e-995b-39f4ad7c1df1"/>
+				<reportElement x="27" y="0" width="127" height="94" uuid="a23b9f03-68fe-474e-995b-39f4ad7c1df1"/>
 				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte [])$F{logo})]]></imageExpression>
 			</image>
 		</band>

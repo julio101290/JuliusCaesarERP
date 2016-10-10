@@ -61,8 +61,7 @@
 			</staticText>
 			<image scaleImage="FillFrame">
 				<reportElement x="0" y="12" width="127" height="94" uuid="6778fdf8-c0a5-4ca9-9ade-e86b7e31312c"/>
-				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte [])$F{logo})
-]]></imageExpression>
+				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte [])$F{logo})]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -111,7 +110,11 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="45" splitType="Stretch">
+			<frame>
+				<reportElement x="391" y="25" width="100" height="20" uuid="42b3e1b8-cc7a-4afd-9dd5-38eb7c07a108"/>
+			</frame>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
