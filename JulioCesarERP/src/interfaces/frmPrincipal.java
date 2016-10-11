@@ -422,12 +422,15 @@ control_existencias ctrl = new control_existencias();
 
     private void menuEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEntradaActionPerformed
         frmMovimientos movimiento = new frmMovimientos();
+        
         jDesktopPane1.add(movimiento);
         movimiento.setVisible(true);
     }//GEN-LAST:event_menuEntradaActionPerformed
 
     private void ReportesInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportesInventariosActionPerformed
+        globales.gstrQuery="SELECT idReporte,Descripcion from Reportes where programa='INV'";
         frmConsultaReportes reportes = new frmConsultaReportes();
+        
         jDesktopPane1.add(reportes);
         reportes.setVisible(true);
     }//GEN-LAST:event_ReportesInventariosActionPerformed
@@ -445,7 +448,9 @@ control_existencias ctrl = new control_existencias();
     }//GEN-LAST:event_jVentasActionPerformed
 
     private void ReportesVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportesVentasActionPerformed
+        globales.gstrQuery="SELECT idReporte,Descripcion from Reportes where programa='VEN'";
         frmConsultaReportes reportes = new frmConsultaReportes();
+        
         jDesktopPane1.add(reportes);
         reportes.setVisible(true);
     }//GEN-LAST:event_ReportesVentasActionPerformed

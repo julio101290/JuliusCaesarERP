@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1945b8ab-202b-42d8-8320-13b62b2a74dc">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="53"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="strNombre" class="java.lang.String"/>
 	<parameter name="strDireccion" class="java.lang.String"/>
 	<parameter name="strRFC" class="java.lang.String"/>
@@ -11,6 +11,7 @@
 		, sum(a.Importe_Neto) as IMPORTE_NETO 
         , sum(a.Cantidad) as CANTIDAD 
         , a.Descripcion 
+        , ('DESDE HASTA') AS rango	
         , (SELECT Logo FROM datosempresa) as logo 
 from ventasproductos a 
         ,ventas b 
@@ -27,6 +28,7 @@ from ventasproductos a
 	<field name="Descripcion" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="rango" class="java.lang.String"/>
 	<field name="logo" class="java.lang.Object"/>
 	<variable name="VentaProducto_1" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[]]></variableExpression>
@@ -38,7 +40,7 @@ from ventasproductos a
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="128" splitType="Stretch">
+		<band height="152" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="66" width="555" height="20" uuid="cb02c9e2-1ee6-4ede-a75f-13be69890c97"/>
 				<textElement textAlignment="Center">
@@ -78,6 +80,13 @@ from ventasproductos a
 				<reportElement x="0" y="12" width="127" height="94" uuid="6778fdf8-c0a5-4ca9-9ade-e86b7e31312c"/>
 				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte [])$F{logo})]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement x="0" y="126" width="555" height="20" uuid="2ad9c6a9-9b45-433b-8f6d-9590b8a5e233"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rango}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

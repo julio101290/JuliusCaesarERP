@@ -52,6 +52,7 @@ import javax.swing.JOptionPane;
     public static String gstrRazonSocial;
     public static String gstrRFC;
     public static String gstrTelefono;
+    public static String gstrQuery;
     
     
     public static String[ ] LicenciaEmpresas = {"Prueba"

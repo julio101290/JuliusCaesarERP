@@ -7,22 +7,31 @@ package interfaces;
 
 import clases.classReportes;
 import herramientas.Reportes;
+import herramientas.globales;
 import static herramientas.globales.llenarComboGlobal;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.JTextField;
 
 /**
  *
  * @author julio
  */
+
 public class frmConsultaReportes extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmConsultaReportes
      */
+    
     public frmConsultaReportes() {
         initComponents();
-        String strQuery;
-        strQuery="SELECT idReporte,Descripcion from Reportes";
-        llenarComboGlobal(this.cboReporte,strQuery,false);
+        //strQuery="SELECT idReporte,Descripcion from Reportes ";
+        llenarComboGlobal(this.cboReporte,globales.gstrQuery,false);
+        this.tabFechas.setVisible(false);
+        Calendar c2 = new GregorianCalendar();
+        dteFecha.setCalendar(c2);
+        dteFecha1.setCalendar(c2);
     }
 
     /**
@@ -38,8 +47,21 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         bntImprimir = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        tabFechas = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        panRangoFechas = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        dteFecha = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        dteFecha1 = new com.toedter.calendar.JDateChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        cboReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboReporteActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Reporte:");
 
@@ -57,22 +79,84 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
             }
         });
 
+        panRangoFechas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panRangoFechas.setToolTipText("");
+
+        jLabel2.setText("DESDE:");
+
+        dteFecha.setToolTipText("");
+        dteFecha.setDateFormatString("yyyy-MM-dd");
+
+        jLabel3.setText("HASTA:");
+
+        dteFecha1.setToolTipText("");
+        dteFecha1.setDateFormatString("yyyy-MM-dd");
+
+        javax.swing.GroupLayout panRangoFechasLayout = new javax.swing.GroupLayout(panRangoFechas);
+        panRangoFechas.setLayout(panRangoFechasLayout);
+        panRangoFechasLayout.setHorizontalGroup(
+            panRangoFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panRangoFechasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dteFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dteFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panRangoFechasLayout.setVerticalGroup(
+            panRangoFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panRangoFechasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panRangoFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dteFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(dteFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panRangoFechas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panRangoFechas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+
+        tabFechas.addTab("Fechas", jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cboReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(bntImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cboReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tabFechas))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,7 +165,9 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cboReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(tabFechas)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntImprimir)
                     .addComponent(jButton1))
@@ -93,13 +179,40 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
 
     private void bntImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntImprimirActionPerformed
         classReportes reportes = new classReportes();
+        String strConsulta="";
+        
         reportes.leerReporte(this.cboReporte.getSelectedItem().toString().substring(0, 4).toString());
+        
+        if (Long.valueOf(this.cboReporte.getSelectedItem().toString().substring(0, 4).toString())==3){
+            
+            strConsulta="select b.Fecha \n" +
+                "		, sum(a.Importe_Neto) as IMPORTE_NETO \n" +
+                "        , sum(a.Cantidad) as CANTIDAD \n" +
+                "        , a.Descripcion \n" +
+                "        , ('Desde "+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ " Hasta "+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ "') as rango \n" +
+                "        , (SELECT Logo FROM datosempresa) as logo \n" +
+                "from ventasproductos a \n" +
+                "        ,ventas b \n" +
+                " where a.idPuntoVenta=b.PuntoVenta \n" +
+                "     and a.idVenta=b.idVenta \n" +
+                "     and b.Fecha BETWEEN '"+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ "' and '"+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ "' \n" +
+                " group by a.Descripcion";
+            Reportes.lanzarReporte(strConsulta, reportes.strNombreReporte);
+            return ;
+        }
         Reportes.lanzarReporte(reportes.strConsulta, reportes.strNombreReporte);
     }//GEN-LAST:event_bntImprimirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cboReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboReporteActionPerformed
+        if(Long.valueOf(this.cboReporte.getSelectedItem().toString().substring(0, 4).toString())==3){
+            this.panRangoFechas.setVisible(true);
+            this.tabFechas.setVisible(true);
+        }
+    }//GEN-LAST:event_cboReporteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,7 +222,14 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntImprimir;
     private javax.swing.JComboBox<String> cboReporte;
+    private com.toedter.calendar.JDateChooser dteFecha;
+    private com.toedter.calendar.JDateChooser dteFecha1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel panRangoFechas;
+    private javax.swing.JTabbedPane tabFechas;
     // End of variables declaration//GEN-END:variables
 }
