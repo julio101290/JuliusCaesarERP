@@ -189,14 +189,34 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
                 "		, sum(a.Importe_Neto) as IMPORTE_NETO \n" +
                 "        , sum(a.Cantidad) as CANTIDAD \n" +
                 "        , a.Descripcion \n" +
-                "        , ('Desde "+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ " Hasta "+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ "') as rango \n" +
+                "        , ('Desde "+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ " Hasta "+((JTextField)this.dteFecha1.getDateEditor().getUiComponent()).getText()+ "') as rango \n" +
                 "        , (SELECT Logo FROM datosempresa) as logo \n" +
                 "from ventasproductos a \n" +
                 "        ,ventas b \n" +
                 " where a.idPuntoVenta=b.PuntoVenta \n" +
                 "     and a.idVenta=b.idVenta \n" +
-                "     and b.Fecha BETWEEN '"+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ "' and '"+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ "' \n" +
+                "     and b.Fecha BETWEEN '"+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ "' and '"+((JTextField)this.dteFecha1.getDateEditor().getUiComponent()).getText()+ "' \n" +
                 " group by a.Descripcion";
+            Reportes.lanzarReporte(strConsulta, reportes.strNombreReporte);
+            return ;
+        }
+        
+         if (Long.valueOf(this.cboReporte.getSelectedItem().toString().substring(0, 4).toString())==4){
+            
+            strConsulta="SELECT b.Descripcion\n" +
+                        "       ,sum(b.Cantidad) as Cantidad\n" +
+                        "       ,sum(b.Cantidad*b.Precio) as Importe\n" +
+                        "       ,(SELECT Logo FROM datosempresa) as logo\n" +
+                        "       , ('Desde "+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ " Hasta "+((JTextField)this.dteFecha1.getDateEditor().getUiComponent()).getText()+ "') as rango \n" +
+                        "FROM movimientoinventario a\n" +
+                        "    ,inventarioProductos b\n" +
+                        "where a.EntradaSalida=b.EntradaSalida\n" +
+                        "    and a.idTipoFlujo=b.idTipoFlujo\n" +
+                        "    and a.idBodega=b.idBodega\n" +
+                        "    and a.idFolio=b.idFolio\n" +
+                        "    and a.Fecha BETWEEN '"+((JTextField)this.dteFecha.getDateEditor().getUiComponent()).getText()+ "' and '"+((JTextField)this.dteFecha1.getDateEditor().getUiComponent()).getText()+ "' \n" +
+                        "    and a.EntradaSalida='Entrada'\n" +
+                        "group by b.Producto,b.Descripcion";
             Reportes.lanzarReporte(strConsulta, reportes.strNombreReporte);
             return ;
         }
@@ -209,6 +229,11 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
 
     private void cboReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboReporteActionPerformed
         if(Long.valueOf(this.cboReporte.getSelectedItem().toString().substring(0, 4).toString())==3){
+            this.panRangoFechas.setVisible(true);
+            this.tabFechas.setVisible(true);
+        }
+        
+         if(Long.valueOf(this.cboReporte.getSelectedItem().toString().substring(0, 4).toString())==4){
             this.panRangoFechas.setVisible(true);
             this.tabFechas.setVisible(true);
         }
