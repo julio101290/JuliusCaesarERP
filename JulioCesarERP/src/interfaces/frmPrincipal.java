@@ -303,6 +303,11 @@ control_existencias ctrl = new control_existencias();
         Cartera.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Cartera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Money.png"))); // NOI18N
         Cartera.setText("Cargos / Abonos");
+        Cartera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CarteraActionPerformed(evt);
+            }
+        });
         jMenu4.add(Cartera);
 
         ReporteCartera.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
@@ -454,6 +459,12 @@ control_existencias ctrl = new control_existencias();
         jDesktopPane1.add(reportes);
         reportes.setVisible(true);
     }//GEN-LAST:event_ReportesVentasActionPerformed
+
+    private void CarteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarteraActionPerformed
+        frmCartera carteras = new frmCartera();
+        jDesktopPane1.add(carteras);
+        carteras.setVisible(true);
+    }//GEN-LAST:event_CarteraActionPerformed
 public void ejecutarDerecho(){
     jMenuItem3.setVisible(globales.blnAccesoArticulos);
     jMenuItem4.setVisible(globales.blnAccesoClientes);
