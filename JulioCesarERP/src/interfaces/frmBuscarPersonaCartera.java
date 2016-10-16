@@ -274,8 +274,8 @@ public class frmBuscarPersonaCartera extends javax.swing.JInternalFrame {
         long lngCliente;
 
         if (fila > -1){
-            frmVentas.txtNumCliente.setText(String.valueOf(JTabClientes.getValueAt(fila, 0)));
-            frmVentas.lblNomCliente.setText(String.valueOf(JTabClientes.getValueAt(fila, 1))+" "+String.valueOf(JTabClientes.getValueAt(fila, 2)));
+            frmCartera.txtNumCliente.setText(String.valueOf(JTabClientes.getValueAt(fila, 0)));
+            frmCartera.lblNomCliente.setText(String.valueOf(JTabClientes.getValueAt(fila, 1))+" "+String.valueOf(JTabClientes.getValueAt(fila, 2)));
             this.dispose();
            
 

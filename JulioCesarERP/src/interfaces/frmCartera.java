@@ -21,8 +21,10 @@ import java.awt.RenderingHints.Key;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.VK_ENTER;
+import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JTextField;
 
 /**
  *
@@ -55,7 +57,7 @@ public class frmCartera extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTabPuntosVenta = new javax.swing.JTable();
+        JTabCartera = new javax.swing.JTable();
         panCapturaBodegas = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         lblDescripcion = new javax.swing.JLabel();
@@ -90,7 +92,7 @@ public class frmCartera extends javax.swing.JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        JTabPuntosVenta.setModel(new javax.swing.table.DefaultTableModel(
+        JTabCartera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -101,12 +103,12 @@ public class frmCartera extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        JTabPuntosVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+        JTabCartera.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JTabPuntosVentaMouseClicked(evt);
+                JTabCarteraMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(JTabPuntosVenta);
+        jScrollPane1.setViewportView(JTabCartera);
 
         lblDescripcion.setText("Descripcion:");
 
@@ -395,28 +397,28 @@ public class frmCartera extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JTabPuntosVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTabPuntosVentaMouseClicked
+    private void JTabCarteraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTabCarteraMouseClicked
         int fila;
-        String[] datosPuntoVenta =new String[11];
-        fila = this.JTabPuntosVenta.rowAtPoint(evt.getPoint());
-        classPuntoVenta bodega = new classPuntoVenta();
-        long lngPuntoVenta;
+        String[] datosCartera =new String[11];
+        fila = this.JTabCartera.rowAtPoint(evt.getPoint());
+        classCartera cartera = new classCartera();
+        long lngCartera;
 
         if (fila > -1){
-            this.txtIdFolioCartera.setText(String.valueOf(JTabPuntosVenta.getValueAt(fila, 0)));
+            this.txtIdFolioCartera.setText(String.valueOf(JTabCartera.getValueAt(fila, 0)));
 
             //            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             //            Date Fecha = new Date();
             //            this.dteFechaNacimiento.setDate(Fecha);
 
-            bodega.leerPuntoVenta( this.txtIdFolioCartera.getText());
+            cartera.leerCartera(this.txtIdFolioCartera.getText());
 
-            this.txtIdFolioCartera.setText(String.valueOf(bodega.lngIdPuntoVenta));
-            this.txtDescripcion.setText(bodega.strDescripcion);
-            this.cboCargoAbono.setSelectedItem(bodega.strIdBodega);
-       
-          
-
+            this.txtIdFolioCartera.setText(String.valueOf(cartera.lngIdCartera));
+            this.txtDescripcion.setText(cartera.strDescripcion);
+            this.cboCargoAbono.setSelectedItem(cartera.strCargoAbono);
+            this.dteFecha.setDate(Date.valueOf(cartera.strFecha));
+            this.txtImporte.setText(String.valueOf(cartera.dblImporte));
+            
         
             this.btnEliminar.setVisible(true);
 
@@ -424,7 +426,7 @@ public class frmCartera extends javax.swing.JInternalFrame {
                 this.btnRegPuntoVenta.setLabel("Actualizar");
             }
 
-    }//GEN-LAST:event_JTabPuntosVentaMouseClicked
+    }//GEN-LAST:event_JTabCarteraMouseClicked
     }
     private void cmdAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAtrasActionPerformed
         long lngValor=0;
@@ -455,15 +457,17 @@ public class frmCartera extends javax.swing.JInternalFrame {
     private void btnRegPuntoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegPuntoVentaActionPerformed
 
         if (this.btnRegPuntoVenta.getLabel()=="Registrar"){
-            classPuntoVenta PuntosVenta = new classPuntoVenta();
+            classCartera cartera = new classCartera();
             String strRespuesta="";
 
-            PuntosVenta.strDescripcion=this.txtDescripcion.getText();
-            PuntosVenta.strIdBodega=(this.cboCargoAbono.getSelectedItem().toString().substring(0, 4).toString());
-            
+            cartera.strDescripcion=this.txtDescripcion.getText();
+            cartera.strCargoAbono=(this.cboCargoAbono.getSelectedItem().toString().substring(0, 4).toString());
+            cartera.dblImporte=Double.valueOf(this.txtImporte.getText());
+            cartera.strFecha=((JTextField)dteFecha.getDateEditor().getUiComponent()).getText();
+            cartera.lngCliente=Long.valueOf(frmCartera.txtNumCliente.getText());
 
             try {
-                PuntosVenta.ingresarPuntoVenta();
+                cartera.ingresarCartera();
                 defineTablaCartera("",1);
                 limpiar();
                 JOptionPane.showInternalMessageDialog(rootPane,"Registrado Correctamente");
@@ -475,14 +479,16 @@ public class frmCartera extends javax.swing.JInternalFrame {
         }
 
         else{
-            classPuntoVenta PuntosVenta =new classPuntoVenta();
-
-            PuntosVenta.lngIdPuntoVenta=Long.valueOf(this.txtIdFolioCartera.getText());
-            PuntosVenta.strDescripcion=this.txtDescripcion.getText();
-            PuntosVenta.strIdBodega=(this.cboCargoAbono.getSelectedItem().toString().substring(0, 4).toString());
+            classCartera cartera = new classCartera();
+            cartera.lngIdCartera=Long.valueOf(this.txtIdFolioCartera.getText());
+            cartera.strDescripcion=this.txtDescripcion.getText();
+            cartera.strCargoAbono=(this.cboCargoAbono.getSelectedItem().toString().substring(0, 4).toString());
+            cartera.dblImporte=Double.valueOf(this.txtImporte.getText());
+            cartera.strFecha=((JTextField)dteFecha.getDateEditor().getUiComponent()).getText();
+            cartera.lngCliente=Long.valueOf(frmCartera.txtNumCliente.getText());
             
             try {
-                if (PuntosVenta.actualizarPuntoVenta()==true){
+                if (cartera.actualizarCartera()==true){
                     this.defineTablaCartera(this.txtBuscar.getText(), Long.valueOf( this.txtPagina.getText()));
                     JOptionPane.showInternalMessageDialog(rootPane,"Actualizado Correctamente");
                 }
@@ -508,7 +514,7 @@ public void defineTablaCartera(String strBusqueda,long DesdeHoja){
         tablaPuntosVenta.setColumnIdentifiers(strTitulos);
         
         //LE ASIGNAMOS EL MODELO DE ARRIBA AL JTABLE 
-        this.JTabPuntosVenta.setModel(tablaPuntosVenta);
+        this.JTabCartera.setModel(tablaPuntosVenta);
         
                     //AHORA A LEER LOS DATOS
         
@@ -525,7 +531,7 @@ public void defineTablaCartera(String strBusqueda,long DesdeHoja){
         cartera.leerBodegas(lngDesdeRegistro, (Long.valueOf(this.txtNumReg.getText())),tablaPuntosVenta,strBusqueda);
         
         //LE PONEMOS EL RESULTADO DE LA CONSULA AL JTABLE
-        this.JTabPuntosVenta.setModel(tablaPuntosVenta);
+        this.JTabCartera.setModel(tablaPuntosVenta);
         
         //ASIGNAMOS LOS VALORES A LA PAGINACION
         lngRegistros = cartera.leerCuantos("");
@@ -599,7 +605,7 @@ public void limpiar()
         }
 
         if(evt.getKeyCode() == KeyEvent.VK_F3) {
-            frmBuscarPersonaVenta buscarPersona = new frmBuscarPersonaVenta();
+            frmBuscarPersonaCartera buscarPersona = new frmBuscarPersonaCartera();
             jDesktopPane1.add(buscarPersona);
             buscarPersona.show();
         }
@@ -611,7 +617,7 @@ public void limpiar()
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable JTabPuntosVenta;
+    private javax.swing.JTable JTabCartera;
     private javax.swing.JPanel PanBotones;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnNuevo;
