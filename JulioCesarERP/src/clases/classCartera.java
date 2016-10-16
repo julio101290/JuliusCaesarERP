@@ -35,7 +35,7 @@ private conexion con;
         con = new conexion();
     }
     
-    public void leerCartera(String strBodega){
+    public void leerCartera(String strCartera){
         String strConsulta;
         String datos[]=new String [12];
         
@@ -46,7 +46,7 @@ private conexion con;
                     "        ,Importe\n" +
                     "        ,CargoAbono\n" +
                     "FROM cartera \n" +
-                    "    where idCartera="+lngIdCartera;
+                    "    where idCartera="+strCartera;
      
       
         try{
@@ -55,12 +55,12 @@ private conexion con;
          res = ps.executeQuery();
          
          while(res.next()){
-              this.lngIdCartera=Long.valueOf(res.getString("idBodega"));
+              this.lngIdCartera=Long.valueOf(res.getString("idCartera"));
               this.strDescripcion=res.getString("Observaciones");
               this.strCargoAbono=res.getString("CargoAbono");
-              this.dblImporte=Double.valueOf(res.getString("CargoAbono"));
+              this.dblImporte=Double.valueOf(res.getDouble("Importe"));
               this.lngCliente=res.getLong("idCliente");
-                      
+              this.strFecha=res.getString("Fecha");
               res.close();
               
               
@@ -95,7 +95,7 @@ private conexion con;
          
          strRespuesta= herramientas.globales.strPreguntaSiNo("Desea agregar el movimiento " + this.strDescripcion);
          if (strRespuesta=="SI"){
-            res = ps.executeQuery();
+            ps.execute();
          }
          
          System.out.println(strConsulta);
@@ -119,7 +119,7 @@ private conexion con;
          
          strRespuesta= herramientas.globales.strPreguntaSiNo("Desea actualizar la cartera " + this.lngIdCartera);
          if (strRespuesta=="SI"){
-            res = ps.executeQuery();
+             ps.execute();
          }
          
          System.out.println(strConsulta);
@@ -134,16 +134,16 @@ private conexion con;
          strConsulta=strConsulta +"DELETE FROM CARTERA WHERE IDCARTERA="  +this.lngIdCartera;
          ps= con.conectado().prepareStatement(strConsulta);
          
-         strRespuesta= herramientas.globales.strPreguntaSiNo("Desea eliminar la bodega " + this.strDescripcion);
+         strRespuesta= herramientas.globales.strPreguntaSiNo("Desea eliminar el movimiento " + this.lngIdCartera);
          if (strRespuesta=="SI"){
-            res = ps.executeQuery();
+             ps.execute();
          }
          
          System.out.println(strConsulta);
          return true;
     }
     
-    public void leerBodegas(long intDesde ,long intCuantos,DefaultTableModel tablaCartera,String strBusqueda ){
+    public void leerCarteras(long intDesde ,long intCuantos,DefaultTableModel tablaCartera,String strBusqueda ){
         String strConsulta;
         String datos[]=new String [7];
       
@@ -172,9 +172,9 @@ private conexion con;
               //System.out.println(res.getString("Nombres"));
               
               datos[0]=res.getString("IDCARTERA");
-              datos[1]=res.getString("FECHA");
+              datos[3]=res.getString("FECHA");
               datos[2]=res.getString("IDCLIENTE");
-              datos[3]=res.getString("OBSERVACIONES");
+              datos[1]=res.getString("OBSERVACIONES");
               datos[4]=res.getString("IMPORTE");
               datos[5]=res.getString("CARGOABONO");
    

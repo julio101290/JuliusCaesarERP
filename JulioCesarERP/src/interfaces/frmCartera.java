@@ -418,6 +418,11 @@ public class frmCartera extends javax.swing.JInternalFrame {
             this.cboCargoAbono.setSelectedItem(cartera.strCargoAbono);
             this.dteFecha.setDate(Date.valueOf(cartera.strFecha));
             this.txtImporte.setText(String.valueOf(cartera.dblImporte));
+            frmCartera.txtNumCliente.setText(String.valueOf(cartera.lngCliente));
+            
+            control_cliente cliente = new control_cliente();
+            cliente.leerCliente(this.txtNumCliente.getText());
+            this.lblNomCliente.setText(cliente.strNombre+" " +cliente.strApellido);
             
         
             this.btnEliminar.setVisible(true);
@@ -461,7 +466,7 @@ public class frmCartera extends javax.swing.JInternalFrame {
             String strRespuesta="";
 
             cartera.strDescripcion=this.txtDescripcion.getText();
-            cartera.strCargoAbono=(this.cboCargoAbono.getSelectedItem().toString().substring(0, 4).toString());
+            cartera.strCargoAbono=(this.cboCargoAbono.getSelectedItem().toString());
             cartera.dblImporte=Double.valueOf(this.txtImporte.getText());
             cartera.strFecha=((JTextField)dteFecha.getDateEditor().getUiComponent()).getText();
             cartera.lngCliente=Long.valueOf(frmCartera.txtNumCliente.getText());
@@ -482,7 +487,7 @@ public class frmCartera extends javax.swing.JInternalFrame {
             classCartera cartera = new classCartera();
             cartera.lngIdCartera=Long.valueOf(this.txtIdFolioCartera.getText());
             cartera.strDescripcion=this.txtDescripcion.getText();
-            cartera.strCargoAbono=(this.cboCargoAbono.getSelectedItem().toString().substring(0, 4).toString());
+            cartera.strCargoAbono=(this.cboCargoAbono.getSelectedItem().toString());
             cartera.dblImporte=Double.valueOf(this.txtImporte.getText());
             cartera.strFecha=((JTextField)dteFecha.getDateEditor().getUiComponent()).getText();
             cartera.lngCliente=Long.valueOf(frmCartera.txtNumCliente.getText());
@@ -505,16 +510,16 @@ public void defineTablaCartera(String strBusqueda,long DesdeHoja){
         long lngDesdeRegistro;
         
         //DEFINIMOS LA TABLA MODELO
-        DefaultTableModel tablaPuntosVenta = new DefaultTableModel();
+        DefaultTableModel tablaCartera = new DefaultTableModel();
         
         //LE AGREGAMOS EL TITULO DE LAS COLUMNAS DE LA TABLA EN UN ARREGLO
         String strTitulos[]={"ID CARTERA","DESCRIPCION"};
         
         //LE ASIGNAMOS LAS COLUMNAS AL MODELO CON LA CADENA DE ARRIBA
-        tablaPuntosVenta.setColumnIdentifiers(strTitulos);
+        tablaCartera.setColumnIdentifiers(strTitulos);
         
         //LE ASIGNAMOS EL MODELO DE ARRIBA AL JTABLE 
-        this.JTabCartera.setModel(tablaPuntosVenta);
+        this.JTabCartera.setModel(tablaCartera);
         
                     //AHORA A LEER LOS DATOS
         
@@ -528,10 +533,10 @@ public void defineTablaCartera(String strBusqueda,long DesdeHoja){
         classCartera cartera= new classCartera();
         
         //LEEMOS LA CLASE CLIENTE MANDANDOLE LOS PARAMETROS
-        cartera.leerBodegas(lngDesdeRegistro, (Long.valueOf(this.txtNumReg.getText())),tablaPuntosVenta,strBusqueda);
+        cartera.leerCarteras(lngDesdeRegistro, (Long.valueOf(this.txtNumReg.getText())),tablaCartera,strBusqueda);
         
         //LE PONEMOS EL RESULTADO DE LA CONSULA AL JTABLE
-        this.JTabCartera.setModel(tablaPuntosVenta);
+        this.JTabCartera.setModel(tablaCartera);
         
         //ASIGNAMOS LOS VALORES A LA PAGINACION
         lngRegistros = cartera.leerCuantos("");
@@ -570,6 +575,7 @@ public void limpiar()
         frmCartera.txtNumCliente.setText("");
         this.lblClienteProveedor.setText("");
         this.btnEliminar.setVisible(false);
+        this.lblClienteProveedor.setText("");
         
         
         
