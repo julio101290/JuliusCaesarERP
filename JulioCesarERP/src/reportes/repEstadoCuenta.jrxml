@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1945b8ab-202b-42d8-8320-13b62b2a74dc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="63"/>
+	<parameter name="strNombre" class="java.lang.String"/>
+	<parameter name="strDireccion" class="java.lang.String"/>
+	<parameter name="strRFC" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT b.idCartera
+       ,b.Fecha
+        ,(SELECT a.Nombres   from Clientes a where 	a.idCliente=b.idCliente) as CLIENTE
+        ,b.Observaciones
+        ,b.Importe
+        ,b.CargoAbono
+        ,b.idCliente
+	,(SELECT Logo FROM datosempresa) as logo
+FROM cartera b
+WHERE b.idCliente=17
+
+]]>
+	</queryString>
+	<field name="idCartera" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CLIENTE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Observaciones" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Importe" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CargoAbono" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idCliente" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="logo" class="java.lang.Object">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="Cargos" class="java.lang.String" calculation="First">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="Abonos" class="java.lang.String">
+		<variableExpression><![CDATA[($F{CargoAbono}.equals( "Abono" ))? $F{Importe} :0]]></variableExpression>
+	</variable>
+	<variable name="Total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[(($F{CargoAbono}.equals( "Cargo" ))?$F{Importe} :0)
+-
+(($F{CargoAbono}.equals( "Abono" ))?$F{Importe} :0)]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="155" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="66" width="555" height="20" uuid="cb02c9e2-1ee6-4ede-a75f-13be69890c97"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{strDireccion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="106" width="555" height="20" uuid="1d1f3a4e-eaa3-4104-89bf-ed08df42813a"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="46" width="555" height="20" uuid="ee51d370-0010-4b45-89d7-a00c711e0d8b"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{strNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="86" width="555" height="20" uuid="0911e4a4-ecd4-4d00-b348-600d4530e70c"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{strRFC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="12" width="555" height="34" uuid="ae86f328-6c62-4e3c-8ff1-76c5ff90fc87"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO DE CUENTA]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="12" width="127" height="94" uuid="6778fdf8-c0a5-4ca9-9ade-e86b7e31312c"/>
+				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte [])$F{logo})]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="52" y="0" width="100" height="20" uuid="c7dc6d15-8fa9-4712-a174-1fa1764f843f"/>
+				<textFieldExpression><![CDATA[$F{CLIENTE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="52" height="20" uuid="858b9d34-5438-41ed-8cd5-cb73a9b4a035"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLIENTE:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="215" height="20" uuid="52e113a9-29bf-4471-9510-bae99e7f885d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="0" width="97" height="20" uuid="2bc46f34-dad5-4c80-bd8a-bb3b19f1cef8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARGOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="0" width="119" height="20" uuid="5ad09b21-a538-44a9-9947-f3fe5b2c5ea0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ABONOS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="2" width="215" height="20" uuid="7f96120b-cf78-4889-ba0a-81ff0b19fbc7"/>
+				<textFieldExpression><![CDATA[$F{Observaciones}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="273" y="2" width="97" height="20" uuid="347dd227-fc50-473a-8555-c03d10994db1"/>
+				<textFieldExpression><![CDATA[($F{CargoAbono}.equals( "Cargo" ))?$F{Importe} :0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="2" width="119" height="20" uuid="372e9dad-3d5e-4f28-86a6-2aa67c787b6a"/>
+				<textFieldExpression><![CDATA[($F{CargoAbono}.equals( "Abono" ))? $F{Importe} :0]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="40" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="414" y="11" width="119" height="20" uuid="7719c167-0719-490c-9229-fb16e94d0cfd"/>
+				<textFieldExpression><![CDATA[$V{Total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="233" y="11" width="181" height="20" uuid="40781ead-05d0-43b4-9a48-d2e4ea9adcc8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EL CLIENTE DEBE UN TOTAL DE:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
