@@ -314,6 +314,11 @@ control_existencias ctrl = new control_existencias();
         ReporteCartera.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         ReporteCartera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/web-space-px-png.png"))); // NOI18N
         ReporteCartera.setText("Reportes de Cartera");
+        ReporteCartera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReporteCarteraActionPerformed(evt);
+            }
+        });
         jMenu4.add(ReporteCartera);
 
         jMenuBar1.add(jMenu4);
@@ -465,6 +470,14 @@ control_existencias ctrl = new control_existencias();
         jDesktopPane1.add(carteras);
         carteras.setVisible(true);
     }//GEN-LAST:event_CarteraActionPerformed
+
+    private void ReporteCarteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteCarteraActionPerformed
+        globales.gstrQuery="SELECT idReporte,Descripcion from Reportes where programa='CAR'";
+        frmConsultaReportes reportes = new frmConsultaReportes();
+        
+        jDesktopPane1.add(reportes);
+        reportes.setVisible(true);
+    }//GEN-LAST:event_ReporteCarteraActionPerformed
 public void ejecutarDerecho(){
     jMenuItem3.setVisible(globales.blnAccesoArticulos);
     jMenuItem4.setVisible(globales.blnAccesoClientes);

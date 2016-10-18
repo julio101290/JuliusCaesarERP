@@ -6,9 +6,12 @@
 package interfaces;
 
 import clases.classReportes;
+import clases.control_cliente;
 import herramientas.Reportes;
 import herramientas.globales;
 import static herramientas.globales.llenarComboGlobal;
+import static interfaces.frmPrincipal.jDesktopPane1;
+import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JTextField;
@@ -29,6 +32,7 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
         //strQuery="SELECT idReporte,Descripcion from Reportes ";
         llenarComboGlobal(this.cboReporte,globales.gstrQuery,false);
         this.tabFechas.setVisible(false);
+        this.tabCliente.setVisible(false);
         Calendar c2 = new GregorianCalendar();
         dteFecha.setCalendar(c2);
         dteFecha1.setCalendar(c2);
@@ -54,6 +58,12 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
         dteFecha = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         dteFecha1 = new com.toedter.calendar.JDateChooser();
+        tabCliente = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        panCliente = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        txtNumCliente = new javax.swing.JTextField();
+        lblNomCliente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -101,7 +111,7 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dteFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dteFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,21 +143,77 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panRangoFechas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabFechas.addTab("Fechas", jPanel1);
+
+        panCliente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panCliente.setToolTipText("");
+
+        jLabel4.setText("CLIENTE:");
+
+        txtNumCliente.setText("0");
+        txtNumCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumClienteActionPerformed(evt);
+            }
+        });
+        txtNumCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumClienteEnterCliente(evt);
+            }
+        });
+
+        lblNomCliente.setText("nombre");
+
+        javax.swing.GroupLayout panClienteLayout = new javax.swing.GroupLayout(panCliente);
+        panCliente.setLayout(panClienteLayout);
+        panClienteLayout.setHorizontalGroup(
+            panClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNumCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblNomCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+        panClienteLayout.setVerticalGroup(
+            panClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panClienteLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(panClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtNumCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNomCliente))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tabCliente.addTab("Cliente", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(bntImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
@@ -157,6 +223,16 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabFechas))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(bntImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(87, 87, 87))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tabCliente)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +243,9 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
                     .addComponent(cboReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(tabFechas)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntImprimir)
                     .addComponent(jButton1))
@@ -220,6 +298,23 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
             Reportes.lanzarReporte(strConsulta, reportes.strNombreReporte);
             return ;
         }
+         
+         if (Long.valueOf(this.cboReporte.getSelectedItem().toString().substring(0, 4).toString())==5){
+            
+            strConsulta="SELECT b.idCartera\n" +
+                        "       ,b.Fecha\n" +
+                        "        ,(SELECT a.Nombres   from Clientes a where 	a.idCliente=b.idCliente) as CLIENTE\n" +
+                        "        ,b.Observaciones\n" +
+                        "        ,b.Importe\n" +
+                        "        ,b.CargoAbono\n" +
+                        "        ,b.idCliente\n" +
+                        "	,(SELECT Logo FROM datosempresa) as logo\n" +
+                        "FROM cartera b\n" +
+                        "WHERE b.idCliente="+frmConsultaReportes.txtNumCliente.getText();
+            
+            Reportes.lanzarReporte(strConsulta, reportes.strNombreReporte);
+            return ;
+        }
         Reportes.lanzarReporte(reportes.strConsulta, reportes.strNombreReporte);
     }//GEN-LAST:event_bntImprimirActionPerformed
 
@@ -237,7 +332,31 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
             this.panRangoFechas.setVisible(true);
             this.tabFechas.setVisible(true);
         }
+         
+         if(Long.valueOf(this.cboReporte.getSelectedItem().toString().substring(0, 4).toString())==5){
+            this.panCliente.setVisible(true);
+            this.tabCliente.setVisible(true);
+        }
     }//GEN-LAST:event_cboReporteActionPerformed
+
+    private void txtNumClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumClienteActionPerformed
+
+    private void txtNumClienteEnterCliente(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumClienteEnterCliente
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            control_cliente cliente = new control_cliente();
+            cliente.leerCliente(this.txtNumCliente.getText());
+            this.lblNomCliente.setText(cliente.strNombre+" " +cliente.strApellido);
+            
+        }
+
+        if(evt.getKeyCode() == KeyEvent.VK_F3) {
+            frmBuscarPersonaReporte buscarPersona = new frmBuscarPersonaReporte();
+            jDesktopPane1.add(buscarPersona);
+            buscarPersona.show();
+        }
+    }//GEN-LAST:event_txtNumClienteEnterCliente
 
     /**
      * @param args the command line arguments
@@ -253,8 +372,14 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    public static javax.swing.JLabel lblNomCliente;
+    private javax.swing.JPanel panCliente;
     private javax.swing.JPanel panRangoFechas;
+    private javax.swing.JTabbedPane tabCliente;
     private javax.swing.JTabbedPane tabFechas;
+    public static javax.swing.JTextField txtNumCliente;
     // End of variables declaration//GEN-END:variables
 }

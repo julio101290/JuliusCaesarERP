@@ -425,6 +425,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Reportes de Cartera"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReporteCarteraActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
