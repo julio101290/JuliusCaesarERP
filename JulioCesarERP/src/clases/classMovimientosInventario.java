@@ -78,7 +78,25 @@ public class classMovimientosInventario {
         return 1;
     } 
     
-   
+    public boolean actualizarMovimientoInventarioVenta() throws SQLException     {                        
+        String strConsulta="";          
+        String strRespuesta="";                   
+        strConsulta=strConsulta +"call PAC_ActualizaInventarioMaestro  ('"+
+                this.strTipoMovimiento+"'"                  
+                + ",'" + this.strFactura + "'"                  
+                + ",'" + this.strFecha + "'"                  
+                + "," + this.lngBodega + ""                  
+                + "," + this.lngCliente + ""                  
+                + "," + this.lngFolio + ""                  
+                + "," + this.lngTipoFlujo + ""                  
+                + ",'" + this.strObservacion + "'"                                   
+                + ");";          
+        
+        ps= con.conectado().prepareStatement(strConsulta);          
+        res = ps.executeQuery();          
+        System.out.println(strConsulta);          
+        return true;     
+    }  
     
     public boolean ingresarMovimientoInventario() throws SQLException
     {               
@@ -154,26 +172,30 @@ public class classMovimientosInventario {
          return true;
     }
 
-     
     
-    
-    public boolean actualizarMovimientoInventarioVenta() throws SQLException
+    public boolean actualizarMovimientoInventarioProducto() throws SQLException 
     {               
          String strConsulta="";
          String strRespuesta="";
          
-         strConsulta=strConsulta +"call PAC_ActualizaInventarioMaestro  ('"+this.strTipoMovimiento+"'"
-                 + ",'" + this.strFactura + "'"
-                 + ",'" + this.strFecha + "'"
-                 + "," + this.lngBodega + ""
-                 + "," + this.lngCliente + ""
-                 + "," + this.lngFolio + ""
-                 + "," + this.lngTipoFlujo + ""
-                 + ",'" + this.strObservacion + "'"
-                 
-                 + ");";
+         strConsulta=strConsulta +"UPDATE INVENTARIOPRODUCTOS \n" +
+                                    "SET PRODUCTO=" +this.lngProducto + "\n" +
+                                    "    ,DESCRIPCION='"+this.strDescripcionProducto+"'\n" +
+                                    "    ,CANTIDAD="+this.dblCantidad+"\n" +
+                                    "    ,PRECIO="+this.dblPrecio+"\n" +
+                                    "    ,IMPORTETOTAL="+this.dblImporteTotal+"\n" +
+                                    "    ,IDPUNTOVENTA="+this.lngPuntoVenta+"\n" +
+                                    "    ,IDVENTA="+this.lngPuntoVenta+"\n" +
+                                    "    ,REGISTROVENTA="+this.lngRegistroVenta+"\n" +
+                                    "WHERE\n" +
+                                    "    ENTRADASALIDA='"+this.strTipoMovimiento+"'\n" +
+                                    "    AND IDTIPOFLUJO="+this.lngTipoFlujo+"\n" +
+                                    "    AND IDBODEGA="+this.lngBodega+"\n" +
+                                    "    AND IDFOLIO="+this.lngFolio+"\n" +
+                                    "    AND REGISTRO="+this.lngRegistro+"\n" ;
+
          ps= con.conectado().prepareStatement(strConsulta);
-         res = ps.executeQuery(); 
+         ps.execute(); 
          System.out.println(strConsulta);
          return true;
     }

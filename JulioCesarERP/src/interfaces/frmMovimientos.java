@@ -501,7 +501,7 @@ public class frmMovimientos extends javax.swing.JInternalFrame {
                 .addComponent(btnGuardarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76))
+                .addGap(74, 74, 74))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,11 +526,10 @@ public class frmMovimientos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtImporteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblImporteTotal))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGuardarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                    .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout panProductosLayout = new javax.swing.GroupLayout(panProductos);
@@ -858,37 +857,70 @@ public void defineTablaArticulos(){
     }//GEN-LAST:event_txtNumClienteActionPerformed
 
     private void btnGuardarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProductoActionPerformed
-        try {
-            long lngUltimoRegistro;
-            classMovimientosInventario clsInventario =new classMovimientosInventario();
-            clsInventario.lngFolio=Long.valueOf(this.txtFolio.getText());
-            clsInventario.lngBodega=Long.valueOf(this.cboBodega.getSelectedItem().toString().substring(0, 4).toString());
-            clsInventario.lngTipoFlujo=Long.valueOf(this.cboTipoFlujo.getSelectedItem().toString().substring(0, 4).toString());
-            clsInventario.strTipoMovimiento=this.cboTipo.getSelectedItem().toString();
-            clsInventario.lngProducto=Long.valueOf(this.txtProducto.getText());
-            clsInventario.strDescripcionProducto=String.valueOf(this.txtDescripcionProducto.getText());
-            clsInventario.dblCantidad=Double.valueOf(this.txtCantidad.getText());
-            clsInventario.dblPrecio=Double.valueOf(this.txtPrecio.getText());
-            clsInventario.dblImporteTotal=Double.valueOf(this.txtImporteTotal.getText());
-            clsInventario.lngRegistroVenta=0;
-            clsInventario.lngPuntoVenta=0;
-            clsInventario.lngVenta=0;
-            lngUltimoRegistro=clsInventario.lngleerUltimoRegistro();
-//            if (lngUltimoRegistro>3){
-//                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 3 REGISTROS");
-//                return;
-//            }
-            clsInventario.lngRegistro=lngUltimoRegistro;
-            clsInventario.ingresarMovimientoInventarioProducto();
-            defineTablaArticulos();
-            limpiarProducto();
-            frmMovimientos.txtProducto.requestFocus();
+      
             
-        } catch (SQLException ex) {
-            Logger.getLogger(frmMovimientos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-            
+            if (this.btnGuardarProducto.getText()==""){
+                long lngUltimoRegistro;
+                classMovimientosInventario clsInventario =new classMovimientosInventario();
+                clsInventario.lngFolio=Long.valueOf(this.txtFolio.getText());
+                clsInventario.lngBodega=Long.valueOf(this.cboBodega.getSelectedItem().toString().substring(0, 4).toString());
+                clsInventario.lngTipoFlujo=Long.valueOf(this.cboTipoFlujo.getSelectedItem().toString().substring(0, 4).toString());
+                clsInventario.strTipoMovimiento=this.cboTipo.getSelectedItem().toString();
+                clsInventario.lngProducto=Long.valueOf(this.txtProducto.getText());
+                clsInventario.strDescripcionProducto=String.valueOf(this.txtDescripcionProducto.getText());
+                clsInventario.dblCantidad=Double.valueOf(this.txtCantidad.getText());
+                clsInventario.dblPrecio=Double.valueOf(this.txtPrecio.getText());
+                clsInventario.dblImporteTotal=Double.valueOf(this.txtImporteTotal.getText());
+                clsInventario.lngRegistroVenta=0;
+                clsInventario.lngPuntoVenta=0;
+                clsInventario.lngVenta=0;
+                lngUltimoRegistro=clsInventario.lngleerUltimoRegistro();
+    //            if (lngUltimoRegistro>3){
+    //                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 3 REGISTROS");
+    //                return;
+    //            }
+                clsInventario.lngRegistro=lngUltimoRegistro;
+                try {
+                    clsInventario.ingresarMovimientoInventarioProducto();
+                } catch (SQLException ex) {
+                    Logger.getLogger(frmMovimientos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                defineTablaArticulos();
+                limpiarProducto();
+                frmMovimientos.txtProducto.requestFocus();
+
+            }
+         if (this.btnGuardarProducto.getText()=="Actualizar"){
+                          
+                classMovimientosInventario clsInventario =new classMovimientosInventario();
+                clsInventario.lngFolio=Long.valueOf(this.txtFolio.getText());
+                clsInventario.lngBodega=Long.valueOf(this.cboBodega.getSelectedItem().toString().substring(0, 4).toString());
+                clsInventario.lngTipoFlujo=Long.valueOf(this.cboTipoFlujo.getSelectedItem().toString().substring(0, 4).toString());
+                clsInventario.strTipoMovimiento=this.cboTipo.getSelectedItem().toString();
+                clsInventario.lngProducto=Long.valueOf(this.txtProducto.getText());
+                clsInventario.strDescripcionProducto=String.valueOf(this.txtDescripcionProducto.getText());
+                clsInventario.dblCantidad=Double.valueOf(this.txtCantidad.getText());
+                clsInventario.dblPrecio=Double.valueOf(this.txtPrecio.getText());
+                clsInventario.dblImporteTotal=Double.valueOf(this.txtImporteTotal.getText());
+                clsInventario.lngRegistroVenta=0;
+                clsInventario.lngPuntoVenta=0;
+                clsInventario.lngVenta=0;
+                
+    //            if (lngUltimoRegistro>3){
+    //                JOptionPane.showInternalMessageDialog(rootPane,"VERSION DE PRUEBA, NO SE PERMITEN MAS DE 3 REGISTROS");
+    //                return;
+    //            }
+                clsInventario.lngRegistro=this.lngRegistro;
+                try {
+                    clsInventario.actualizarMovimientoInventarioProducto();
+                } catch (SQLException ex) {
+                    Logger.getLogger(frmMovimientos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                defineTablaArticulos();
+                limpiarProducto();
+                frmMovimientos.txtProducto.requestFocus();
+         
+         }
         
          
     }//GEN-LAST:event_btnGuardarProductoActionPerformed
@@ -1002,6 +1034,7 @@ public void defineTablaArticulos(){
             this.tab.setEnabledAt(1, false);
             this.lblNomCliente.setText("");
             this.dteFecha.setToolTipText("");
+            this.btnGuardar.setLabel("");
         }
      
      public void limpiarProducto(){
@@ -1010,7 +1043,7 @@ public void defineTablaArticulos(){
          frmMovimientos.txtPrecio.setText("");
          frmMovimientos.txtProducto.setText("");
          frmMovimientos.txtImporteTotal.setText("");
-         this.btnGuardar.setLabel("");
+         this.btnGuardarProducto.setLabel("");
      }
         
    public void desHabilitarLLave(){
