@@ -81,7 +81,7 @@ control_existencias ctrl = new control_existencias();
         jDesktopPane1.setBackground(java.awt.Color.lightGray);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Wallpaperpackz (22).jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/meeting-1184892_960_720.png"))); // NOI18N
         jLabel1.setLabelFor(jDesktopPane1);
         jDesktopPane1.add(jLabel1);
         jLabel1.setBounds(0, 0, 1480, 590);
