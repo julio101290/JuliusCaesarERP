@@ -371,12 +371,12 @@ public class frmVentas extends javax.swing.JInternalFrame {
             }
         });
         JTabArticulos.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 JTabArticulosAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         tabPaises.setViewportView(JTabArticulos);
@@ -408,6 +408,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
         lblImporteTotal.setText("Importe Total:");
 
+        btnGuardarProducto.setFont(new java.awt.Font("Dialog", 1, 3)); // NOI18N
         btnGuardarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/floppy_disk_save-128.png"))); // NOI18N
         btnGuardarProducto.setToolTipText("");
         btnGuardarProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -562,6 +563,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
             this.txtPrecio.setText(String.valueOf(JTabArticulos.getValueAt(fila, 3)));
             this.txtCantidad.setText(String.valueOf(JTabArticulos.getValueAt(fila, 4)));
             this.txtImporteTotal.setText(String.valueOf(JTabArticulos.getValueAt(fila, 5)));
+            this.btnGuardarProducto.setLabel("Actualizar");
         }
     }//GEN-LAST:event_JTabArticulosMouseClicked
 
@@ -805,6 +807,7 @@ public void defineTablaArticulos(){
     }//GEN-LAST:event_txtNumClienteActionPerformed
 
     private void btnGuardarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProductoActionPerformed
+        
         try {
             long lngUltimoRegistro;
             classVenta clsVentas =new classVenta();
