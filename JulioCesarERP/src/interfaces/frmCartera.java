@@ -573,9 +573,9 @@ public void limpiar()
         this.txtImporte.setText("");
         this.txtDescripcion.setText("");
         frmCartera.txtNumCliente.setText("");
-        this.lblClienteProveedor.setText("");
+        //this.lblClienteProveedor.setText("");
         this.btnEliminar.setVisible(false);
-        this.lblClienteProveedor.setText("");
+        //this.lblClienteProveedor.setText("");
         
         
         

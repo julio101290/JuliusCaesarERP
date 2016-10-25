@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1945b8ab-202b-42d8-8320-13b62b2a74dc">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="63"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="strNombre" class="java.lang.String"/>
 	<parameter name="strDireccion" class="java.lang.String"/>
 	<parameter name="strRFC" class="java.lang.String"/>
@@ -16,9 +16,7 @@
         ,b.idCliente
 	,(SELECT Logo FROM datosempresa) as logo
 FROM cartera b
-WHERE b.idCliente=17
-
-]]>
+WHERE b.idCliente=17]]>
 	</queryString>
 	<field name="idCartera" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -61,43 +59,43 @@ WHERE b.idCliente=17
 	</background>
 	<title>
 		<band height="155" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="66" width="555" height="20" uuid="cb02c9e2-1ee6-4ede-a75f-13be69890c97"/>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="12" width="555" height="34" uuid="ae86f328-6c62-4e3c-8ff1-76c5ff90fc87"/>
 				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+					<font fontName="Arial" size="18" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO DE CUENTA]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="0" y="66" width="555" height="20" uuid="cb02c9e2-1ee6-4ede-a75f-13be69890c97"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{strDireccion}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="0" y="106" width="555" height="20" uuid="1d1f3a4e-eaa3-4104-89bf-ed08df42813a"/>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="106" width="555" height="20" uuid="1d1f3a4e-eaa3-4104-89bf-ed08df42813a"/>
 				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="46" width="555" height="20" uuid="ee51d370-0010-4b45-89d7-a00c711e0d8b"/>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="46" width="555" height="20" uuid="ee51d370-0010-4b45-89d7-a00c711e0d8b"/>
 				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{strNombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="86" width="555" height="20" uuid="0911e4a4-ecd4-4d00-b348-600d4530e70c"/>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="86" width="555" height="20" uuid="0911e4a4-ecd4-4d00-b348-600d4530e70c"/>
 				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{strRFC}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="0" y="12" width="555" height="34" uuid="ae86f328-6c62-4e3c-8ff1-76c5ff90fc87"/>
-				<textElement textAlignment="Center">
-					<font fontName="SansSerif" size="18" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ESTADO DE CUENTA]]></text>
-			</staticText>
-			<image scaleImage="FillFrame">
-				<reportElement x="0" y="12" width="127" height="94" uuid="6778fdf8-c0a5-4ca9-9ade-e86b7e31312c"/>
+			<image scaleImage="FillFrame" onErrorType="Icon">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="12" width="127" height="94" uuid="6778fdf8-c0a5-4ca9-9ade-e86b7e31312c"/>
 				<imageExpression><![CDATA[JRImageRenderer.getInstance((byte [])$F{logo})]]></imageExpression>
 			</image>
 		</band>
@@ -106,12 +104,15 @@ WHERE b.idCliente=17
 		<band height="36" splitType="Stretch">
 			<textField>
 				<reportElement x="52" y="0" width="100" height="20" uuid="c7dc6d15-8fa9-4712-a174-1fa1764f843f"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{CLIENTE}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="0" width="52" height="20" uuid="858b9d34-5438-41ed-8cd5-cb73a9b4a035"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CLIENTE:]]></text>
 			</staticText>
@@ -120,41 +121,64 @@ WHERE b.idCliente=17
 	<columnHeader>
 		<band height="22" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="215" height="20" uuid="52e113a9-29bf-4471-9510-bae99e7f885d"/>
+				<reportElement x="113" y="0" width="181" height="20" uuid="52e113a9-29bf-4471-9510-bae99e7f885d"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[DESCRIPCION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="273" y="0" width="97" height="20" uuid="2bc46f34-dad5-4c80-bd8a-bb3b19f1cef8"/>
+				<reportElement x="305" y="0" width="97" height="20" uuid="2bc46f34-dad5-4c80-bd8a-bb3b19f1cef8"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[CARGOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="414" y="0" width="119" height="20" uuid="5ad09b21-a538-44a9-9947-f3fe5b2c5ea0"/>
+				<reportElement x="436" y="0" width="119" height="20" uuid="5ad09b21-a538-44a9-9947-f3fe5b2c5ea0"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ABONOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="f9a91cc7-2164-492e-b24b-ddddec5b0506"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="23" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="2" width="215" height="20" uuid="7f96120b-cf78-4889-ba0a-81ff0b19fbc7"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="113" y="3" width="181" height="20" uuid="7f96120b-cf78-4889-ba0a-81ff0b19fbc7"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Observaciones}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="273" y="2" width="97" height="20" uuid="347dd227-fc50-473a-8555-c03d10994db1"/>
+				<reportElement x="305" y="2" width="97" height="20" uuid="347dd227-fc50-473a-8555-c03d10994db1"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[($F{CargoAbono}.equals( "Cargo" ))?$F{Importe} :0]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="414" y="2" width="119" height="20" uuid="372e9dad-3d5e-4f28-86a6-2aa67c787b6a"/>
+				<reportElement x="436" y="2" width="119" height="20" uuid="372e9dad-3d5e-4f28-86a6-2aa67c787b6a"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="Times-Roman" isPdfEmbedded="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[($F{CargoAbono}.equals( "Abono" ))? $F{Importe} :0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="2" width="100" height="20" uuid="d244dc68-b0c8-4288-a1ff-6d6b40f87a68"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -168,12 +192,15 @@ WHERE b.idCliente=17
 		<band height="42" splitType="Stretch">
 			<textField>
 				<reportElement x="414" y="11" width="119" height="20" uuid="7719c167-0719-490c-9229-fb16e94d0cfd"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{Total}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="233" y="11" width="181" height="20" uuid="40781ead-05d0-43b4-9a48-d2e4ea9adcc8"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[EL CLIENTE DEBE UN TOTAL DE:]]></text>
 			</staticText>
