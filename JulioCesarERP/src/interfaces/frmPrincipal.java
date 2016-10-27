@@ -344,6 +344,11 @@ control_existencias ctrl = new control_existencias();
         jMenuItem12.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Information.png"))); // NOI18N
         jMenuItem12.setText("Acerca de");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem12);
 
         jMenuBar1.add(jMenu5);
@@ -478,6 +483,12 @@ control_existencias ctrl = new control_existencias();
         jDesktopPane1.add(reportes);
         reportes.setVisible(true);
     }//GEN-LAST:event_ReporteCarteraActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        frmAcerca acerca = new frmAcerca();
+        jDesktopPane1.add(acerca);
+        acerca.setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
 public void ejecutarDerecho(){
     jMenuItem3.setVisible(globales.blnAccesoArticulos);
     jMenuItem4.setVisible(globales.blnAccesoClientes);
