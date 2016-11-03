@@ -10,6 +10,12 @@ import herramientas.Reportes;
 import herramientas.conexion;
 import static herramientas.conexion.strServidor;
 import herramientas.globales;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -332,12 +338,22 @@ control_existencias ctrl = new control_existencias();
         jMenuItem10.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/books.png"))); // NOI18N
         jMenuItem10.setText("Manual de Usuario PDF");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem10);
 
         jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem11.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/world.png"))); // NOI18N
         jMenuItem11.setText("WEB, Tutoriales ETC");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem11);
 
         jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_MASK));
@@ -489,6 +505,29 @@ control_existencias ctrl = new control_existencias();
         jDesktopPane1.add(acerca);
         acerca.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        String fileLocal = new String("src/manual.pdf"); 
+        File path = new File (fileLocal);
+    try {
+        Desktop.getDesktop().open(path);
+    } catch (IOException ex) {
+        Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+       
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        if(java.awt.Desktop.isDesktopSupported()){
+            try{
+                 Desktop dk = Desktop.getDesktop();
+                 dk.browse(new URI("https://julius555.blogspot.mx/"));
+            }catch(Exception e){
+                System.out.println("Error al abrir URL: "+e.getMessage());
+            }
+}  
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 public void ejecutarDerecho(){
     jMenuItem3.setVisible(globales.blnAccesoArticulos);
     jMenuItem4.setVisible(globales.blnAccesoClientes);
