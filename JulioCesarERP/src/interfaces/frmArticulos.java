@@ -83,6 +83,7 @@ public class frmArticulos extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setTitle("CATALOGO DE ARTICULOS");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         JTabArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,12 +110,12 @@ public class frmArticulos extends javax.swing.JInternalFrame {
         });
         JTabArticulos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         JTabArticulos.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 JTabArticulosAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         JTabArticulos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -359,6 +360,7 @@ public class frmArticulos extends javax.swing.JInternalFrame {
         btnRegArticulo.setFont(new java.awt.Font("Tahoma", 0, 3)); // NOI18N
         btnRegArticulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/floppy_disk_save-128.png"))); // NOI18N
         btnRegArticulo.setText("Registrar");
+        btnRegArticulo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRegArticulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegArticuloActionPerformed(evt);
@@ -406,8 +408,8 @@ public class frmArticulos extends javax.swing.JInternalFrame {
                     .addComponent(btnImprimirReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(btnRegArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addComponent(btnRegArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addGroup(PanBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(salirclijButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
