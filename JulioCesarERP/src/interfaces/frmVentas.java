@@ -849,7 +849,7 @@ public void defineTablaArticulos(){
             
             clsInventario.lngBodega=Long.valueOf(clsPuntoVenta.strIdBodega);
             clsInventario.lngCliente=clsVentas.lngCliente;
-            clsInventario.dblCantidad=1;
+            clsInventario.dblCantidad=clsVentas.dblCantidad;
             clsInventario.dblImporteTotal=clsVentas.dblImporteTotal;
             clsInventario.dblPrecio=clsVentas.dblPrecio;                    
             clsInventario.lngProducto=clsVentas.lngProducto;

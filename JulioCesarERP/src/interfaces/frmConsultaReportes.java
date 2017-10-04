@@ -36,6 +36,8 @@ public class frmConsultaReportes extends javax.swing.JInternalFrame {
         Calendar c2 = new GregorianCalendar();
         dteFecha.setCalendar(c2);
         dteFecha1.setCalendar(c2);
+       
+       
     }
 
     /**

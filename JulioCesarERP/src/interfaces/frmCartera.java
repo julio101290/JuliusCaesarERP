@@ -11,6 +11,7 @@ import clases.classPuntoVenta;
 import clases.control_cliente;
 import herramientas.Reportes;
 import static herramientas.globales.llenarComboGlobal;
+import static herramientas.globales.verificaLicencia;
 import static interfaces.frmPrincipal.jDesktopPane1;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -41,6 +42,8 @@ public class frmCartera extends javax.swing.JInternalFrame {
         limpiar();
         this.cboCargoAbono.addItem("Cargo");
         this.cboCargoAbono.addItem("Abono");
+  
+        this.cboCargoAbono.setSelectedItem("Cargo");
         this.defineTablaCartera("", 1);
         Calendar c2 = new GregorianCalendar();
         dteFecha.setCalendar(c2);
@@ -470,7 +473,7 @@ public class frmCartera extends javax.swing.JInternalFrame {
             cartera.dblImporte=Double.valueOf(this.txtImporte.getText());
             cartera.strFecha=((JTextField)dteFecha.getDateEditor().getUiComponent()).getText();
             cartera.lngCliente=Long.valueOf(frmCartera.txtNumCliente.getText());
-
+    
             try {
                 cartera.ingresarCartera();
                 defineTablaCartera("",1);
