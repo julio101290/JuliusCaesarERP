@@ -68,6 +68,7 @@ public class frmLogueo extends javax.swing.JFrame {
         pswContraseña = new javax.swing.JPasswordField();
         lblBase = new javax.swing.JLabel();
         txtBase = new javax.swing.JTextField();
+        cmdConexionLocal = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -116,9 +117,19 @@ public class frmLogueo extends javax.swing.JFrame {
         getContentPane().add(lblBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 263, 160, -1));
         getContentPane().add(txtBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 286, 160, -1));
 
+        cmdConexionLocal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmdConexionLocal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/server-database.png"))); // NOI18N
+        cmdConexionLocal.setText("CONEXION LOCAL");
+        cmdConexionLocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdConexionLocalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmdConexionLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 240, 56));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondon.png"))); // NOI18N
         jLabel1.setLabelFor(this);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -100, 400, 630));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -100, 400, 690));
 
         pack();
         setLocationRelativeTo(null);
@@ -182,6 +193,10 @@ public class frmLogueo extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_cmdAccesarActionPerformed
 
+    private void cmdConexionLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdConexionLocalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdConexionLocalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -219,6 +234,7 @@ public class frmLogueo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAccesar;
+    private javax.swing.JButton cmdConexionLocal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblBase;
