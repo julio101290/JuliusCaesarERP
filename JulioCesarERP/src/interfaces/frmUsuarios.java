@@ -479,6 +479,7 @@ public final class frmUsuarios extends javax.swing.JInternalFrame {
         classUsuario classUsuario= new classUsuario();
         
         //LEEMOS LA CLASE CLIENTE MANDANDOLE LOS PARAMETROS
+        
         classUsuario.leerUsuarios(lngDesdeRegistro, (Long.valueOf(this.txtNumReg.getText())),tablaUsuarios,strBusqueda);
         
         //LE PONEMOS EL RESULTADO DE LA CONSULA AL JTABLE

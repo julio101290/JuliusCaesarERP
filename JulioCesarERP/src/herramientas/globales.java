@@ -53,6 +53,7 @@ import javax.swing.JOptionPane;
     public static String gstrRFC;
     public static String gstrTelefono;
     public static String gstrQuery;
+    public static boolean gboolTipoConexion=false; //falso=Remoto verdadero=local
     
     
     public static String[ ] LicenciaEmpresas = {"Prueba"

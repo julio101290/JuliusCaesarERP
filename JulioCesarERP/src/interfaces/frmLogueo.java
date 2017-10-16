@@ -7,9 +7,12 @@ package interfaces;
 
 import clases.classDatosEmpresa;
 import clases.classUsuario;
+import ConexionLite.*;
+import clasesSQLite.*;
 import herramientas.conexion;
 import herramientas.globales;
 import java.io.File;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -194,7 +197,26 @@ public class frmLogueo extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdAccesarActionPerformed
 
     private void cmdConexionLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdConexionLocalActionPerformed
-        // TODO add your handling code here:
+        //VERIFICA SI EL USUARIOS EXISTE
+        classUsuariosLite usuarios = new classUsuariosLite();
+        usuarios.strUsuario=this.txtUsuario.getText() ;
+        usuarios.strContra=this.pswContraseña.getText();
+        
+        if (usuarios.blnBuscaUsuario()==true ){
+            try {
+                crearXML2();
+                principal.setVisible(true);
+            } catch (ParserConfigurationException ex) {
+                Logger.getLogger(frmLogueo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerException ex) {
+                Logger.getLogger(frmLogueo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            globales.gboolTipoConexion=true;
+
+        }
+              else {
+                    JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTO ");
+                    }   
     }//GEN-LAST:event_cmdConexionLocalActionPerformed
 
     /**
