@@ -3,6 +3,7 @@ package interfaces;
 
 import clases.classGruposUsuarios;
 import clases.classUsuario;
+import clasesSQLite.classUsuariosLite;
 import herramientas.Reportes;
 import herramientas.conexion;
 import java.text.ParseException;
@@ -16,6 +17,7 @@ import javax.swing.SingleSelectionModel;
 import javax.swing.table.DefaultTableModel;
 //import static jdk.nashorn.internal.objects.NativeString.trim;
 import  herramientas.globales.*;
+import static herramientas.globales.gboolTipoConexion;
 import java.awt.Frame;
 import java.io.File;
 import net.sf.jasperreports.engine.JRException;
@@ -476,17 +478,24 @@ public final class frmUsuarios extends javax.swing.JInternalFrame {
         lngDesdeRegistro=(DesdeHoja*lngRegistros)-lngRegistros;
         
         //INSTANCEAMOS LA CLASE CLIENTE
-        classUsuario classUsuario= new classUsuario();
-        
+        if (gboolTipoConexion=true){
+            classUsuariosLite classUsuarioL= new classUsuariosLite();
+            classUsuarioL.leerUsuarios(lngDesdeRegistro, (Long.valueOf(this.txtNumReg.getText())),tablaUsuarios,strBusqueda);
+        }
+        else{
+            classUsuario classUsuario= new classUsuario();
+            classUsuario.leerUsuarios(lngDesdeRegistro, (Long.valueOf(this.txtNumReg.getText())),tablaUsuarios,strBusqueda);
+            lngRegistros = classUsuario.leerCuantos("");
+        }
         //LEEMOS LA CLASE CLIENTE MANDANDOLE LOS PARAMETROS
         
-        classUsuario.leerUsuarios(lngDesdeRegistro, (Long.valueOf(this.txtNumReg.getText())),tablaUsuarios,strBusqueda);
+        
         
         //LE PONEMOS EL RESULTADO DE LA CONSULA AL JTABLE
         this.JTabUsuarios.setModel(tablaUsuarios);
         
         //ASIGNAMOS LOS VALORES A LA PAGINACION
-        lngRegistros = classUsuario.leerCuantos("");
+        
         lngNumPaginas= (lngRegistros/ (Long.valueOf( this.txtNumReg.getText())))+1;
         this.jlblTotalPaginas.setText(" De " + ( lngNumPaginas));
         
@@ -506,15 +515,20 @@ public final class frmUsuarios extends javax.swing.JInternalFrame {
         String[] datosUsuario =new String[11];
         fila = this.JTabUsuarios.rowAtPoint(evt.getPoint());
         classUsuario usuario = new classUsuario();
+        classUsuariosLite UsuarioLite=new classUsuariosLite();
         long lngUsuario;
         
         if (fila > -1){
             this.txtIdUsuario.setText(String.valueOf(JTabUsuarios.getValueAt(fila, 0)));
             this.txtUsuario.setText(String.valueOf(JTabUsuarios.getValueAt(fila, 1)));
 
-            
+            if (gboolTipoConexion==true){
+                datosUsuario=UsuarioLite.leerUsuario( this.txtUsuario.getText());
+            }
+            else{
+              datosUsuario=usuario.leerUsuario( this.txtUsuario.getText());
             datosUsuario=usuario.leerUsuario( this.txtUsuario.getText());
-            
+            }
             this.txtIdUsuario.setText(datosUsuario[0]);
             this.txtUsuario.setText(datosUsuario[1]);
             this.txtContraseña.setText(datosUsuario[2]);
